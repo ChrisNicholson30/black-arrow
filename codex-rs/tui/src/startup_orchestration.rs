@@ -287,6 +287,7 @@ pub(super) async fn run_main_inner(
     .await
     .map_err(std::io::Error::other)??;
     blackarrow_base::startup::mark(blackarrow_base::startup::point::TERMINAL_READY);
+    crate::blackarrow_signals::restore_terminal_on_termination();
     let startup_presentation::StartupPresentation {
         bootstrap_config,
         config_cwd,

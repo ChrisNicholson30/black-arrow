@@ -114,6 +114,7 @@ mod app_server_session;
 mod approval_events;
 mod async_question_reply;
 mod backend_banners;
+mod blackarrow_signals;
 mod bottom_pane;
 mod branch_summary;
 mod chatwidget;
