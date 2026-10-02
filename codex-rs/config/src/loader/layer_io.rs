@@ -19,7 +19,8 @@ use std::path::PathBuf;
 use toml::Value as TomlValue;
 
 #[cfg(unix)]
-const CODEX_MANAGED_CONFIG_SYSTEM_PATH: &str = "/etc/codex/managed_config.toml";
+const CODEX_MANAGED_CONFIG_SYSTEM_PATH: &str =
+    blackarrow_base::paths::SYSTEM_MANAGED_CONFIG_TOML_UNIX;
 
 #[derive(Debug, Clone)]
 pub(super) struct MangedConfigFromFile {

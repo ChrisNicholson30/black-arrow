@@ -22,4 +22,5 @@ toml = { workspace = true }
 tracing = { workspace = true, features = ["log"] }
 
 [dev-dependencies]
+blackarrow-base = { workspace = true }
 pretty_assertions = { workspace = true }

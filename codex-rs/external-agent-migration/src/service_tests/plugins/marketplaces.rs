@@ -532,7 +532,7 @@ async fn import_plugins_infers_external_official_marketplace_when_missing_from_s
 async fn detect_repo_skips_project_relative_external_agent_plugin_marketplace_path() {
     let root = TempDir::new().expect("create tempdir");
     let external_agent_home = root.path().join(EXTERNAL_AGENT_DIR);
-    let codex_home = root.path().join(".codex");
+    let codex_home = root.path().join(".blackarrow");
     let repo_root = root.path().join("repo");
     let marketplace_root = repo_root.join("my-marketplace");
     let plugin_root = marketplace_root.join("plugins").join("cloudflare");
@@ -595,7 +595,7 @@ async fn detect_repo_skips_project_relative_external_agent_plugin_marketplace_pa
 async fn import_rejects_forged_project_relative_external_agent_plugin_item() {
     let root = TempDir::new().expect("create tempdir");
     let external_agent_home = root.path().join(EXTERNAL_AGENT_DIR);
-    let codex_home = root.path().join(".codex");
+    let codex_home = root.path().join(".blackarrow");
     let repo_root = root.path().join("repo");
     let marketplace_root = repo_root.join("my-marketplace");
     let plugin_root = marketplace_root.join("plugins").join("cloudflare");
@@ -687,7 +687,7 @@ async fn import_rejects_forged_project_relative_external_agent_plugin_item() {
 async fn import_plugins_rejects_project_cwd_before_config_loading() {
     let root = TempDir::new().expect("create tempdir");
     let external_agent_home = root.path().join(EXTERNAL_AGENT_DIR);
-    let codex_home = root.path().join(".codex");
+    let codex_home = root.path().join(".blackarrow");
     let repo_root = root.path().join("repo");
     fs::create_dir_all(repo_root.join(".git")).expect("create git dir");
     fs::create_dir_all(&codex_home).expect("create codex home");
@@ -729,7 +729,7 @@ fn import_skills_returns_only_new_skill_directory_names() {
 fn import_cursor_skills_reads_user_and_managed_directories() {
     let root = TempDir::new().expect("create tempdir");
     let external_agent_home = root.path().join(".cursor");
-    let codex_home = root.path().join(".codex");
+    let codex_home = root.path().join(".blackarrow");
     let user_skill = external_agent_home.join("skills").join("user-skill");
     let managed_skill = external_agent_home
         .join("skills-cursor")

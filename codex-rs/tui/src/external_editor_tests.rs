@@ -169,7 +169,7 @@ fn editor_directory_uses_protected_workspace_fallback_with_default_temporary_gra
     let cwd = root.path().join("workspace");
     fs::create_dir(&codex_home).expect("create Codex home");
     fs::create_dir(&cwd).expect("create workspace");
-    let workspace_codex_home = cwd.join(".codex");
+    let workspace_codex_home = cwd.join(".blackarrow");
     let policy = FileSystemSandboxPolicy::workspace_write(
         &[],
         /*exclude_tmpdir_env_var*/ false,
@@ -201,7 +201,7 @@ fn editor_directory_rejects_explicitly_writable_workspace_fallback() {
     let cwd = root.path().join("workspace");
     fs::create_dir(&codex_home).expect("create Codex home");
     fs::create_dir(&cwd).expect("create workspace");
-    let workspace_codex_home = cwd.join(".codex");
+    let workspace_codex_home = cwd.join(".blackarrow");
     let writable_workspace_codex_home = AbsolutePathBuf::from_absolute_path(&workspace_codex_home)
         .expect("absolute workspace metadata directory");
     let policy = FileSystemSandboxPolicy::workspace_write(
@@ -225,7 +225,7 @@ fn editor_directory_rejects_workspace_fallback_symlink_to_writable_target() {
     use std::os::unix::fs::symlink;
 
     let paths = EditorPaths::new();
-    let workspace_codex_home = paths.cwd.join(".codex");
+    let workspace_codex_home = paths.cwd.join(".blackarrow");
     symlink(&paths.codex_home, &workspace_codex_home).expect("create workspace metadata symlink");
     let policy = workspace_write_policy(&[&paths.codex_home]);
 
@@ -325,7 +325,9 @@ async fn editor_process_uses_protected_workspace_fallback_with_default_temporary
     let cwd = root.path().join("workspace");
     fs::create_dir(&codex_home).expect("create Codex home");
     fs::create_dir(&cwd).expect("create workspace");
-    let default_codex_home = dirs::home_dir().expect("home directory").join(".codex");
+    let default_codex_home = dirs::home_dir()
+        .expect("home directory")
+        .join(".blackarrow");
     let writable_default_codex_home = AbsolutePathBuf::from_absolute_path(&default_codex_home)
         .expect("absolute default Codex home");
     let policy = FileSystemSandboxPolicy::workspace_write(
@@ -333,10 +335,10 @@ async fn editor_process_uses_protected_workspace_fallback_with_default_temporary
         /*exclude_tmpdir_env_var*/ false,
         /*exclude_slash_tmp*/ false,
     );
-    let workspace_codex_home = cwd.join(".codex");
+    let workspace_codex_home = cwd.join(".blackarrow");
     let editor_directory = dunce::canonicalize(&cwd)
         .expect("canonicalize workspace")
-        .join(".codex")
+        .join(".blackarrow")
         .join("editor");
     let editor_command = vec![
         "/bin/sh".to_string(),

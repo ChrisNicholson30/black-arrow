@@ -26,7 +26,9 @@ impl LifecycleLock {
         })?;
         Self::acquire_at(
             &directory
-                .join("com.openai.codex")
+                // Black Arrow: lock beside its own data. Codex's processes
+                // take the same lock in their own directory.
+                .join(blackarrow_base::brand::APP_IDENTIFIER)
                 .join("user-verification")
                 .join(format!("{}.lock", namespace.label)),
             Duration::from_secs(/*secs*/ 60),

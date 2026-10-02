@@ -17,6 +17,7 @@ anyhow = { workspace = true }
 arc-swap = { workspace = true }
 async-channel = { workspace = true }
 base64 = { workspace = true }
+blackarrow-base = { workspace = true }
 bm25 = { workspace = true }
 chrono = { workspace = true, features = ["serde"] }
 codex-analytics = { workspace = true }

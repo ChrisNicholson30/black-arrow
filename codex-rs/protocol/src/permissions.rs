@@ -40,6 +40,12 @@ pub use windows_glob::windows_deny_read_glob_scan;
 const PROTECTED_METADATA_GIT_PATH_NAME: &str = ".git";
 const PROTECTED_METADATA_AGENTS_PATH_NAME: &str = ".agents";
 const PROTECTED_METADATA_CODEX_PATH_NAME: &str = ".codex";
+// Black Arrow keeps project configuration in `.blackarrow`, so that directory
+// needs the protection upstream gives `.codex`: an agent that could write its
+// own project config or hooks could grant itself wider permissions. `.codex`
+// stays protected as well so a Black Arrow agent cannot rewrite the project
+// config of a Codex install working in the same repository.
+const PROTECTED_METADATA_BLACKARROW_PATH_NAME: &str = blackarrow_base::paths::PROJECT_DIR_NAME;
 const PROTECTED_METADATA_AWS_PATH_NAME: &str = ".aws";
 
 /// Top-level workspace metadata paths that stay protected under writable roots.
@@ -47,6 +53,7 @@ pub const PROTECTED_METADATA_PATH_NAMES: &[&str] = &[
     PROTECTED_METADATA_GIT_PATH_NAME,
     PROTECTED_METADATA_AGENTS_PATH_NAME,
     PROTECTED_METADATA_CODEX_PATH_NAME,
+    PROTECTED_METADATA_BLACKARROW_PATH_NAME,
     PROTECTED_METADATA_AWS_PATH_NAME,
 ];
 
@@ -860,6 +867,10 @@ impl FileSystemSandboxPolicy {
         append_default_read_only_project_root_subpath_if_no_explicit_rule(&mut entries, ".git");
         append_default_read_only_project_root_subpath_if_no_explicit_rule(&mut entries, ".agents");
         append_default_read_only_project_root_subpath_if_no_explicit_rule(&mut entries, ".codex");
+        append_default_read_only_project_root_subpath_if_no_explicit_rule(
+            &mut entries,
+            PROTECTED_METADATA_BLACKARROW_PATH_NAME,
+        );
         append_default_read_only_project_root_subpath_if_no_explicit_rule(&mut entries, ".aws");
         for writable_root in writable_roots {
             for protected_path in default_read_only_subpaths_for_writable_root(
@@ -2380,6 +2391,13 @@ pub(crate) fn default_read_only_subpaths_for_writable_root(
         subpaths.push(top_level_codex);
     }
 
+    // Black Arrow's own project metadata gets identical treatment, including
+    // protection before the directory exists.
+    let top_level_blackarrow = writable_root.join(PROTECTED_METADATA_BLACKARROW_PATH_NAME);
+    if protect_missing_dot_codex || top_level_blackarrow.as_path().is_dir() {
+        subpaths.push(top_level_blackarrow);
+    }
+
     // AWS profiles can select credential helpers that the application executes.
     let top_level_aws = writable_root.join(PROTECTED_METADATA_AWS_PATH_NAME);
     if top_level_aws.as_path().is_dir() {
@@ -3374,6 +3392,12 @@ mod tests {
                 ),
                 FileSystemSandboxEntry::skip_missing_path(
                     FileSystemPath::Special {
+                        value: FileSystemSpecialPath::project_roots(Some(".blackarrow".into())),
+                    },
+                    FileSystemAccessMode::Read,
+                ),
+                FileSystemSandboxEntry::skip_missing_path(
+                    FileSystemPath::Special {
                         value: FileSystemSpecialPath::project_roots(Some(".aws".into())),
                     },
                     FileSystemAccessMode::Read,
@@ -3462,6 +3486,7 @@ mod tests {
         let dot_git_config = cwd.path().join(".git").join("config");
         let dot_agents_config = cwd.path().join(".agents").join("config");
         let dot_codex_config = cwd.path().join(".codex").join("config.toml");
+        let dot_blackarrow_config = cwd.path().join(".blackarrow").join("config.toml");
         let dot_aws_config = cwd.path().join(".aws").join("config");
         let root = AbsolutePathBuf::from_absolute_path(cwd.path()).expect("absolute cwd");
         let file_system_policy =
@@ -3474,6 +3499,9 @@ mod tests {
         assert!(!file_system_policy.can_write_local_path_with_cwd(&dot_git_config, cwd.path()));
         assert!(!file_system_policy.can_write_local_path_with_cwd(&dot_agents_config, cwd.path()));
         assert!(!file_system_policy.can_write_local_path_with_cwd(&dot_codex_config, cwd.path()));
+        assert!(
+            !file_system_policy.can_write_local_path_with_cwd(&dot_blackarrow_config, cwd.path())
+        );
         assert!(!file_system_policy.can_write_local_path_with_cwd(&dot_aws_config, cwd.path()));
 
         let writable_roots = file_system_policy.get_writable_roots_with_cwd(cwd.path());
@@ -3484,12 +3512,14 @@ mod tests {
                 ".git".to_string(),
                 ".agents".to_string(),
                 ".codex".to_string(),
+                ".blackarrow".to_string(),
                 ".aws".to_string(),
             ]
         );
         assert!(!writable_roots[0].is_path_writable(&dot_git_config));
         assert!(!writable_roots[0].is_path_writable(&dot_agents_config));
         assert!(!writable_roots[0].is_path_writable(&dot_codex_config));
+        assert!(!writable_roots[0].is_path_writable(&dot_blackarrow_config));
         assert!(!writable_roots[0].is_path_writable(&dot_aws_config));
     }
 
