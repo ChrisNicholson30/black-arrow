@@ -13,5 +13,6 @@ doctest = false
 workspace = true
 
 [dependencies]
+blackarrow-base = { workspace = true }
 codex-arg0 = { workspace = true }
 tempfile = { workspace = true }

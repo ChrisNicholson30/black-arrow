@@ -156,6 +156,8 @@ members = [
     "codex-experimental-api-macros",
     "plugin",
     "model-provider",
+    # Black Arrow: crates under blackarrow/ are fork-only. See docs/architecture.md.
+    "blackarrow/base",
 ]
 resolver = "2"
 
@@ -169,6 +171,8 @@ edition = "2024"
 license = "Apache-2.0"
 
 [workspace.dependencies]
+# Black Arrow
+blackarrow-base = { path = "blackarrow/base" }
 # Internal
 codex-realtime-webrtc = { path = "realtime-webrtc" }
 app_test_support = { path = "app-server/tests/common" }

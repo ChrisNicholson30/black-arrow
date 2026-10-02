@@ -6,6 +6,7 @@ license.workspace = true
 
 [dependencies]
 anyhow = { workspace = true }
+blackarrow-base = { workspace = true }
 chrono = { workspace = true }
 codex-history = { workspace = true }
 codex-protocol = { workspace = true }

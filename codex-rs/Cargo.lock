@@ -1344,6 +1344,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "blackarrow-base"
+version = "0.0.0"
+dependencies = [
+ "libc",
+ "pretty_assertions",
+ "tempfile",
+]
+
+[[package]]
 name = "blake2"
 version = "0.10.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2363,6 +2372,7 @@ name = "codex-arg0"
 version = "0.0.0"
 dependencies = [
  "anyhow",
+ "blackarrow-base",
  "codex-apply-patch",
  "codex-async-utils",
  "codex-exec-server",
@@ -2509,6 +2519,7 @@ dependencies = [
  "app_test_support",
  "assert_cmd",
  "assert_matches",
+ "blackarrow-base",
  "chrono",
  "clap",
  "clap_complete",
@@ -2822,6 +2833,7 @@ version = "0.0.0"
 dependencies = [
  "anyhow",
  "base64 0.22.1",
+ "blackarrow-base",
  "codex-execpolicy",
  "codex-features",
  "codex-file-system",
@@ -2931,6 +2943,7 @@ dependencies = [
  "assert_matches",
  "async-channel",
  "base64 0.22.1",
+ "blackarrow-base",
  "bm25",
  "chrono",
  "codex-agent-graph-store",
@@ -3168,6 +3181,7 @@ version = "0.0.0"
 dependencies = [
  "anyhow",
  "assert_cmd",
+ "blackarrow-base",
  "clap",
  "codex-app-server-client",
  "codex-app-server-protocol",
@@ -3380,6 +3394,7 @@ dependencies = [
 name = "codex-external-agent-migration"
 version = "0.0.0"
 dependencies = [
+ "blackarrow-base",
  "chrono",
  "codex-analytics",
  "codex-app-server-protocol",
@@ -3410,6 +3425,7 @@ dependencies = [
 name = "codex-features"
 version = "0.0.0"
 dependencies = [
+ "blackarrow-base",
  "codex-network-proxy",
  "codex-protocol",
  "codex-utils-redacted-string",
@@ -3836,6 +3852,7 @@ version = "0.0.0"
 dependencies = [
  "anyhow",
  "base64 0.22.1",
+ "blackarrow-base",
  "chrono",
  "codex-agent-identity",
  "codex-config",
@@ -4296,6 +4313,7 @@ name = "codex-protocol"
 version = "0.0.0"
 dependencies = [
  "anyhow",
+ "blackarrow-base",
  "chardetng",
  "chrono",
  "codex-async-utils",
@@ -4411,6 +4429,7 @@ dependencies = [
  "anyhow",
  "axum",
  "base64 0.22.1",
+ "blackarrow-base",
  "bytes",
  "codex-api",
  "codex-config",
@@ -4535,6 +4554,7 @@ dependencies = [
  "age",
  "anyhow",
  "base64 0.22.1",
+ "blackarrow-base",
  "codex-git-utils",
  "codex-keyring-store",
  "keyring",
@@ -4652,6 +4672,7 @@ name = "codex-state"
 version = "0.0.0"
 dependencies = [
  "anyhow",
+ "blackarrow-base",
  "chrono",
  "codex-git-utils",
  "codex-history",
@@ -4719,6 +4740,7 @@ dependencies = [
 name = "codex-test-binary-support"
 version = "0.0.0"
 dependencies = [
+ "blackarrow-base",
  "codex-arg0",
  "tempfile",
 ]
@@ -4801,6 +4823,7 @@ dependencies = [
  "assert_matches",
  "axum",
  "base64 0.22.1",
+ "blackarrow-base",
  "chrono",
  "clap",
  "codex-ansi-escape",
@@ -4936,6 +4959,7 @@ name = "codex-user-verification"
 version = "0.0.0"
 dependencies = [
  "base64 0.22.1",
+ "blackarrow-base",
  "core-foundation 0.10.1",
  "dirs",
  "objc2",
@@ -5000,6 +5024,7 @@ name = "codex-utils-cargo-bin"
 version = "0.0.0"
 dependencies = [
  "assert_cmd",
+ "blackarrow-base",
  "runfiles",
  "thiserror 2.0.18",
 ]
@@ -5041,6 +5066,7 @@ dependencies = [
 name = "codex-utils-home-dir"
 version = "0.0.0"
 dependencies = [
+ "blackarrow-base",
  "codex-utils-absolute-path",
  "dirs",
  "pretty_assertions",
