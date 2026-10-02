@@ -250,7 +250,7 @@ async fn replacement_uses_server_defaults_and_preserves_explicit_launch_settings
             let rendered = render_bottom_popup(&app.chat_widget, /*width*/ 80)
                 .replace(&server_config.cwd.display().to_string(), "<PROJECT>");
             insta::assert_snapshot!(rendered, @r"
-            › Ask Codex to do anything
+            › Describe a task
 
               server-model high · <PROJECT>
             ");

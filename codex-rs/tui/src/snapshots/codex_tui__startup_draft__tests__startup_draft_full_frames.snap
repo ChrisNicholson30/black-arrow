@@ -5,37 +5,37 @@ expression: "snapshots.join(\"\\n---\\n\")"
 ---
 empty (48 columns):
 
-  >_ OpenAI Codex (v<VERSION>)
+  >_ Black Arrow (v<VERSION>)
      loading
 
 
-› Ask Codex to do anything
+› Describe a task
 
   ? for shortcuts
 ---
 configured (48 columns):
 
-  >_ OpenAI Codex (v<VERSION>)
+  >_ Black Arrow (v<VERSION>)
      workspace
 
 
-› Ask Codex to do anything
+› Describe a task
 
   ? for shortcuts
 ---
 resuming (48 columns):
 
-  >_ OpenAI Codex (v<VERSION>)
+  >_ Black Arrow (v<VERSION>)
      loading
   Resuming session…
 
-› Ask Codex to do anything
+› Describe a task
 
   ? for shortcuts
 ---
 forking (48 columns):
 
-  >_ OpenAI Codex (v<VERSION>)
+  >_ Black Arrow (v<VERSION>)
      loading
   Forking session…
 
@@ -45,7 +45,7 @@ forking (48 columns):
 ---
 multiline (48 columns):
 
-  >_ OpenAI Codex (v<VERSION>)
+  >_ Black Arrow (v<VERSION>)
      loading
 
 
@@ -56,7 +56,7 @@ multiline (48 columns):
 ---
 narrow (18 columns):
 
-  >_ OpenAI Codex…
+  >_ Black Arrow …
      loading
 
 

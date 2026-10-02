@@ -5,10 +5,10 @@ expression: "snapshots.join(\"\\n\\n\")"
 specialty=None 40x10
 
   Enable full access?
-  When Codex runs with full access, it
-  can edit any file on your computer
-  and run commands with network,
-  without your approval. Exercise
+  When Black Arrow runs with full
+  access, it can edit any file on your
+  computer and run commands with
+  network, without your approval.
   [… 9 lines]
 › 1. Yes, continue anyway
   2. Cancel
@@ -18,10 +18,10 @@ specialty=Some("cyber") 40x16
 
   Enable full access?
 
-  When Codex runs with full access, it
-  can edit any file on your computer
-  and run commands with network,
-  without your approval.
+  When Black Arrow runs with full
+  access, it can edit any file on your
+  computer and run commands with
+  network, without your approval.
 
   Cyber models carry a higher risk of
   dangerous actions. Ensure proper

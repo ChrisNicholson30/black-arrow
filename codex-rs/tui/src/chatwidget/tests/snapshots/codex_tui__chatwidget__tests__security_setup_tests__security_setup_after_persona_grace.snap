@@ -14,6 +14,6 @@ expression: "normalize_snapshot_paths(render_bottom_popup(&chat, 48))"
   Press a number to choose · esc to dismiss ·
   type to continue
 
-› Ask Codex to do anything
+› Describe a task
 
   test-model-a default · /tmp/project
