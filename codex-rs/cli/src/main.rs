@@ -110,20 +110,21 @@ use codex_protocol::protocol::AskForApproval;
 use codex_protocol::user_input::UserInput;
 use codex_terminal_detection::TerminalName;
 
-/// Codex CLI
+/// Black Arrow: terminal coding harness
 ///
 /// If no subcommand is specified, options will be forwarded to the interactive CLI.
 #[derive(Debug, Parser)]
 #[clap(
+    name = blackarrow_base::brand::BIN_NAME,
     author,
     version,
     // If a sub‑command is given, ignore requirements of the default args.
     subcommand_negates_reqs = true,
-    // The executable is sometimes invoked via a platform‑specific name like
-    // `codex-x86_64-unknown-linux-musl`, but the help output should always use
-    // the generic `codex` command name that users run.
-    bin_name = "codex",
-    override_usage = "codex [OPTIONS] [PROMPT]\n       codex [OPTIONS] <COMMAND> [ARGS]"
+    // The executable may be invoked through the `ba` alias or a
+    // platform‑specific name, but the help output should always use the
+    // `blackarrow` command name that users run.
+    bin_name = blackarrow_base::brand::BIN_NAME,
+    override_usage = "blackarrow [OPTIONS] [PROMPT]\n       blackarrow [OPTIONS] <COMMAND> [ARGS]"
 )]
 struct MultitoolCli {
     #[clap(flatten)]
@@ -150,7 +151,7 @@ enum Subcommand {
     /// Internal: forward a local TCP socket through an HTTP/3 CONNECT proxy.
     #[clap(hide = true)]
     TcpTunnel(codex_tcp_tunnel::Args),
-    /// Run Codex non-interactively.
+    /// Run Black Arrow non-interactively.
     #[clap(visible_alias = "e")]
     Exec(ExecCli),
 
@@ -163,10 +164,10 @@ enum Subcommand {
     /// Remove stored authentication credentials.
     Logout(LogoutCommand),
 
-    /// Manage external MCP servers for Codex.
+    /// Manage external MCP servers for Black Arrow.
     Mcp(McpCli),
 
-    /// Manage Codex plugins.
+    /// Manage Black Arrow plugins.
     Plugin(PluginCli),
 
     /// [experimental] Run the app server or related tooling.
@@ -176,19 +177,23 @@ enum Subcommand {
     RemoteControl(RemoteControlCommand),
 
     /// Launch the Desktop app (opens the app installer if missing).
+    // Black Arrow: hidden and refused at dispatch; there is no desktop app.
     #[cfg(any(target_os = "macos", target_os = "windows"))]
+    #[clap(hide = true)]
     App(app_cmd::AppCommand),
 
     /// Generate shell completion scripts.
     Completion(CompletionCommand),
 
     /// Update Codex to the latest version.
+    // Black Arrow: hidden and refused at dispatch until a release channel exists.
+    #[clap(hide = true)]
     Update,
 
-    /// Diagnose local Codex installation, config, auth, and runtime health.
+    /// Diagnose local Black Arrow installation, config, auth, and runtime health.
     Doctor(DoctorCommand),
 
-    /// Run commands within a Codex-provided sandbox.
+    /// Run commands within a Black Arrow-provided sandbox.
     Sandbox(HostSandboxArgs),
 
     /// Debugging tools.
@@ -199,7 +204,8 @@ enum Subcommand {
     Execpolicy(ExecpolicyCommand),
 
     /// Apply the latest diff produced by Codex agent as a `git apply` to your local working tree.
-    #[clap(visible_alias = "a")]
+    // Black Arrow: Codex Cloud is an OpenAI service, not a Black Arrow feature.
+    #[clap(visible_alias = "a", hide = true)]
     Apply(ApplyCommand),
 
     /// Resume a previous interactive session (picker by default; use --last to continue the most recent).
@@ -224,7 +230,8 @@ enum Subcommand {
     Fork(ForkCommand),
 
     /// [EXPERIMENTAL] Browse tasks from Codex Cloud and apply changes locally.
-    #[clap(name = "cloud", alias = "cloud-tasks")]
+    // Black Arrow: Codex Cloud is an OpenAI service, not a Black Arrow feature.
+    #[clap(name = "cloud", alias = "cloud-tasks", hide = true)]
     Cloud(CloudTasksCli),
 
     /// Internal: run the responses API proxy.
@@ -313,7 +320,7 @@ struct DebugModelsCommand {
 
 #[derive(Debug, Parser)]
 struct ReviewCommand {
-    /// Error out when config.toml contains fields that are not recognized by this version of Codex.
+    /// Error out when config.toml contains fields that are not recognized by this version of Black Arrow.
     #[arg(long = "strict-config", default_value_t = false)]
     strict_config: bool,
 
@@ -393,7 +400,7 @@ struct SessionArchiveConfigOverrides {
     #[clap(flatten)]
     shared: SharedCliOptions,
 
-    /// Error out when config.toml contains fields that are not recognized by this version of Codex.
+    /// Error out when config.toml contains fields that are not recognized by this version of Black Arrow.
     #[arg(long = "strict-config", default_value_t = false)]
     strict_config: bool,
 
@@ -472,7 +479,7 @@ type HostSandboxArgs = UnsupportedSandboxArgs;
 #[cfg(not(any(target_os = "macos", target_os = "linux", target_os = "windows")))]
 #[derive(Debug, Parser)]
 struct UnsupportedSandboxArgs {
-    /// Layer $CODEX_HOME/<name>.config.toml on top of the base user config.
+    /// Layer $BLACKARROW_HOME/<name>.config.toml on top of the base user config.
     #[arg(long = "profile", short = 'p')]
     pub config_profile: Option<ProfileV2Name>,
 
@@ -504,13 +511,13 @@ struct LoginCommand {
 
     #[arg(
         long = "with-api-key",
-        help = "Read the API key from stdin (e.g. `printenv OPENAI_API_KEY | codex login --with-api-key`)"
+        help = "Read the API key from stdin (e.g. `printenv OPENAI_API_KEY | blackarrow login --with-api-key`)"
     )]
     with_api_key: bool,
 
     #[arg(
         long = "with-access-token",
-        help = "Read the access token from stdin (e.g. `printenv CODEX_ACCESS_TOKEN | codex login --with-access-token`)"
+        help = "Read the access token from stdin (e.g. `printenv CODEX_ACCESS_TOKEN | blackarrow login --with-access-token`)"
     )]
     with_access_token: bool,
 
@@ -561,7 +568,7 @@ struct AppServerCommand {
     #[command(flatten)]
     code_mode_host: codex_app_server::AppServerCodeModeHostArgs,
 
-    /// Error out when config.toml contains fields that are not recognized by this version of Codex.
+    /// Error out when config.toml contains fields that are not recognized by this version of Black Arrow.
     #[arg(long = "strict-config", default_value_t = false)]
     strict_config: bool,
 
@@ -588,19 +595,15 @@ struct AppServerCommand {
 
     /// Controls whether analytics are enabled by default.
     ///
-    /// Analytics are disabled by default for app-server. Users have to explicitly opt in
-    /// via the `analytics` section in the config.toml file.
+    /// Accepted for compatibility; it has no effect in Black Arrow.
     ///
-    /// However, for first-party use cases like the VSCode IDE extension, we default analytics
-    /// to be enabled by default by setting this flag. Users can still opt out by setting this
-    /// in their config.toml:
+    /// Upstream uses this flag to let first-party clients default analytics on.
+    /// Black Arrow sends analytics only when the user opts in from config.toml:
     ///
     /// ```toml
     /// [analytics]
-    /// enabled = false
+    /// enabled = true
     /// ```
-    ///
-    /// See https://developers.openai.com/codex/config-advanced/#metrics for more details.
     #[arg(long = "analytics-default-enabled")]
     analytics_default_enabled: bool,
 
@@ -771,6 +774,18 @@ fn handle_app_exit(
     Ok(())
 }
 
+/// Black Arrow: upstream's updater reinstalls the Codex package through npm,
+/// Homebrew, or its own installer. Refuse until Black Arrow publishes releases,
+/// so this binary can never modify a Codex install on the same machine.
+fn ensure_release_channel() -> anyhow::Result<()> {
+    anyhow::ensure!(
+        blackarrow_base::defaults::current().has_release_channel,
+        "Black Arrow does not publish releases yet, so it cannot update itself. \
+         Rebuild from source to pick up changes."
+    );
+    Ok(())
+}
+
 /// Run the update action and print the result.
 fn run_update_action(
     action: UpdateAction,
@@ -791,6 +806,9 @@ fn run_update_action(
         println!("Relaunch Codex to reconnect.");
         return Ok(());
     }
+    // Restarting this program's own background server is fine. Everything
+    // below reinstalls the Codex package, so it stops here.
+    ensure_release_channel()?;
     println!();
     let cmd_str = action.command_str();
     println!("Updating Codex via `{cmd_str}`...");
@@ -857,10 +875,11 @@ fn resolve_windows_update_command_from_path(
 }
 
 fn run_update_command() -> anyhow::Result<()> {
+    ensure_release_channel()?;
     #[cfg(debug_assertions)]
     {
         anyhow::bail!(
-            "`codex update` is not available in debug builds. Install a release build of Codex to use this command."
+            "`blackarrow update` is not available in debug builds. Install a release build of Codex to use this command."
         );
     }
 
@@ -1055,7 +1074,7 @@ async fn cli_main(
         && let Some(agents_endpoint) = &options.remote.remote
         && root_endpoint != agents_endpoint
     {
-        anyhow::bail!("`codex agents` received conflicting remote server endpoints");
+        anyhow::bail!("`blackarrow agents` received conflicting remote server endpoints");
     }
     let root_remote = agents_options
         .and_then(|options| options.remote.remote.clone())
@@ -1086,7 +1105,9 @@ async fn cli_main(
             );
             if open_agents_overview {
                 if interactive.prompt.is_some() || !interactive.images.is_empty() {
-                    anyhow::bail!("`codex agents` does not accept an initial prompt or images");
+                    anyhow::bail!(
+                        "`blackarrow agents` does not accept an initial prompt or images"
+                    );
                 }
                 if root_remote.is_some()
                     && (interactive.oss
@@ -1104,12 +1125,12 @@ async fn cli_main(
                             }))
                 {
                     anyhow::bail!(
-                        "`codex agents` cannot apply local provider or additional-directory overrides to a remote server"
+                        "`blackarrow agents` cannot apply local provider or additional-directory overrides to a remote server"
                     );
                 }
                 if is_workload_identity_selected() {
                     anyhow::bail!(
-                        "`codex agents` is unavailable while workload identity is active"
+                        "`blackarrow agents` is unavailable while workload identity is active"
                     );
                 }
                 if root_remote.is_none() {
@@ -1118,7 +1139,7 @@ async fn cli_main(
                         root_remote_auth_token_env.clone(),
                     )?;
                     #[cfg(not(any(unix, windows)))]
-                    anyhow::bail!("`codex agents` requires `--remote` on this platform");
+                    anyhow::bail!("`blackarrow agents` requires `--remote` on this platform");
                 }
                 interactive.agents_overview = true;
             }
@@ -1435,6 +1456,10 @@ async fn cli_main(
                 root_remote_auth_token_env.as_deref(),
                 "app",
             )?;
+            anyhow::ensure!(
+                blackarrow_base::defaults::current().has_desktop_app,
+                "Black Arrow is a terminal application and has no desktop app to launch."
+            );
             app_cmd::run_app(app_cli).await?;
         }
         Some(Subcommand::Resume(ResumeCommand {
@@ -1582,7 +1607,7 @@ async fn cli_main(
                         .await;
                     } else if login_cli.api_key.is_some() {
                         eprintln!(
-                            "The --api-key flag is no longer supported. Pipe the key instead, e.g. `printenv OPENAI_API_KEY | codex login --with-api-key`."
+                            "The --api-key flag is no longer supported. Pipe the key instead, e.g. `printenv OPENAI_API_KEY | blackarrow login --with-api-key`."
                         );
                         std::process::exit(1);
                     } else if login_cli.with_api_key {
@@ -1705,7 +1730,7 @@ async fn cli_main(
             #[cfg(not(any(target_os = "macos", target_os = "linux", target_os = "windows")))]
             {
                 let _ = loader_overrides;
-                anyhow::bail!("`codex sandbox` is not supported on this operating system");
+                anyhow::bail!("`blackarrow sandbox` is not supported on this operating system");
             }
         }
         Some(Subcommand::Debug(DebugCommand { subcommand })) => match subcommand {
@@ -1885,7 +1910,7 @@ fn profile_v2_for_subcommand<'a>(
             subcommand: DebugSubcommand::PromptInput(_),
         }) => Ok(Some(profile_v2)),
         _ => anyhow::bail!(
-            "--profile only applies to runtime commands and `codex mcp`: `codex`, `codex exec`, `codex review`, `codex resume`, `codex queue`, `codex archive`, `codex delete`, `codex unarchive`, `codex fork`, `codex mcp`, `codex sandbox`, and `codex debug prompt-input`."
+            "--profile only applies to runtime commands and `blackarrow mcp`: `blackarrow`, `blackarrow exec`, `blackarrow review`, `blackarrow resume`, `blackarrow queue`, `blackarrow archive`, `blackarrow delete`, `blackarrow unarchive`, `blackarrow fork`, `blackarrow mcp`, `blackarrow sandbox`, and `blackarrow debug prompt-input`."
         ),
     }
 }
@@ -2146,12 +2171,12 @@ fn reject_remote_mode_for_subcommand(
 ) -> anyhow::Result<()> {
     if let Some(remote) = remote {
         anyhow::bail!(
-            "`--remote {remote}` is only supported for interactive TUI commands, not `codex {subcommand}`"
+            "`--remote {remote}` is only supported for interactive TUI commands, not `blackarrow {subcommand}`"
         );
     }
     if remote_auth_token_env.is_some() {
         anyhow::bail!(
-            "`--remote-auth-token-env` is only supported for interactive TUI commands, not `codex {subcommand}`"
+            "`--remote-auth-token-env` is only supported for interactive TUI commands, not `blackarrow {subcommand}`"
         );
     }
     Ok(())
@@ -2181,12 +2206,12 @@ fn reject_unsupported_worktree_for_subcommand(
         None => Ok(()),
         Some(Subcommand::Fork(command)) if command.session_id.is_some() && !command.last => Ok(()),
         Some(Subcommand::Fork(_)) => {
-            anyhow::bail!("`codex fork --worktree` requires an explicit session ID")
+            anyhow::bail!("`blackarrow fork --worktree` requires an explicit session ID")
         }
         Some(Subcommand::Exec(command)) => match &command.command {
             None | Some(ExecCommand::Fork(_)) => Ok(()),
             Some(ExecCommand::Resume(_)) => anyhow::bail!(
-                "`--worktree` cannot resume an existing session; use `codex exec fork --worktree`"
+                "`--worktree` cannot resume an existing session; use `blackarrow exec fork --worktree`"
             ),
             Some(ExecCommand::Review(_)) => {
                 anyhow::bail!("`--worktree` is not supported for code review")
@@ -2194,7 +2219,7 @@ fn reject_unsupported_worktree_for_subcommand(
         },
         _ => {
             anyhow::bail!(
-                "`--worktree` supports new interactive sessions, `codex fork`, `codex exec`, and `codex exec fork`"
+                "`--worktree` supports new interactive sessions, `blackarrow fork`, `blackarrow exec`, and `blackarrow exec fork`"
             )
         }
     }
@@ -2220,7 +2245,7 @@ fn reject_root_strict_config_for_subcommand(
 /// flag should be rejected after parsing.
 ///
 /// `--strict-config` is parsed on the root interactive CLI so commands like
-/// `codex --strict-config` continue to work for the TUI and for wrappers that
+/// `blackarrow --strict-config` continue to work for the TUI and for wrappers that
 /// forward root options into another command shape. Clap will still accept that
 /// root flag before the dispatcher knows which subcommand the user selected, so
 /// unsupported subcommands need an explicit post-parse reject path.
@@ -2288,7 +2313,7 @@ fn reject_strict_config_for_unsupported_subcommand(
     subcommand: &str,
 ) -> anyhow::Result<()> {
     if strict_config {
-        anyhow::bail!("`--strict-config` is not supported for `codex {subcommand}`");
+        anyhow::bail!("`--strict-config` is not supported for `blackarrow {subcommand}`");
     }
     Ok(())
 }
@@ -2386,7 +2411,7 @@ async fn run_interactive_tui(
     if interactive.no_daemon {
         if interactive.agents_overview {
             return Ok(AppExitInfo::fatal(
-                "--no-daemon cannot be used with codex agents. The agents overview requires a shared server. Use codex --no-daemon to work without it.",
+                "--no-daemon cannot be used with blackarrow agents. The agents overview requires a shared server. Use blackarrow --no-daemon to work without it.",
             ));
         }
         if remote.is_some() {
@@ -2409,7 +2434,7 @@ async fn run_interactive_tui(
         }
 
         eprintln!(
-            "WARNING: TERM is set to \"dumb\". Codex's interactive TUI may not work in this terminal."
+            "WARNING: TERM is set to \"dumb\". Black Arrow's interactive TUI may not work in this terminal."
         );
         if !confirm("Continue anyway? [y/N]: ")? {
             return Ok(AppExitInfo::fatal(
@@ -2432,7 +2457,7 @@ async fn run_interactive_tui(
         codex_app_server_daemon::run(AppServerLifecycleCommand::Start)
             .await
             .map_err(|err| std::io::Error::other(format!(
-                "{err:#}\nThe agents overview requires a shared server. Use codex --no-daemon to work without it."
+                "{err:#}\nThe agents overview requires a shared server. Use blackarrow --no-daemon to work without it."
             )))?;
     }
 
@@ -2500,7 +2525,7 @@ where
             Err(backup_err) => {
                 local_state_db::print_diagnostic_guidance(startup_error);
                 return Ok(AppExitInfo::fatal(format!(
-                    "failed to move damaged Codex local database files into a backup folder automatically: {backup_err}"
+                    "failed to move damaged Black Arrow local database files into a backup folder automatically: {backup_err}"
                 )));
             }
         }
@@ -2556,7 +2581,7 @@ fn confirm(prompt: &str) -> std::io::Result<bool> {
     Ok(answer.eq_ignore_ascii_case("y") || answer.eq_ignore_ascii_case("yes"))
 }
 
-/// Build the final `TuiCli` for a `codex resume` invocation.
+/// Build the final `TuiCli` for a `blackarrow resume` invocation.
 fn finalize_resume_interactive(
     mut interactive: TuiCli,
     root_config_overrides: CliConfigOverrides,
@@ -2591,7 +2616,7 @@ fn finalize_resume_interactive(
     interactive
 }
 
-/// Build the final `TuiCli` for a `codex fork` invocation.
+/// Build the final `TuiCli` for a `blackarrow fork` invocation.
 fn finalize_fork_interactive(
     mut interactive: TuiCli,
     root_config_overrides: CliConfigOverrides,
@@ -2694,7 +2719,7 @@ fn merge_interactive_cli_flags(interactive: &mut TuiCli, subcommand_cli: TuiCli)
 
 fn print_completion(cmd: CompletionCommand) {
     let mut app = MultitoolCli::command();
-    let name = "codex";
+    let name = blackarrow_base::brand::BIN_NAME;
     generate(cmd.shell, &mut app, name, &mut std::io::stdout());
 }
 
@@ -3427,15 +3452,15 @@ mod tests {
     fn plugin_marketplace_help_uses_plugin_namespace() {
         let help = help_from_args(&["codex", "plugin", "marketplace", "--help"]);
         assert!(
-            help.contains("Usage: codex plugin marketplace [OPTIONS] <COMMAND>"),
+            help.contains("Usage: blackarrow plugin marketplace [OPTIONS] <COMMAND>"),
             "{help}"
         );
 
         for (subcommand, usage) in [
-            ("add", "Usage: codex plugin marketplace add"),
-            ("list", "Usage: codex plugin marketplace list"),
-            ("upgrade", "Usage: codex plugin marketplace upgrade"),
-            ("remove", "Usage: codex plugin marketplace remove"),
+            ("add", "Usage: blackarrow plugin marketplace add"),
+            ("list", "Usage: blackarrow plugin marketplace list"),
+            ("upgrade", "Usage: blackarrow plugin marketplace upgrade"),
+            ("remove", "Usage: blackarrow plugin marketplace remove"),
         ] {
             let help = help_from_args(&["codex", "plugin", "marketplace", subcommand, "--help"]);
             assert!(help.contains(usage), "{help}");
@@ -3711,7 +3736,7 @@ mod tests {
                 );
                 exit_info.disconnect_info = Some(codex_tui::DisconnectInfo {
                     command: vec![
-                        "codex".to_string(),
+                        blackarrow_base::brand::BIN_NAME.to_string(),
                         "--remote".to_string(),
                         "wss://example.com:443/".to_string(),
                     ],
@@ -3728,8 +3753,8 @@ mod tests {
             vec![
                 "Disconnected from this task. Any running work continues.",
                 "To reconnect, run:",
-                "  codex --remote wss://example.com:443/ --remote-auth-token-env CODEX_REMOTE_TOKEN resume 123e4567-e89b-12d3-a456-426614174000",
-                "Stop the current turn: run codex --remote wss://example.com:443/ --remote-auth-token-env CODEX_REMOTE_TOKEN agents, select this task, and press ctrl + x.",
+                "  blackarrow --remote wss://example.com:443/ --remote-auth-token-env CODEX_REMOTE_TOKEN resume 123e4567-e89b-12d3-a456-426614174000",
+                "Stop the current turn: run blackarrow --remote wss://example.com:443/ --remote-auth-token-env CODEX_REMOTE_TOKEN agents, select this task, and press ctrl + x.",
                 "Token usage so far: total=2 input=0 output=2",
             ]
         );
@@ -3791,7 +3816,7 @@ mod tests {
             vec![
                 "Token usage: total=2 input=0 output=2".to_string(),
                 "To continue this session, run:".to_string(),
-                "  codex resume 123e4567-e89b-12d3-a456-426614174000".to_string(),
+                "  blackarrow resume 123e4567-e89b-12d3-a456-426614174000".to_string(),
             ]
         );
     }
@@ -3806,7 +3831,7 @@ mod tests {
                 insta::assert_snapshot!(lines.join("\n"), @"
                 Token usage: total=2 input=0 output=2
                 To continue this session, run:
-                  codex resume 123e4567-e89b-12d3-a456-426614174000
+                  blackarrow resume 123e4567-e89b-12d3-a456-426614174000
                 ");
             }
         }
@@ -3824,7 +3849,7 @@ mod tests {
             vec![
                 "Token usage: total=2 input=0 output=2",
                 "To continue this session, run:",
-                "  \u{1b}[36mcodex resume 123e4567-e89b-12d3-a456-426614174000\u{1b}[39m",
+                "  \u{1b}[36mblackarrow resume 123e4567-e89b-12d3-a456-426614174000\u{1b}[39m",
             ]
         );
     }
@@ -3839,8 +3864,8 @@ mod tests {
         insta::assert_snapshot!(lines.join("\n"), @"
         Token usage: total=2 input=0 output=2
         To continue this session, run:
-          codex resume 123e4567-e89b-12d3-a456-426614174000
-        Or run codex resume and select my-thread.
+          blackarrow resume 123e4567-e89b-12d3-a456-426614174000
+        Or run blackarrow resume and select my-thread.
         ");
     }
 
@@ -3856,8 +3881,8 @@ mod tests {
             vec![
                 "Token usage: total=2 input=0 output=2",
                 "To continue this session, run:",
-                "  \u{1b}[36mcodex resume 123e4567-e89b-12d3-a456-426614174000\u{1b}[39m",
-                "Or run \u{1b}[36mcodex resume\u{1b}[39m and select \u{1b}[36mmy-thread\u{1b}[39m.",
+                "  \u{1b}[36mblackarrow resume 123e4567-e89b-12d3-a456-426614174000\u{1b}[39m",
+                "Or run \u{1b}[36mblackarrow resume\u{1b}[39m and select \u{1b}[36mmy-thread\u{1b}[39m.",
             ]
         );
     }
@@ -4260,7 +4285,7 @@ mod tests {
 
         assert_eq!(
             err.to_string(),
-            "`--strict-config` is not supported for `codex mcp`"
+            "`--strict-config` is not supported for `blackarrow mcp`"
         );
 
         let cli = MultitoolCli::try_parse_from(["codex", "--strict-config", "remote-control"])
@@ -4273,7 +4298,7 @@ mod tests {
 
         assert_eq!(
             err.to_string(),
-            "`--strict-config` is not supported for `codex remote-control`"
+            "`--strict-config` is not supported for `blackarrow remote-control`"
         );
     }
 
@@ -4289,7 +4314,7 @@ mod tests {
 
         assert_eq!(
             err.to_string(),
-            "`--strict-config` is not supported for `codex app-server proxy`"
+            "`--strict-config` is not supported for `blackarrow app-server proxy`"
         );
     }
 

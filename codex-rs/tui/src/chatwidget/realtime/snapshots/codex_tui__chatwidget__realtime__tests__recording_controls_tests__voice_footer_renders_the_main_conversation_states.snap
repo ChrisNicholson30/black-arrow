@@ -5,7 +5,7 @@ expression: "states.join(\"\\n\\n\")"
 connecting:
  voice ◌ connecting                                                 /voice stop
 
-› Ask Codex to do anything
+› Describe a task
 
   status line stays visible
 
@@ -13,7 +13,7 @@ listening:
  voice ● listening                                      ⌃x mute     /voice stop
    mic ▁▁▁▁▁▁  codex ▁▁▁▁▁▁
 
-› Ask Codex to do anything
+› Describe a task
 
   status line stays visible
 
@@ -21,7 +21,7 @@ speaking:
  voice ● speaking                                       ⌃x mute     /voice stop
    mic ▁▁▇▇▇▇  codex ▁▁████
 
-› Ask Codex to do anything
+› Describe a task
 
   status line stays visible
 
@@ -29,7 +29,7 @@ muted:
  voice ◌ muted                                          ⌃x unmute   /voice stop
    mic ▁▁▁▁▁▁  codex ▁▁▇▇▇▇
 
-› Ask Codex to do anything
+› Describe a task
 
   status line stays visible
 
@@ -37,7 +37,7 @@ transcript:
  voice ● speaking                                       ⌃x mute     /voice stop
    mic ▁▁▄▄▄▄  codex ▁▁▄▄▄▄
 
-› Ask Codex to do anything
+› Describe a task
 
   status line stays visible
 
@@ -45,6 +45,6 @@ interrupted:
  voice ● heard                                          ⌃x mute     /voice stop
    mic ▁▁▄▄▄▄  codex ▁▁▄▄▄▄
 
-› Ask Codex to do anything
+› Describe a task
 
   status line stays visible

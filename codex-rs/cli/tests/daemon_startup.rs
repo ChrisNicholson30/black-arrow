@@ -154,7 +154,8 @@ async fn daemon_startup(command: &str) -> Result<()> {
     fs::write(
         home.path().join("config.toml"),
         format!(
-            "model = \"gpt-5.6-terra\"\n\
+            // Black Arrow: the shared background server is opt-in.
+            "model = \"gpt-5.6-terra\"\nfeatures.daemon_auto_start = true\n\
          features.bedrock_setup_wizard = true\ncli_auth_credentials_store = \"file\"\n\
          suppress_unstable_features_warning = true\nanalytics.enabled = false\n\
          windows.sandbox = \"unelevated\"\n\

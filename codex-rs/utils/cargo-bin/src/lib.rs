@@ -33,6 +33,28 @@ pub enum CargoBinError {
         env_keys: Vec<String>,
         fallback: String,
     },
+    #[error(
+        "integration tests need a build with debug assertions: release builds of \
+         Black Arrow ignore CODEX_HOME, which the test suite uses to isolate state, \
+         so the binary under test would run against the real state directory"
+    )]
+    StateIsolationUnavailable,
+}
+
+/// The name upstream tests use for the product binary.
+const UPSTREAM_PRODUCT_BIN: &str = "codex";
+
+/// Maps the binary name a test asks for to the target Black Arrow builds.
+///
+/// Upstream tests locate the product binary as "codex" in many places. The
+/// executable is called `blackarrow` here, so the lookup is translated once
+/// instead of editing every call site.
+fn product_bin_name(name: &str) -> &str {
+    if name == UPSTREAM_PRODUCT_BIN {
+        blackarrow_base::brand::BIN_NAME
+    } else {
+        name
+    }
 }
 
 /// Returns an absolute path to a binary target built for the current test run.
@@ -42,6 +64,10 @@ pub enum CargoBinError {
 /// This helper allows callers to transparently support both.
 #[allow(deprecated)]
 pub fn cargo_bin(name: &str) -> Result<PathBuf, CargoBinError> {
+    if name == UPSTREAM_PRODUCT_BIN && !blackarrow_base::paths::HONORS_UPSTREAM_NAMES {
+        return Err(CargoBinError::StateIsolationUnavailable);
+    }
+    let name = product_bin_name(name);
     let env_keys = cargo_bin_env_keys(name);
     for key in &env_keys {
         if let Some(value) = std::env::var_os(key) {

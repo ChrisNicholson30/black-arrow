@@ -3701,7 +3701,7 @@ async fn matched_prefix_rule_runs_unsandboxed_under_zsh_fork() -> Result<()> {
 ///
 /// Tool owners use this pattern when a trusted wrapper must run outside the
 /// current sandbox, but then needs to launch child commands back inside the
-/// same sandbox with `codex sandbox -P`. The nested invocation must also pass
+/// same sandbox with `blackarrow sandbox -P`. The nested invocation must also pass
 /// `--include-managed-config` so it continues to honor enterprise requirements.
 /// The test proves both halves of that contract: the wrapper writes outside the
 /// `:workspace` sandbox, while its inherited profile name remains `:workspace`.
@@ -3900,7 +3900,7 @@ async fn explicit_escalation_with_denied_reads(decision: Option<ReviewDecision>)
 /// named profile needed to reconstruct the original sandbox remotely without
 /// dropping managed enterprise requirements. The script treats the inherited
 /// environment value as untrusted and accepts only explicitly allowlisted
-/// profile names before passing one to `codex sandbox -P`.
+/// profile names before passing one to `blackarrow sandbox -P`.
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
 #[cfg(unix)]
 async fn zsh_fork_inner_allowed_script_inherits_active_permission_profile() -> Result<()> {

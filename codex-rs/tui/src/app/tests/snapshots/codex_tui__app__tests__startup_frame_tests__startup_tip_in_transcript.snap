@@ -4,7 +4,7 @@ expression: "normalize_snapshot_paths(normalize_agent_center_snapshot(snapshots.
 ---
 80 columns
 
-  >_ OpenAI Codex (v0.0.0)
+  >_ Black Arrow (v0.0.0)
      /tmp/project
 
 • Conversation continues here.
@@ -19,14 +19,14 @@ expression: "normalize_snapshot_paths(normalize_agent_center_snapshot(snapshots.
 
 
 
-› Ask Codex to do anything
+› Describe a task
 
   GPT-5.6-Sol default · /tmp/project
   ? for shortcuts
 
 32 columns
 
-  >_ OpenAI Codex (v0.0.0)
+  >_ Black Arrow (v0.0.0)
      /tmp/project
 
 • Conversation continues here.
@@ -41,7 +41,7 @@ expression: "normalize_snapshot_paths(normalize_agent_center_snapshot(snapshots.
 
 
 
-› Ask Codex to do anything
+› Describe a task
 
   GPT-5.6-Sol default · /tmp/pr…
   ? for shortcuts

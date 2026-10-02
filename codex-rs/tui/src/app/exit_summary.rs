@@ -32,7 +32,9 @@ impl App {
         let disconnect_info = thread_id.and_then(|_| {
             let command = match &self.app_server_target {
                 AppServerTarget::Embedded => return None,
-                AppServerTarget::LocalDaemon { .. } => vec!["codex".to_string()],
+                AppServerTarget::LocalDaemon { .. } => {
+                    vec![blackarrow_base::brand::BIN_NAME.to_string()]
+                }
                 AppServerTarget::Remote { endpoint } => {
                     let address = match endpoint {
                         RemoteAppServerEndpoint::WebSocket { websocket_url, .. } => {
@@ -49,7 +51,11 @@ impl App {
                             format!("unix://{}", socket_path.display())
                         }
                     };
-                    vec!["codex".to_string(), "--remote".to_string(), address]
+                    vec![
+                        blackarrow_base::brand::BIN_NAME.to_string(),
+                        "--remote".to_string(),
+                        address,
+                    ]
                 }
             };
             let stop_hint = self
@@ -138,12 +144,16 @@ impl AppExitInfo {
             lines.push("To continue this session, run:".to_string());
             lines.push(format!(
                 "  {}",
-                color_command(format!("codex resume {}", thread.thread_id)),
+                color_command(format!(
+                    "{} resume {}",
+                    blackarrow_base::brand::BIN_NAME,
+                    thread.thread_id
+                )),
             ));
             if let Some(thread_name) = thread.thread_name.filter(|name| !name.is_empty()) {
                 lines.push(format!(
                     "Or run {} and select {}.",
-                    color_command("codex resume".to_string()),
+                    color_command(format!("{} resume", blackarrow_base::brand::BIN_NAME)),
                     color_command(thread_name),
                 ));
             }

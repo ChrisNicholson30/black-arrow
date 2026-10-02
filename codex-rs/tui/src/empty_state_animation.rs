@@ -53,12 +53,23 @@ pub(crate) struct EmptyStateAnimation {
     replaying: bool,
 }
 
+/// Black Arrow: this decoration is upstream's logo, so the shipped program
+/// never starts or paints it. This crate's unit tests keep it, which leaves
+/// upstream's animation tests and their snapshots as upstream wrote them; the
+/// real binary is checked in `tests/suite/blackarrow_screen.rs`.
+pub(crate) fn is_shown() -> bool {
+    cfg!(test) || blackarrow_base::brand::SHOWS_EMPTY_STATE_MARK
+}
+
 impl EmptyStateAnimation {
     pub(crate) fn is_eligible(&self) -> bool {
         self.eligible
     }
 
     pub(crate) fn start_fresh(&mut self) {
+        if !is_shown() {
+            return;
+        }
         self.cancel_replay();
         self.eligible = true;
         self.spin_elapsed = Duration::ZERO;
@@ -202,7 +213,8 @@ impl EmptyStateAnimation {
         let screen = buffer.area;
         let width = screen.width.saturating_sub(/*rhs*/ 4).min(MAX_COLUMNS);
         let height = width * STAGE_ROWS / MAX_COLUMNS;
-        if motion == MotionMode::Reduced
+        if !is_shown()
+            || motion == MotionMode::Reduced
             || composer != Some(ComposerState::Empty)
             || height < MIN_STAGE_ROWS
             || height > screen.height

@@ -72,7 +72,7 @@ pub async fn update_from_cli(
             .ok()
             .map(|info| info.app_server_version),
         managed_codex_path,
-        message: "The CLI package is selected and pinned. Run `codex app-server daemon update` to return to production updates.".to_string(),
+        message: "The CLI package is selected and pinned. Run `blackarrow app-server daemon update` to return to production updates.".to_string(),
     }))
 }
 
@@ -118,7 +118,7 @@ async fn prepare_from_package(
     } else {
         anyhow::ensure!(
             previous_root.join("current").symlink_metadata().is_ok(),
-            "no daemon package is selected; run `codex app-server daemon start` first"
+            "no daemon package is selected; run `blackarrow app-server daemon start` first"
         );
     }
     std::fs::create_dir_all(&root)?;
@@ -351,7 +351,7 @@ async fn prepare_from_package(
             ..daemon.clone()
         };
         selected.start_managed_backend(settings).await.context(
-            "daemon package selected but could not start; retry with `codex app-server daemon start`",
+            "daemon package selected but could not start; retry with `blackarrow app-server daemon start`",
         )?;
         selected.wait_until_ready().await?;
     }

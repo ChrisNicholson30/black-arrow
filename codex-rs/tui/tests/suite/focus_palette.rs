@@ -208,17 +208,16 @@ fn default_owned_screen_entry_paints_before_sync_ends_and_exit_clears_inline_dra
     first_frame.process(&terminal.output[..end]);
     let first_contents = first_frame.screen().contents();
     ensure!(
-        first_contents.contains("OpenAI Codex")
-            && first_contents.contains("Ask Codex to do anything"),
+        first_contents.contains("Black Arrow") && first_contents.contains("Describe a task"),
         "owned-screen synchronization ended before its first complete loading frame:\n{first_contents}"
     );
     let composer_row = first_contents
         .lines()
-        .position(|line| line.contains("Ask Codex to do anything"))
+        .position(|line| line.contains("Describe a task"))
         .context("missing composer in first owned-screen frame")?;
     assert_eq!(
         (
-            first_contents.matches("Ask Codex to do anything").count(),
+            first_contents.matches("Describe a task").count(),
             first_frame.screen().cursor_position(),
             first_frame.screen().hide_cursor(),
         ),
@@ -244,9 +243,7 @@ fn default_owned_screen_entry_paints_before_sync_ends_and_exit_clears_inline_dra
         "alternate screen was not restored"
     );
     ensure!(
-        !terminal
-            .screen_contents()
-            .contains("Ask Codex to do anything"),
+        !terminal.screen_contents().contains("Describe a task"),
         "owned-screen exit left the inline composer visible"
     );
     Ok(())
@@ -392,7 +389,7 @@ impl PtyCodex {
             self.read_output(Duration::from_millis(/*millis*/ 50))?;
             self.answer_startup_queries()?;
 
-            if self.palette_answered && self.screen_contains("OpenAI Codex") {
+            if self.palette_answered && self.screen_contains(blackarrow_base::brand::PRODUCT_NAME) {
                 return Ok(());
             }
 
@@ -559,6 +556,10 @@ pub(super) fn write_test_config(codex_home: &Path, repo_root: &Path) -> Result<(
     .context("write focus-test API-key authentication")
 }
 
+// Black Arrow: daemon auto-start is off by default, so the tests about it turn
+// it on instead of deleting the line that turns it off.
+const DAEMON_AUTO_START_ON: &str = "features.daemon_auto_start = true\n";
+
 #[test]
 fn no_daemon_skips_startup_and_discovery() -> Result<()> {
     for running in [false, true] {
@@ -569,7 +570,7 @@ fn no_daemon_skips_startup_and_discovery() -> Result<()> {
         let contents = std::fs::read_to_string(&config)?;
         std::fs::write(
             config,
-            contents.replace("features.daemon_auto_start = false\n", ""),
+            contents.replace("features.daemon_auto_start = false\n", DAEMON_AUTO_START_ON),
         )?;
         let socket_path = codex_app_server_client::app_server_control_socket_path(home.path())?;
         std::fs::create_dir_all(socket_path.as_path().parent().unwrap())?;
@@ -617,7 +618,7 @@ fn auto_daemon_start_failure_exits_with_manual_fallback_hint() -> Result<()> {
     let contents = std::fs::read_to_string(&config)?;
     std::fs::write(
         config,
-        contents.replace("features.daemon_auto_start = false\n", ""),
+        contents.replace("features.daemon_auto_start = false\n", DAEMON_AUTO_START_ON),
     )?;
     // An incomplete selected package must fail without installing a replacement.
     std::fs::create_dir_all(home.path().join("packages/app-server-daemon/current"))?;

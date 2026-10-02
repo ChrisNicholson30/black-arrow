@@ -68,7 +68,8 @@ impl WelcomeWidget {
             is_logged_in,
             animation: RefCell::new(animation),
             request_frame,
-            animations_enabled,
+            // Black Arrow: no logo decoration, so no rows are reserved for it.
+            animations_enabled: animations_enabled && crate::empty_state_animation::is_shown(),
             presentation: Cell::new(Presentation::Animated),
             focused: Cell::new(/*value*/ true),
             layout_area: Cell::new(None),
@@ -126,8 +127,8 @@ impl WidgetRef for &WelcomeWidget {
         lines.push(Line::from(vec![
             "  ".into(),
             "Welcome to ".into(),
-            "Codex".bold(),
-            ", OpenAI's command-line coding agent".into(),
+            blackarrow_base::brand::PRODUCT_NAME.bold(),
+            ", a terminal coding harness".into(),
         ]));
 
         Paragraph::new(lines)

@@ -21,9 +21,8 @@ const ANNOUNCEMENT_TIP_URL: &str =
 const IS_MACOS: bool = cfg!(target_os = "macos");
 const IS_WINDOWS: bool = cfg!(target_os = "windows");
 
-const WINDOWS_APP_TOOLTIP: &str = "Use the **desktop app**. Install it from https://chatgpt.com/codex?app-landing-page=true and run `codex app`.";
-const MACOS_APP_TOOLTIP: &str =
-    "Use the **desktop app**. Run `codex app` to open it. It installs automatically if needed.";
+const WINDOWS_APP_TOOLTIP: &str = "Use the **desktop app**. Install it from https://chatgpt.com/codex?app-landing-page=true and run `blackarrow app`.";
+const MACOS_APP_TOOLTIP: &str = "Use the **desktop app**. Run `blackarrow app` to open it. It installs automatically if needed.";
 const LINUX_APP_TOOLTIP: &str = "Use the **desktop app**. Install it from https://learn.chatgpt.com/docs/linux/linux-app and run `chatgpt`.";
 
 const RAW_TOOLTIPS: &str = include_str!("../assets/tooltips.txt");
@@ -112,6 +111,10 @@ fn linux_app_tooltip(session: LinuxDesktopSession) -> Option<&'static str> {
 }
 
 fn app_tooltip() -> Option<&'static str> {
+    // Black Arrow: there is no desktop app to promote.
+    if !blackarrow_base::defaults::current().has_desktop_app {
+        return None;
+    }
     if IS_MACOS {
         Some(MACOS_APP_TOOLTIP)
     } else if IS_WINDOWS {
@@ -191,6 +194,11 @@ pub(crate) mod announcement {
 
     /// Prewarm the cache of the announcement tip.
     pub(crate) fn prewarm(http_client_factory: HttpClientFactory) {
+        // Black Arrow: upstream's announcements describe Codex, and fetching
+        // them is a network request on every launch.
+        if !blackarrow_base::defaults::current().fetch_remote_announcements {
+            return;
+        }
         if ANNOUNCEMENT_TIP.get().is_some() {
             return;
         }

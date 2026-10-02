@@ -33,7 +33,7 @@ pub(crate) struct DoctorFeedbackReport {
     pub(crate) tags: BTreeMap<String, String>,
 }
 
-/// Runs `codex --cd <workspace> doctor --json --feedback` and returns a best-effort
+/// Runs `blackarrow --cd <workspace> doctor --json --feedback` and returns a best-effort
 /// feedback attachment.
 ///
 /// Failure to spawn Codex, finish before the timeout, or parse JSON means the

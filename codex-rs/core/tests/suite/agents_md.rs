@@ -920,7 +920,7 @@ async fn symlinked_writable_root_reports_sandbox_failure_instead_of_session_corr
         .replace(&home_path, "$CODEX_HOME");
     insta::assert_snapshot!(error, @"
     failed to load AGENTS.md instructions for environment `local`: failed to prepare fs sandbox: failed to prepare Seatbelt sandbox: writable root $CODEX_HOME/visualizations contains symlink component $CODEX_HOME/visualizations; symlinked writable roots are not supported.
-    If this writable root is at or beneath CODEX_HOME and you trust its symlink targets, set `allow_symlinked_codex_home = true` at the top level of `$CODEX_HOME/config.toml` (normally `~/.codex/config.toml`) on the execution host, then restart Codex or its executor. This opt-out trusts targets outside CODEX_HOME and targets changed between commands. It does not apply to other writable roots.
+    If this writable root is at or beneath CODEX_HOME and you trust its symlink targets, set `allow_symlinked_codex_home = true` at the top level of `$BLACKARROW_HOME/config.toml` (normally `~/.blackarrow/config.toml`) on the execution host, then restart Codex or its executor. This opt-out trusts targets outside CODEX_HOME and targets changed between commands. It does not apply to other writable roots.
     ");
 
     Ok(())

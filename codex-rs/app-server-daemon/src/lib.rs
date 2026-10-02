@@ -982,7 +982,7 @@ impl Daemon {
 
         let managed_codex_path = self.managed_codex_bin.display();
         Err(anyhow!(
-            "daemon executable not found at {managed_codex_path}; repair the existing installation, or run `codex app-server daemon start` to install a missing daemon"
+            "daemon executable not found at {managed_codex_path}; repair the existing installation, or run `blackarrow app-server daemon start` to install a missing daemon"
         ))
     }
 

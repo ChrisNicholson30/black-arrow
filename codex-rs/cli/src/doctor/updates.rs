@@ -51,6 +51,16 @@ const DESKTOP_UPDATE_URL: &str =
 /// warning instead of failing doctor outright; update freshness is useful
 /// support context but should not mask more direct install/config failures.
 pub(super) async fn updates_check(config: &Config) -> DoctorCheck {
+    // Black Arrow: the version feeds below are Codex's. Report the situation
+    // instead of asking them about a different product.
+    if !blackarrow_base::defaults::current().has_release_channel {
+        return DoctorCheck::new(
+            "updates.status",
+            "updates",
+            CheckStatus::Ok,
+            "no release channel yet; rebuild from source to update",
+        );
+    }
     let current_exe = std::env::current_exe().ok();
     let install_context = doctor_install_context(current_exe.as_deref());
     let mut details = vec![

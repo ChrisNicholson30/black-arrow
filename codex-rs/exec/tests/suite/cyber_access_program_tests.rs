@@ -88,7 +88,7 @@ fn cyber_access_program_requires_a_supported_turn() {
     for (args, message) in [
         (
             vec!["review", "--uncommitted"],
-            "is not supported with `codex exec review`",
+            "is not supported with `blackarrow exec review`",
         ),
         (vec!["fork", "synthetic-session"], "requires a prompt"),
     ] {

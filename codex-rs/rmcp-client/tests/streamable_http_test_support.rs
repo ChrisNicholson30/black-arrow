@@ -371,7 +371,7 @@ pub(crate) async fn spawn_exec_server() -> anyhow::Result<ExecServerProcess> {
     })
 }
 
-/// Reads the websocket URL printed by `codex exec-server --listen`.
+/// Reads the websocket URL printed by `blackarrow exec-server --listen`.
 async fn read_exec_server_listen_url(child: &mut Child) -> anyhow::Result<String> {
     let stdout = child
         .stdout
