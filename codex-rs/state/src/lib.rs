@@ -128,7 +128,7 @@ pub const PINNED_THREAD_SECTION_ID: &str = "01984de2-8f74-7c91-a3b2-5c5e937cf318
 pub const PINNED_THREAD_SECTION_NAME: &str = "Pinned";
 
 /// Environment variable for overriding the SQLite state database home directory.
-pub const SQLITE_HOME_ENV: &str = "CODEX_SQLITE_HOME";
+pub const SQLITE_HOME_ENV: &str = blackarrow_base::paths::SQLITE_HOME_ENV_VAR;
 
 /// Errors encountered during DB operations. Tags: [stage]
 pub const DB_ERROR_METRIC: &str = "codex.db.error";

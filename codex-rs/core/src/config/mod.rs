@@ -270,7 +270,9 @@ pub const CONFIG_TOML_FILE: &str = "config.toml";
 const CONFIG_PROFILE_V2_SUFFIX: &str = ".config.toml";
 
 fn resolve_sqlite_home_env(resolved_cwd: &Path) -> Option<AbsolutePathBuf> {
-    let raw = std::env::var(codex_state::SQLITE_HOME_ENV).ok()?;
+    // Black Arrow: read through the shared resolver so a `CODEX_SQLITE_HOME`
+    // exported for Codex cannot point Black Arrow at Codex's databases.
+    let raw = blackarrow_base::paths::sqlite_home_override()?.value;
     let trimmed = raw.trim();
     if trimmed.is_empty() {
         return None;

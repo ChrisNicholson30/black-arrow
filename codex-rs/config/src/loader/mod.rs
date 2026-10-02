@@ -9,6 +9,10 @@ mod project_discovery;
 mod tests;
 
 #[cfg(test)]
+#[path = "blackarrow_tests.rs"]
+mod blackarrow_tests;
+
+#[cfg(test)]
 #[path = "projectless_directory_tests.rs"]
 mod projectless_directory_tests;
 #[cfg(windows)]
@@ -76,7 +80,7 @@ pub use windows::WindowsSystemConfigNamespaceProbe;
 pub use windows::probe_windows_system_config_namespace;
 
 #[cfg(unix)]
-const SYSTEM_CONFIG_TOML_FILE_UNIX: &str = "/etc/codex/config.toml";
+const SYSTEM_CONFIG_TOML_FILE_UNIX: &str = blackarrow_base::paths::SYSTEM_CONFIG_TOML_UNIX;
 
 #[cfg(windows)]
 const DEFAULT_PROGRAM_DATA_DIR_WINDOWS: &str = r"C:\ProgramData";
@@ -109,28 +113,28 @@ async fn first_layer_config_error_from_entries(layers: &[ConfigLayerEntry]) -> O
 /// composed with config-style TOML merging plus field-specific handling for
 /// hooks, rules, deny-read permissions, and remote sandbox config:
 ///
-/// - system    `/etc/codex/requirements.toml` (Unix) or
+/// - system    `/etc/blackarrow/requirements.toml` (Unix) or
 ///   `%ProgramData%\OpenAI\Codex\requirements.toml` (Windows)
 /// - cloud:    enterprise-managed cloud config bundle requirements
-/// - legacy:   `/etc/codex/managed_config.toml` (Unix) reinterpreted as
+/// - legacy:   `/etc/blackarrow/managed_config.toml` (Unix) reinterpreted as
 ///   requirements.toml
 /// - admin:    managed preferences (*)
 ///
 /// For backwards compatibility, Unix continues to load
-/// `/etc/codex/managed_config.toml` and map it to `requirements.toml`.
+/// `/etc/blackarrow/managed_config.toml` and map it to `requirements.toml`.
 ///
 /// Configuration is built up from multiple layers in the following order:
 ///
 /// - package:  optional default configuration supplied with the Codex package
 /// - admin:    managed preferences (*)
-/// - system    `/etc/codex/config.toml` (Unix) or
+/// - system    `/etc/blackarrow/config.toml` (Unix) or
 ///   `%ProgramData%\OpenAI\Codex\config.toml` (Windows)
 /// - cloud     enterprise-managed cloud config bundle fragments
-/// - user      `${CODEX_HOME}/config.toml`
-/// - profile   `${CODEX_HOME}/<name>.config.toml`, when selected
+/// - user      `${BLACKARROW_HOME}/config.toml`
+/// - profile   `${BLACKARROW_HOME}/<name>.config.toml`, when selected
 /// - cwd       `${PWD}/config.toml` (loaded but disabled when the directory is untrusted)
-/// - tree      parent directories up to root looking for `./.codex/config.toml` (loaded but disabled when untrusted)
-/// - repo      `$(git rev-parse --show-toplevel)/.codex/config.toml` (loaded but disabled when untrusted)
+/// - tree      parent directories up to root looking for `./.blackarrow/config.toml` (loaded but disabled when untrusted)
+/// - repo      `$(git rev-parse --show-toplevel)/.blackarrow/config.toml` (loaded but disabled when untrusted)
 /// - runtime   e.g., --config flags, model selector in UI
 ///
 /// (*) Only available on macOS via managed device profiles.
@@ -726,7 +730,9 @@ pub async fn load_requirements_toml(
 
 #[cfg(unix)]
 fn system_requirements_toml_file() -> io::Result<AbsolutePathBuf> {
-    AbsolutePathBuf::from_absolute_path(Path::new("/etc/codex/requirements.toml"))
+    AbsolutePathBuf::from_absolute_path(Path::new(
+        blackarrow_base::paths::SYSTEM_REQUIREMENTS_TOML_UNIX,
+    ))
 }
 
 #[cfg(windows)]
@@ -1112,7 +1118,11 @@ impl ProjectTrustContext {
         }
     }
 
-    fn root_checkout_hooks_folder_for_dir(&self, dir: &AbsolutePathBuf) -> Option<AbsolutePathBuf> {
+    fn root_checkout_hooks_folder_for_dir(
+        &self,
+        dir: &AbsolutePathBuf,
+        project_dir_name: &str,
+    ) -> Option<AbsolutePathBuf> {
         let checkout_root = self.checkout_root.as_ref()?;
         let repo_root = self.repo_root.as_ref()?;
         // Regular checkouts resolve both paths to the same root; linked worktrees do not.
@@ -1121,7 +1131,7 @@ impl ProjectTrustContext {
         }
 
         let relative_dir = dir.as_path().strip_prefix(checkout_root.as_path()).ok()?;
-        Some(repo_root.join(relative_dir).join(".codex"))
+        Some(repo_root.join(relative_dir).join(project_dir_name))
     }
 }
 
@@ -1681,20 +1691,31 @@ async fn discover_project_layers(
     let mut layers = Vec::new();
     let mut startup_warnings = Vec::new();
     for dir in dirs {
-        let dot_codex_abs = dir.join(".codex");
-        let dot_codex_uri = PathUri::from_abs_path(&dot_codex_abs);
-        if !fs
-            .get_metadata(&dot_codex_uri, Default::default(), /*sandbox*/ None)
-            .await
-            .map(|metadata| metadata.is_directory)
-            .unwrap_or(false)
-        {
-            continue;
+        // Black Arrow: project configuration lives in `.blackarrow`. Debug
+        // builds also accept upstream's `.codex`, so upstream's tests can keep
+        // their fixtures. See `blackarrow_base::paths::project_dir_names`.
+        let mut project_dir = None;
+        for name in blackarrow_base::paths::project_dir_names() {
+            let candidate = dir.join(name);
+            let candidate_uri = PathUri::from_abs_path(&candidate);
+            if fs
+                .get_metadata(&candidate_uri, Default::default(), /*sandbox*/ None)
+                .await
+                .map(|metadata| metadata.is_directory)
+                .unwrap_or(false)
+            {
+                project_dir = Some((candidate, *name));
+                break;
+            }
         }
+        let Some((dot_codex_abs, project_dir_name)) = project_dir else {
+            continue;
+        };
 
         let decision = trust_context.decision_for_dir(&dir);
         let disabled_reason = trust_context.disabled_reason_for_decision(&decision);
-        let hooks_config_folder_override = trust_context.root_checkout_hooks_folder_for_dir(&dir);
+        let hooks_config_folder_override =
+            trust_context.root_checkout_hooks_folder_for_dir(&dir, project_dir_name);
         let dot_codex_normalized =
             normalize_path(dot_codex_abs.as_path()).unwrap_or_else(|_| dot_codex_abs.to_path_buf());
         if dot_codex_abs == codex_home_abs || dot_codex_normalized == codex_home_normalized {

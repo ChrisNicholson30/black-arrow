@@ -55,13 +55,14 @@ impl MigrationScope {
     }
 
     fn repository(root: PathBuf) -> io::Result<Option<Self>> {
+        let project_dir = blackarrow_base::paths::PROJECT_DIR_NAME;
         for relative_path in [
-            ".codex",
-            ".codex/config.toml",
-            ".codex/agents",
-            ".codex/hooks",
-            ".agents",
-            ".agents/skills",
+            project_dir.to_string(),
+            format!("{project_dir}/config.toml"),
+            format!("{project_dir}/agents"),
+            format!("{project_dir}/hooks"),
+            ".agents".to_string(),
+            ".agents/skills".to_string(),
         ] {
             if is_redirected_destination(&root.join(relative_path))? {
                 return Ok(None);

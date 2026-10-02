@@ -5,7 +5,7 @@ use pretty_assertions::assert_eq;
 async fn detect_does_not_offer_memory_for_an_unsupported_source() {
     let root = TempDir::new().expect("create tempdir");
     let external_agent_home = root.path().join(".cursor");
-    let codex_home = root.path().join(".codex");
+    let codex_home = root.path().join(".blackarrow");
     let project_root = external_agent_home.join("projects/project-a");
     let project_memory = project_root.join("memory");
     let project_cwd = root.path().join("project-a-cwd");

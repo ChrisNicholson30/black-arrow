@@ -557,7 +557,9 @@ impl ExternalAgentConfigService {
         let source_settings = self.source_settings(&scope);
         let target_config = match &scope {
             MigrationScope::Home => self.codex_home.join("config.toml"),
-            MigrationScope::Repository { root } => root.join(".codex").join("config.toml"),
+            MigrationScope::Repository { root } => root
+                .join(blackarrow_base::paths::PROJECT_DIR_NAME)
+                .join("config.toml"),
         };
         let Some(settings) = self.effective_source_settings(&scope)? else {
             return Ok(None);
@@ -605,7 +607,9 @@ impl ExternalAgentConfigService {
         };
         let target_config = match &scope {
             MigrationScope::Home => self.codex_home.join("config.toml"),
-            MigrationScope::Repository { root } => root.join(".codex").join("config.toml"),
+            MigrationScope::Repository { root } => root
+                .join(blackarrow_base::paths::PROJECT_DIR_NAME)
+                .join("config.toml"),
         };
         let settings = self.effective_source_settings(&scope)?;
         let migrated = self.build_mcp_config(&scope, settings)?;
@@ -648,7 +652,8 @@ impl ExternalAgentConfigService {
             ),
             MigrationScope::Repository { root } => (
                 root.join(self.source.config_dir()).join("agents"),
-                root.join(".codex").join("agents"),
+                root.join(blackarrow_base::paths::PROJECT_DIR_NAME)
+                    .join("agents"),
             ),
         };
 
@@ -661,7 +666,9 @@ impl ExternalAgentConfigService {
         };
         let target_hooks = match &scope {
             MigrationScope::Home => self.codex_home.join("hooks.json"),
-            MigrationScope::Repository { root } => root.join(".codex").join("hooks.json"),
+            MigrationScope::Repository { root } => root
+                .join(blackarrow_base::paths::PROJECT_DIR_NAME)
+                .join("hooks.json"),
         };
         let source_external_agent_dir = self.source_config_dir(&scope);
 

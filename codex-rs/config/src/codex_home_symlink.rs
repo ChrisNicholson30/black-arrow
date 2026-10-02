@@ -20,9 +20,8 @@ pub fn allowed_symlinked_codex_home(
     }
 
     // Preserve a configured alias only when lexical normalization did not change its target.
-    let alias = std::env::var_os("CODEX_HOME")
-        .filter(|path| !path.is_empty())
-        .and_then(|path| AbsolutePathBuf::from_absolute_path(path).ok())
+    let alias = blackarrow_base::paths::home_override()
+        .and_then(|found| AbsolutePathBuf::from_absolute_path(found.value).ok())
         .filter(|path| path.canonicalize().ok().as_ref() == Some(codex_home));
     Some(alias.unwrap_or_else(|| codex_home.clone()))
 }

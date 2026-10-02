@@ -15,7 +15,12 @@ impl UserVerificationKeyNamespace {
     pub fn new(account_user_id: &str) -> Self {
         let identity = URL_SAFE_NO_PAD.encode(Sha256::digest(account_user_id.as_bytes()));
         Self {
-            label: format!("com.openai.codex.user-verification.plugin-service.v1.{identity}"),
+            // Black Arrow: its own label, so it never finds or replaces a key
+            // that Codex created for the same account.
+            label: format!(
+                "{}.user-verification.plugin-service.v1.{identity}",
+                blackarrow_base::brand::APP_IDENTIFIER
+            ),
         }
     }
 }
@@ -23,3 +28,7 @@ impl UserVerificationKeyNamespace {
 #[cfg(test)]
 #[path = "key_namespace_tests.rs"]
 mod tests;
+
+#[cfg(test)]
+#[path = "key_namespace_blackarrow_tests.rs"]
+mod blackarrow_tests;

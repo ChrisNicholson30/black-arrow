@@ -1554,7 +1554,7 @@ allowed_approval_policies = ["on-request"]
             candidate: "Never".into(),
             allowed: "[OnRequest]".into(),
             requirement_source: RequirementSource::MdmManagedPreferences {
-                domain: "com.openai.codex".to_string(),
+                domain: "dev.blackarrow".to_string(),
                 key: "requirements_toml_base64".to_string(),
             },
         })

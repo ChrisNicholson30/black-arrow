@@ -46,6 +46,9 @@ use std::process::Command;
 use std::sync::Arc;
 use tempfile::TempDir;
 
+#[path = "seatbelt_blackarrow_tests.rs"]
+mod blackarrow;
+
 fn assert_seatbelt_denied(stderr: &[u8], path: &Path) {
     let stderr = String::from_utf8_lossy(stderr);
     let expected = format!("bash: {}: Operation not permitted\n", path.display());
@@ -524,7 +527,8 @@ fn explicit_unreadable_paths_are_excluded_from_full_disk_read_and_write_access()
         vec![
             "-DWRITABLE_ROOT_0=/".to_string(),
             "-DWRITABLE_ROOT_0_EXCLUDED_0=/.codex".to_string(),
-            format!("-DWRITABLE_ROOT_0_EXCLUDED_1={}", unreadable_root.display()),
+            "-DWRITABLE_ROOT_0_EXCLUDED_1=/.blackarrow".to_string(),
+            format!("-DWRITABLE_ROOT_0_EXCLUDED_2={}", unreadable_root.display()),
         ],
         "unexpected write carveout parameters in args: {args:#?}"
     );
@@ -1970,18 +1974,25 @@ fn create_seatbelt_args_with_read_only_git_and_codex_subpaths() {
             "-DWRITABLE_ROOT_0_EXCLUDED_1={}",
             cwd.canonicalize()
                 .expect("canonicalize cwd")
-                .join(".git")
+                .join(".blackarrow")
                 .display()
         ),
         format!(
             "-DWRITABLE_ROOT_0_EXCLUDED_2={}",
             cwd.canonicalize()
                 .expect("canonicalize cwd")
-                .join(".agents")
+                .join(".git")
                 .display()
         ),
         format!(
             "-DWRITABLE_ROOT_0_EXCLUDED_3={}",
+            cwd.canonicalize()
+                .expect("canonicalize cwd")
+                .join(".agents")
+                .display()
+        ),
+        format!(
+            "-DWRITABLE_ROOT_0_EXCLUDED_4={}",
             cwd.canonicalize()
                 .expect("canonicalize cwd")
                 .join(".aws")
@@ -3000,8 +3011,16 @@ fn create_seatbelt_args_for_cwd_as_git_repo() {
         args.contains(&expected_dot_codex),
         "missing {expected_dot_codex}: {args:#?}"
     );
-    let expected_dot_agents = format!(
+    let expected_dot_blackarrow = format!(
         "-DWRITABLE_ROOT_0_EXCLUDED_2={}",
+        vulnerable_root_canonical.join(".blackarrow").display()
+    );
+    assert!(
+        args.contains(&expected_dot_blackarrow),
+        "missing {expected_dot_blackarrow}: {args:#?}"
+    );
+    let expected_dot_agents = format!(
+        "-DWRITABLE_ROOT_0_EXCLUDED_3={}",
         dot_agents_canonical.to_string_lossy()
     );
     assert!(

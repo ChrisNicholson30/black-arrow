@@ -97,7 +97,7 @@ pub(crate) use self::resolved_store::resolve_oauth_tokens_from_store_policy;
 use self::resolved_store::try_resolve_oauth_tokens_from_store_policy;
 pub(crate) use self::runtime::OAuthRuntime;
 
-const KEYRING_SERVICE: &str = "Codex MCP Credentials";
+const KEYRING_SERVICE: &str = blackarrow_base::brand::KEYCHAIN_MCP_SERVICE;
 const MCP_OAUTH_SECRET_PREFIX: &str = "MCP_OAUTH";
 const REFRESH_SKEW_MILLIS: u64 = 30_000;
 

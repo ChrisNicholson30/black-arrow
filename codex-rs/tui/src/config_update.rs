@@ -317,8 +317,13 @@ pub(crate) async fn read_remote_project_trust(
                     disabled_project
                         .and_then(|layer| layer["name"]["dotCodexFolder"].as_str())
                         .and_then(|path| {
-                            path.strip_suffix("/.codex")
-                                .or_else(|| path.strip_suffix("\\.codex"))
+                            // Black Arrow: whichever project directory name was found.
+                            blackarrow_base::paths::project_dir_names()
+                                .iter()
+                                .find_map(|name| {
+                                    path.strip_suffix(&format!("/{name}"))
+                                        .or_else(|| path.strip_suffix(&format!("\\{name}")))
+                                })
                         })
                 })
         })
