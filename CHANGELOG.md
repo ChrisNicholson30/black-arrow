@@ -14,7 +14,7 @@ Foundation sprint, forked from openai/codex at `ca466061d6`.
 - Startup timeline, written to the file named by `BLACKARROW_STARTUP_TRACE`.
 - Two checks in `blackarrow doctor`: that state is separate from Codex, and which of analytics, feedback upload, update checks, and announcements are on.
 - The terminal is restored when the process is ended by SIGTERM, SIGHUP, or SIGINT.
-- `scripts/blackarrow/`: startup benchmark, terminal behaviour check, hermetic test runner, upstream sync tooling, and `install.sh`, which links `blackarrow` and `ba` into `~/.local/bin`.
+- `scripts/blackarrow/`: startup benchmark, terminal behaviour check, hermetic test runner, upstream sync tooling, `install.sh`, which links `blackarrow` and `ba` into `~/.local/bin`, and `get.sh`, a `curl … | sh` installer that builds from source.
 - Engineering documentation under `docs/`, including a measured baseline of unmodified Codex.
 
 ### Changed
