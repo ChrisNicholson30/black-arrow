@@ -5,9 +5,11 @@
 #
 # There are no prebuilt binaries yet. This fetches the source, builds the
 # release binary with the toolchain the repository pins, and links `blackarrow`
-# and `ba` into ~/.local/bin. Expect about 20 minutes, and about 15 GB of disk
-# while it builds. The build output is deleted afterwards; what stays is the
-# program (330 MB) and the source (under 1 GB).
+# and `ba` into ~/.local/bin. On an Apple Silicon Mac with memory to spare the
+# build takes about 20 minutes. Short of memory it takes far longer: well over
+# an hour on a 32 GB machine that was already swapping. It needs about 15 GB of
+# disk while it runs. The build output is deleted afterwards; what stays is the
+# program (330 MB) and the source (about 120 MB).
 #
 # It needs macOS on Apple Silicon, git, the Xcode command line tools, and
 # rustup. It installs none of them: it says what is missing and stops. It never
@@ -89,7 +91,7 @@ main() {
     [ -f "$src/scripts/blackarrow/install.sh" ] ||
         fail "'$ref' does not contain Black Arrow. Is BLACKARROW_REF right?"
 
-    say "Building. About 20 minutes; the first run also downloads the Rust toolchain."
+    say "Building. About 20 minutes, longer if the Mac is short of memory; the first run also downloads the Rust toolchain."
     (cd "$src/codex-rs" && cargo build --release --locked --bin blackarrow)
 
     # Keep the program outside the build directory, so that deleting the build
