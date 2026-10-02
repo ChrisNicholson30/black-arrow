@@ -110,20 +110,21 @@ use codex_protocol::protocol::AskForApproval;
 use codex_protocol::user_input::UserInput;
 use codex_terminal_detection::TerminalName;
 
-/// Codex CLI
+/// Black Arrow: terminal coding harness
 ///
 /// If no subcommand is specified, options will be forwarded to the interactive CLI.
 #[derive(Debug, Parser)]
 #[clap(
+    name = blackarrow_base::brand::BIN_NAME,
     author,
     version,
     // If a sub‑command is given, ignore requirements of the default args.
     subcommand_negates_reqs = true,
-    // The executable is sometimes invoked via a platform‑specific name like
-    // `codex-x86_64-unknown-linux-musl`, but the help output should always use
-    // the generic `codex` command name that users run.
-    bin_name = "codex",
-    override_usage = "codex [OPTIONS] [PROMPT]\n       codex [OPTIONS] <COMMAND> [ARGS]"
+    // The executable may be invoked through the `ba` alias or a
+    // platform‑specific name, but the help output should always use the
+    // `blackarrow` command name that users run.
+    bin_name = blackarrow_base::brand::BIN_NAME,
+    override_usage = "blackarrow [OPTIONS] [PROMPT]\n       blackarrow [OPTIONS] <COMMAND> [ARGS]"
 )]
 struct MultitoolCli {
     #[clap(flatten)]
@@ -150,7 +151,7 @@ enum Subcommand {
     /// Internal: forward a local TCP socket through an HTTP/3 CONNECT proxy.
     #[clap(hide = true)]
     TcpTunnel(codex_tcp_tunnel::Args),
-    /// Run Codex non-interactively.
+    /// Run Black Arrow non-interactively.
     #[clap(visible_alias = "e")]
     Exec(ExecCli),
 
@@ -163,10 +164,10 @@ enum Subcommand {
     /// Remove stored authentication credentials.
     Logout(LogoutCommand),
 
-    /// Manage external MCP servers for Codex.
+    /// Manage external MCP servers for Black Arrow.
     Mcp(McpCli),
 
-    /// Manage Codex plugins.
+    /// Manage Black Arrow plugins.
     Plugin(PluginCli),
 
     /// [experimental] Run the app server or related tooling.
@@ -185,10 +186,10 @@ enum Subcommand {
     /// Update Codex to the latest version.
     Update,
 
-    /// Diagnose local Codex installation, config, auth, and runtime health.
+    /// Diagnose local Black Arrow installation, config, auth, and runtime health.
     Doctor(DoctorCommand),
 
-    /// Run commands within a Codex-provided sandbox.
+    /// Run commands within a Black Arrow-provided sandbox.
     Sandbox(HostSandboxArgs),
 
     /// Debugging tools.
@@ -313,7 +314,7 @@ struct DebugModelsCommand {
 
 #[derive(Debug, Parser)]
 struct ReviewCommand {
-    /// Error out when config.toml contains fields that are not recognized by this version of Codex.
+    /// Error out when config.toml contains fields that are not recognized by this version of Black Arrow.
     #[arg(long = "strict-config", default_value_t = false)]
     strict_config: bool,
 
@@ -393,7 +394,7 @@ struct SessionArchiveConfigOverrides {
     #[clap(flatten)]
     shared: SharedCliOptions,
 
-    /// Error out when config.toml contains fields that are not recognized by this version of Codex.
+    /// Error out when config.toml contains fields that are not recognized by this version of Black Arrow.
     #[arg(long = "strict-config", default_value_t = false)]
     strict_config: bool,
 
@@ -504,13 +505,13 @@ struct LoginCommand {
 
     #[arg(
         long = "with-api-key",
-        help = "Read the API key from stdin (e.g. `printenv OPENAI_API_KEY | codex login --with-api-key`)"
+        help = "Read the API key from stdin (e.g. `printenv OPENAI_API_KEY | blackarrow login --with-api-key`)"
     )]
     with_api_key: bool,
 
     #[arg(
         long = "with-access-token",
-        help = "Read the access token from stdin (e.g. `printenv CODEX_ACCESS_TOKEN | codex login --with-access-token`)"
+        help = "Read the access token from stdin (e.g. `printenv CODEX_ACCESS_TOKEN | blackarrow login --with-access-token`)"
     )]
     with_access_token: bool,
 
@@ -561,7 +562,7 @@ struct AppServerCommand {
     #[command(flatten)]
     code_mode_host: codex_app_server::AppServerCodeModeHostArgs,
 
-    /// Error out when config.toml contains fields that are not recognized by this version of Codex.
+    /// Error out when config.toml contains fields that are not recognized by this version of Black Arrow.
     #[arg(long = "strict-config", default_value_t = false)]
     strict_config: bool,
 
@@ -1435,6 +1436,10 @@ async fn cli_main(
                 root_remote_auth_token_env.as_deref(),
                 "app",
             )?;
+            anyhow::ensure!(
+                blackarrow_base::defaults::current().has_desktop_app,
+                "Black Arrow is a terminal application and has no desktop app to launch."
+            );
             app_cmd::run_app(app_cli).await?;
         }
         Some(Subcommand::Resume(ResumeCommand {
@@ -1582,7 +1587,7 @@ async fn cli_main(
                         .await;
                     } else if login_cli.api_key.is_some() {
                         eprintln!(
-                            "The --api-key flag is no longer supported. Pipe the key instead, e.g. `printenv OPENAI_API_KEY | codex login --with-api-key`."
+                            "The --api-key flag is no longer supported. Pipe the key instead, e.g. `printenv OPENAI_API_KEY | blackarrow login --with-api-key`."
                         );
                         std::process::exit(1);
                     } else if login_cli.with_api_key {
@@ -2409,7 +2414,7 @@ async fn run_interactive_tui(
         }
 
         eprintln!(
-            "WARNING: TERM is set to \"dumb\". Codex's interactive TUI may not work in this terminal."
+            "WARNING: TERM is set to \"dumb\". Black Arrow's interactive TUI may not work in this terminal."
         );
         if !confirm("Continue anyway? [y/N]: ")? {
             return Ok(AppExitInfo::fatal(
@@ -2500,7 +2505,7 @@ where
             Err(backup_err) => {
                 local_state_db::print_diagnostic_guidance(startup_error);
                 return Ok(AppExitInfo::fatal(format!(
-                    "failed to move damaged Codex local database files into a backup folder automatically: {backup_err}"
+                    "failed to move damaged Black Arrow local database files into a backup folder automatically: {backup_err}"
                 )));
             }
         }
@@ -2694,7 +2699,7 @@ fn merge_interactive_cli_flags(interactive: &mut TuiCli, subcommand_cli: TuiCli)
 
 fn print_completion(cmd: CompletionCommand) {
     let mut app = MultitoolCli::command();
-    let name = "codex";
+    let name = blackarrow_base::brand::BIN_NAME;
     generate(cmd.shell, &mut app, name, &mut std::io::stdout());
 }
 
@@ -3711,7 +3716,7 @@ mod tests {
                 );
                 exit_info.disconnect_info = Some(codex_tui::DisconnectInfo {
                     command: vec![
-                        "codex".to_string(),
+                        blackarrow_base::brand::BIN_NAME.to_string(),
                         "--remote".to_string(),
                         "wss://example.com:443/".to_string(),
                     ],

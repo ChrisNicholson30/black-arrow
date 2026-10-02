@@ -1162,7 +1162,7 @@ impl App {
                     current_executable.with_file_name(if cfg!(windows) {
                         "codex.exe"
                     } else {
-                        "codex"
+                        blackarrow_base::brand::BIN_NAME
                     })
                 } else {
                     current_executable

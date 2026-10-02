@@ -443,7 +443,7 @@ impl AuthModeWidget {
             vec![
                 Line::from(vec![
                     "  ".into(),
-                    "Sign in with ChatGPT to use Codex as part of your paid plan".into(),
+                    "Sign in with ChatGPT to use Black Arrow with your paid plan".into(),
                 ]),
                 Line::from(vec![
                     "  ".into(),
