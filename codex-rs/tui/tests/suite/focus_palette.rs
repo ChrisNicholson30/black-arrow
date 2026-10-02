@@ -525,6 +525,35 @@ impl PtyCodex {
         );
         Ok(())
     }
+
+    /// Black Arrow: the process id, so a test can send it a signal.
+    pub(super) fn pid(&self) -> u32 {
+        self.child.id()
+    }
+
+    /// Black Arrow: every byte the program has written to the terminal so far.
+    pub(super) fn raw_output(&self) -> &[u8] {
+        &self.output
+    }
+
+    /// Black Arrow: reads output until the process ends, then returns how it ended.
+    pub(super) fn wait_for_exit(&mut self, timeout: Duration) -> Result<std::process::ExitStatus> {
+        let deadline = Instant::now() + timeout;
+        while Instant::now() < deadline {
+            self.read_output(Duration::from_millis(/*millis*/ 20))?;
+            if let Some(status) = self.child.try_wait()? {
+                // Collect whatever was still in the terminal's buffer.
+                for _ in 0..10 {
+                    self.read_output(Duration::from_millis(/*millis*/ 10))?;
+                }
+                return Ok(status);
+            }
+        }
+        bail!(
+            "process did not exit within {timeout:?}; screen:\n{}",
+            self.screen_contents()
+        )
+    }
 }
 
 impl Drop for PtyCodex {

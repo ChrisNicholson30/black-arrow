@@ -2,6 +2,8 @@
 #[cfg(unix)]
 mod blackarrow_screen;
 #[cfg(unix)]
+mod blackarrow_signals;
+#[cfg(unix)]
 mod daemon_compatibility;
 #[cfg(unix)]
 mod directory_trust;

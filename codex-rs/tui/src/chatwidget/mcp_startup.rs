@@ -200,6 +200,8 @@ impl ChatWidget {
     }
 
     pub(super) fn finish_mcp_startup(&mut self, failed: Vec<String>, cancelled: Vec<String>) {
+        blackarrow_base::startup::mark(blackarrow_base::startup::point::MCP_READY);
+        blackarrow_base::startup::flush();
         if !cancelled.is_empty() {
             self.add_mcp_startup_warning(
                 vec![format!(

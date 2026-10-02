@@ -1062,6 +1062,7 @@ See the Codex keymap documentation for supported actions and examples."
         if let Err(err) = app.render_startup_frame(tui, &app_event_rx) {
             return shutdown_on_startup_error(app_server, err).await;
         }
+        blackarrow_base::startup::mark(blackarrow_base::startup::point::CHAT_FRAME);
         let tui_events = tui.event_stream();
         tokio::pin!(tui_events);
         tracing::info!(

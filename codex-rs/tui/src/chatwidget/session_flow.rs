@@ -50,6 +50,7 @@ impl ChatWidget {
         display: SessionConfiguredDisplay,
         fork_parent_title: Option<String>,
     ) {
+        blackarrow_base::startup::mark(blackarrow_base::startup::point::SESSION_READY);
         self.windows_sandbox_host =
             if !self.windows_sandbox_local_server && self.remote_connection.is_some() {
                 crate::app::WindowsSandboxHost::Remote

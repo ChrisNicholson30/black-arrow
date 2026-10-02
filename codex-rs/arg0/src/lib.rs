@@ -230,6 +230,7 @@ where
     // this executable. Admittedly, we could invoke `keep()` on it, but it
     // would be nice to avoid leaving temporary directories behind, if possible.
     let path_entry_guard = arg0_dispatch();
+    blackarrow_base::startup::mark(blackarrow_base::startup::point::ARG0_READY);
     let current_exe = std::env::current_exe().ok();
 
     // Regular invocation. Run the async entry point on a thread with the same
@@ -240,6 +241,7 @@ where
         .stack_size(THREAD_STACK_SIZE_BYTES)
         .spawn(move || {
             let runtime = build_runtime()?;
+            blackarrow_base::startup::mark(blackarrow_base::startup::point::RUNTIME_READY);
             runtime.block_on(run_main_with_arg0_guard(
                 path_entry_guard,
                 current_exe,
