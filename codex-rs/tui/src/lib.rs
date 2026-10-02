@@ -1211,6 +1211,7 @@ async fn run_ratatui_app(
         )
         .await;
     launch_telemetry.record(&app_server_target, matches!(&startup_app_server, Ok(Ok(_))));
+    blackarrow_base::startup::mark(blackarrow_base::startup::point::APP_SERVER_READY);
     let mut app_server_session = match startup_app_server {
         Ok(Ok(app_server)) => {
             AppServerSession::new(app_server, app_server_target.thread_params_mode())
@@ -1282,6 +1283,7 @@ async fn run_ratatui_app(
             }
         }
     };
+    blackarrow_base::startup::mark(blackarrow_base::startup::point::AUTH_LOADED);
     // Workload identity bypasses interactive login; every other provider uses account/read.
     let requires_openai_auth = startup_account
         .as_ref()
@@ -2002,6 +2004,7 @@ async fn run_ratatui_app(
             )
         })
         .await;
+    blackarrow_base::startup::mark(blackarrow_base::startup::point::MODELS_LOADED);
     let (startup_bootstrap, startup_hooks_entry) = match startup_prefetch {
         Ok(startup_prefetch) => startup_prefetch,
         Err(err) => {

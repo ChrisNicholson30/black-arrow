@@ -1033,6 +1033,7 @@ fn stage_str(stage: Stage) -> &'static str {
 }
 
 fn main() -> anyhow::Result<()> {
+    blackarrow_base::startup::init();
     codex_build_info::initialize!();
     let remote_control_disabled = codex_app_server::take_remote_control_disabled_env();
     arg0_dispatch_or_else(move |arg0_paths: Arg0DispatchPaths| async move {
@@ -1053,6 +1054,7 @@ async fn cli_main(
         mut interactive,
         subcommand,
     } = MultitoolCli::parse();
+    blackarrow_base::startup::mark(blackarrow_base::startup::point::CLI_PARSED);
     // Retain the launch target through TUI exit, even if a launcher changes selection.
     let daemon_cli_executable = arg0_paths
         .codex_self_exe

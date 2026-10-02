@@ -442,6 +442,7 @@ where
         // Not every terminal or multiplexer hides intermediate cursor moves inside a
         // synchronized update, especially when the frame spans multiple writes.
         let updates = diff_buffers(self.previous_buffer(), self.current_buffer());
+        let drew_cells = !updates.is_empty();
         if !updates.is_empty() && !self.hidden_cursor {
             self.hide_cursor()?;
         }
@@ -460,6 +461,12 @@ where
         self.swap_buffers();
 
         Backend::flush(&mut self.backend)?;
+
+        // Black Arrow: every draw path ends here, so this is the one place that
+        // knows a frame with content has reached the terminal.
+        if drew_cells {
+            blackarrow_base::startup::mark(blackarrow_base::startup::point::FIRST_FRAME);
+        }
 
         Ok(())
     }

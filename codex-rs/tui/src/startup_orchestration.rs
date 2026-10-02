@@ -278,6 +278,7 @@ pub(super) async fn run_main_inner(
             err
         }
     })?;
+    blackarrow_base::startup::mark(blackarrow_base::startup::point::BOOTSTRAP_CONFIG_LOADED);
     // Keep normal terminal signals available until local configuration is ready. Once raw
     // mode begins, StartupDraft immediately takes ownership of input.
     let (initialized_terminal, terminal_restore_guard) = tokio::task::spawn_blocking(|| {
@@ -285,6 +286,7 @@ pub(super) async fn run_main_inner(
     })
     .await
     .map_err(std::io::Error::other)??;
+    blackarrow_base::startup::mark(blackarrow_base::startup::point::TERMINAL_READY);
     let startup_presentation::StartupPresentation {
         bootstrap_config,
         config_cwd,
@@ -457,6 +459,7 @@ pub(super) async fn run_main_inner(
             strict_config,
         ))
         .await?;
+    blackarrow_base::startup::mark(blackarrow_base::startup::point::CONFIG_LOADED);
     if app_server_target.uses_embedded_network_policy() {
         embedded_network_policy.activate(&mut config);
     }
@@ -734,6 +737,7 @@ pub(super) async fn run_main_inner(
             &app_server_target,
         ))
         .await??;
+    blackarrow_base::startup::mark(blackarrow_base::startup::point::STATE_READY);
     let config_toml_log_dir_configured = config
         .config_layer_stack
         .effective_config()
