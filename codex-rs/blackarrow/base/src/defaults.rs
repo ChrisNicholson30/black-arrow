@@ -54,6 +54,10 @@ pub struct Defaults {
     pub has_desktop_app: bool,
     /// Whether to fetch announcement text at startup.
     pub fetch_remote_announcements: bool,
+    /// Status line items shown after upstream's own, when the user has not
+    /// configured a status line. Each is an item id as `/statusline` lists
+    /// them.
+    pub extra_status_line_items: &'static [&'static str],
 }
 
 impl Defaults {
@@ -73,6 +77,11 @@ impl Defaults {
     /// - Announcements: upstream downloads them from the Codex repository on
     ///   every launch. They describe a different product, and the request is
     ///   startup network work Black Arrow does not need.
+    /// - Status line: upstream shows the model, the directory, and the thread
+    ///   name. Black Arrow adds how much of the weekly usage limit is left, so
+    ///   it can be seen without running a command. The figure is in the usage
+    ///   report the program already fetches, so showing it costs no request,
+    ///   and the item is left out when the provider reports no weekly limit.
     pub const BLACK_ARROW: Self = Self {
         analytics_enabled: Some(false),
         feedback_enabled: false,
@@ -80,6 +89,7 @@ impl Defaults {
         has_release_channel: false,
         has_desktop_app: false,
         fetch_remote_announcements: false,
+        extra_status_line_items: &["weekly-limit"],
     };
 
     /// What upstream does. Used only by debug builds, and only on request.
@@ -90,6 +100,7 @@ impl Defaults {
         has_release_channel: true,
         has_desktop_app: true,
         fetch_remote_announcements: true,
+        extra_status_line_items: &[],
     };
 }
 
@@ -154,8 +165,20 @@ mod tests {
                 has_release_channel: false,
                 has_desktop_app: false,
                 fetch_remote_announcements: false,
+                // Not a privacy setting: it displays what is already fetched.
+                extra_status_line_items: Defaults::BLACK_ARROW.extra_status_line_items,
             }
         );
+    }
+
+    #[test]
+    fn the_status_line_shows_weekly_usage_by_default() {
+        assert_eq!(
+            Defaults::BLACK_ARROW.extra_status_line_items,
+            ["weekly-limit"]
+        );
+        // Upstream's tests assert upstream's status line.
+        assert_eq!(Defaults::UPSTREAM.extra_status_line_items, [] as [&str; 0]);
     }
 
     #[test]
