@@ -11,10 +11,11 @@ The public executable is `blackarrow`. It is the `[[bin]]` target of the `codex-
 For a build from source:
 
 ```bash
-cd codex-rs && cargo build --release --bin blackarrow
-ln -sf "$PWD/target/release/blackarrow" ~/.local/bin/blackarrow
-ln -sf "$PWD/target/release/blackarrow" ~/.local/bin/ba
+(cd codex-rs && cargo build --release --bin blackarrow)
+scripts/blackarrow/install.sh
 ```
+
+The script links both names in `~/.local/bin` to the build. It finds the binary from its own location, because a link made by hand from the wrong directory points at nothing and the shell only says "command not found".
 
 A Homebrew formula would do the same with `bin.install` and `bin.install_symlink`.
 
@@ -26,7 +27,7 @@ Upstream treats `0.0.0` as "development build" in several places: update checks 
 
 Before the first versioned build, check each place that tests for `0.0.0` (`LOCAL_DEV_BUILD_VERSION` in `core/src/config/mod.rs`, `is_source_build_version` in the TUI) and decide whether the released behaviour is what Black Arrow wants.
 
-Black Arrow's version numbers are its own and are unrelated to Codex's.
+Black Arrow's version numbers are its own and are unrelated to Codex's. A Codex version is stated in two requests to the Codex backend, the model catalogue and the `version` header, which have to say which Codex client the code is; see [providers.md](providers.md).
 
 ## Updates
 

@@ -33,12 +33,10 @@ cargo build --release --bin blackarrow     # about 18 minutes from clean
 To put `blackarrow` and `ba` on your `PATH`:
 
 ```bash
-mkdir -p ~/.local/bin
-ln -sf "$PWD/target/release/blackarrow" ~/.local/bin/blackarrow
-ln -sf "$PWD/target/release/blackarrow" ~/.local/bin/ba
+scripts/blackarrow/install.sh
 ```
 
-`ba` is the same executable under a second name.
+It links both names in `~/.local/bin` to the release build, so a rebuild updates them, and it can be run from any directory. `ba` is the same executable under a second name.
 
 Use a release build. A debug build can be made to behave like Codex, in its state directory names and in its defaults, so that upstream's tests can run. It is for development only; [docs/architecture.md](docs/architecture.md) has the details.
 
