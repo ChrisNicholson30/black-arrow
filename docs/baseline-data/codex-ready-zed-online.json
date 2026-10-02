@@ -1,0 +1,328 @@
+{
+  "label": "baseline-ready-zed-online",
+  "binary": "<repo>/codex-rs/target/blackarrow-baseline/codex",
+  "binary_bytes": 328022472,
+  "state": "ready",
+  "profile": "zed",
+  "size": "120x40",
+  "network": "online",
+  "home_env": "CODEX_HOME",
+  "tui": {
+    "first_byte_ms": {
+      "n": 4,
+      "min_ms": 13.34,
+      "median_ms": 14.62,
+      "p95_ms": 16.7,
+      "max_ms": 16.7
+    },
+    "first_paint_ms": {
+      "n": 4,
+      "min_ms": 16.01,
+      "median_ms": 17.37,
+      "p95_ms": 19.74,
+      "max_ms": 19.74
+    },
+    "first_frame_ms": {
+      "n": 4,
+      "min_ms": 17.13,
+      "median_ms": 18.45,
+      "p95_ms": 20.93,
+      "max_ms": 20.93
+    },
+    "settled_ms": {
+      "n": 4,
+      "min_ms": 301.48,
+      "median_ms": 475.5,
+      "p95_ms": 515.51,
+      "max_ms": 515.51
+    },
+    "ready_ms": {
+      "n": 0
+    },
+    "shutdown_ms": {
+      "n": 4,
+      "min_ms": 7.49,
+      "median_ms": 9.18,
+      "p95_ms": 10.17,
+      "max_ms": 10.17
+    }
+  },
+  "tui_first_launch": {
+    "first_byte_ms": 13.34,
+    "first_frame_ms": 17.13,
+    "settled_ms": 301.48,
+    "shutdown_ms": 10.17
+  },
+  "idle": {
+    "window_s": 6.0,
+    "cpu_percent": 0.003,
+    "cpu_ms": 0.18,
+    "rss_mb": 120.7,
+    "footprint_mb": 31.8,
+    "idle_wakeups_per_s": 0.0,
+    "interrupt_wakeups_per_s": 0.5,
+    "frames_drawn": 0,
+    "bytes_written": 0,
+    "child_processes": [],
+    "open_sockets": [
+      "127.0.0.1:52485 (LISTEN)",
+      "127.0.0.1:52489->127.0.0.1:52485 (ESTABLISHED)",
+      "127.0.0.1:52485->127.0.0.1:52489 (ESTABLISHED)",
+      "127.0.0.1:52490->127.0.0.1:52485 (ESTABLISHED)",
+      "127.0.0.1:52485->127.0.0.1:52490 (ESTABLISHED)"
+    ]
+  },
+  "queries": [
+    {
+      "at_ms": 16.83,
+      "kind": "cursor-position",
+      "answered": true
+    },
+    {
+      "at_ms": 16.85,
+      "kind": "OSC 10 colour",
+      "answered": true
+    },
+    {
+      "at_ms": 16.86,
+      "kind": "OSC 11 colour",
+      "answered": true
+    },
+    {
+      "at_ms": 16.87,
+      "kind": "kitty-keyboard",
+      "answered": true
+    },
+    {
+      "at_ms": 16.87,
+      "kind": "DA1",
+      "answered": true
+    }
+  ],
+  "screen": "\n  >_ OpenAI Codex (v0.0.0)\n     <repo>/codex-rs/target/\u2026/baseline-ready-zed-online/workspace\n\n\n\n\n\n\n\n\n                                                       \u28c0\u28e4\u28e4\u28e4\u28c0\u28c0\n                                                    \u28e0\u28f6\u28ff\u28ff\u28ff\u28ff\u28ff\u28ff\u28ff\u28ff\u28e6\u28e4\u28e4\u28e4\u28e4\u28e4\u28e4\u2840\n                                                  \u2880\u28fe\u28ff\u28ff\u283f\u280b\u2809\u2809\u2889\u28ed\u28ff\u28ff\u28ff\u28ff\u28ff\u283f\u28ff\u28ff\u28ff\u28ff\u28f7\u28c4\n                                                 \u28c0\u28fe\u28ff\u28ff\u2803 \u28c0\u28f4\u28fe\u28ff\u28ff\u287f\u281f\u280b \u28c0\u2840 \u2808\u2819\u28bf\u28ff\u28ff\u28e7\n                                              \u28c0\u28f6\u28ff\u28ff\u28ff\u28ff\u2847 \u28b8\u28ff\u28ff\u287f\u281b\u2809\u2880\u28e0\u28f4\u28ff\u28ff\u28ff\u28f7\u28e6\u28c0\u2808\u28bb\u28ff\u28ff\u2847\n                                             \u28f0\u28ff\u28ff\u287f\u28bf\u28ff\u28ff\u2847 \u28b8\u28ff\u28ff\u2880\u28e4\u28f6\u28ff\u28ff\u28ff\u281f\u281b\u283b\u28ff\u28ff\u28ff\u28ff\u28ee\u28ff\u28ff\u2877\n                                            \u28b0\u28ff\u28ff\u285f\u2801\u28b8\u28ff\u28ff\u2847 \u28b8\u28ff\u28ff\u28ff\u28ff\u283f\u283f\u28ff\u28ff\u28ff\u28e6\u28c4\u2840\u2808\u281b\u283f\u28ff\u28ff\u28ff\u28e7\u2840\n                                            \u28fe\u28ff\u28ff\u2803 \u28b8\u28ff\u28ff\u2847 \u28b8\u28ff\u28ff\u280b\u2801  \u2808\u2819\u28bb\u28ff\u28ff\u28ff\u28f6\u28e4\u2840 \u2839\u28bf\u28ff\u28f7\u2844\n                                            \u28b8\u28ff\u28ff\u28c7 \u2838\u28ff\u28ff\u28f7\u28e6\u28fc\u28ff\u28ff      \u28b8\u28ff\u28ff\u283b\u28bf\u28ff\u28ff\u2847 \u2818\u28ff\u28ff\u28ff\n                                            \u2808\u28bf\u28ff\u28ff\u28e6\u2840\u2808\u281b\u283f\u28ff\u28ff\u28ff\u28ff\u28c4\u2840  \u2880\u28e0\u28fc\u28ff\u28ff  \u28ff\u28ff\u2847  \u28ff\u28ff\u28ff\u2807\n                                              \u28bb\u28ff\u28ff\u28ff\u28f7\u28e6\u28c0\u2808\u2819\u283b\u28ff\u28ff\u28ff\u28f6\u28f6\u28ff\u28ff\u28ff\u28ff\u28ff  \u28ff\u28ff\u2847 \u28e0\u28ff\u28ff\u28ff\n                                              \u28b8\u28ff\u28ff\u287f\u28bf\u28ff\u28ff\u28ff\u28e6\u28e0\u28f4\u28ff\u28ff\u28ff\u287f\u281f\u280b\u28b8\u28ff\u28ff  \u28ff\u28ff\u28f7\u28f4\u28ff\u28ff\u28ff\u2803\n                                              \u2818\u28ff\u28ff\u28f7 \u2808\u281b\u28bf\u28ff\u28ff\u28ff\u283f\u280b\u2809 \u28e0\u28f4\u28ff\u28ff\u28ff  \u28ff\u28ff\u28ff\u28ff\u28ff\u281f\u2801\n                                               \u283b\u28ff\u28ff\u28ff\u28e4\u28c0 \u2808\u2809 \u2880\u28e4\u28f6\u28ff\u28ff\u28ff\u283f\u281f\u2801 \u28f0\u28ff\u28ff\u285f\u280b\u2801\n                                                \u2808\u283f\u28ff\u28ff\u28ff\u28ff\u28f6\u28fe\u28ff\u28ff\u28ff\u28ff\u281f\u280b\u2801  \u28e0\u28fc\u28ff\u28ff\u285f\n                                                   \u2819\u281b\u281b\u281b\u283b\u281b\u28bf\u28ff\u28ff\u28ff\u28ff\u28f7\u28fe\u28ff\u28ff\u28ff\u287f\u280f\n                                                          \u2808\u2819\u281b\u283f\u283f\u283f\u283f\u281b\u2809\n\n\n\n\n\n\n\n\n\u203a Ask Codex to do anything\n\n  GPT-6.1-Sol default \u00b7 <repo>/codex-rs/target/blackarrow-bench/basel\u2026\n  ? for shortcuts",
+  "network_requests": [],
+  "runs": [
+    {
+      "run": 0,
+      "first_byte_ms": 13.34,
+      "first_paint_ms": 16.01,
+      "first_frame_ms": 17.13,
+      "settled_ms": 301.48,
+      "frames_until_settled": 22,
+      "alt_screen": true,
+      "exited_early": false,
+      "idle": {
+        "window_s": 6.0,
+        "cpu_percent": 0.003,
+        "cpu_ms": 0.18,
+        "rss_mb": 120.7,
+        "footprint_mb": 31.8,
+        "idle_wakeups_per_s": 0.0,
+        "interrupt_wakeups_per_s": 0.5,
+        "frames_drawn": 0,
+        "bytes_written": 0,
+        "child_processes": [],
+        "open_sockets": [
+          "127.0.0.1:52485 (LISTEN)",
+          "127.0.0.1:52489->127.0.0.1:52485 (ESTABLISHED)",
+          "127.0.0.1:52485->127.0.0.1:52489 (ESTABLISHED)",
+          "127.0.0.1:52490->127.0.0.1:52485 (ESTABLISHED)",
+          "127.0.0.1:52485->127.0.0.1:52490 (ESTABLISHED)"
+        ]
+      },
+      "queries": [
+        {
+          "at_ms": 13.43,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 13.45,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 13.46,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 13.47,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 13.48,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 10.17,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946707148830000
+    },
+    {
+      "run": 1,
+      "first_byte_ms": 15.72,
+      "first_paint_ms": 18.51,
+      "first_frame_ms": 19.59,
+      "settled_ms": 478.79,
+      "frames_until_settled": 25,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 15.83,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 15.85,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 15.86,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 15.87,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 15.88,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 7.49,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946716855977000
+    },
+    {
+      "run": 2,
+      "first_byte_ms": 13.52,
+      "first_paint_ms": 16.22,
+      "first_frame_ms": 17.3,
+      "settled_ms": 472.21,
+      "frames_until_settled": 25,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 13.62,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 13.63,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 13.64,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 13.65,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 13.65,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 9.49,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946717659587000
+    },
+    {
+      "run": 3,
+      "first_byte_ms": 16.7,
+      "first_paint_ms": 19.74,
+      "first_frame_ms": 20.93,
+      "settled_ms": 515.51,
+      "frames_until_settled": 25,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 16.83,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 16.85,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 16.86,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 16.87,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 16.87,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 8.86,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946718473033000
+    }
+  ],
+  "stray_processes": [],
+  "state_dir_entries": [
+    ".sandbox_migration",
+    ".tmp",
+    "auth.json",
+    "config.toml",
+    "goals_1.sqlite",
+    "goals_1.sqlite-shm",
+    "goals_1.sqlite-wal",
+    "installation_id",
+    "log",
+    "logs_2.sqlite",
+    "logs_2.sqlite-shm",
+    "logs_2.sqlite-wal",
+    "memories_1.sqlite",
+    "memories_1.sqlite-wal",
+    "queue_1.sqlite",
+    "queue_1.sqlite-shm",
+    "queue_1.sqlite-wal",
+    "shell_snapshots",
+    "skills",
+    "state_5.sqlite",
+    "state_5.sqlite-shm",
+    "state_5.sqlite-wal",
+    "thread-writer-locks",
+    "tmp"
+  ],
+  "home_entries": [
+    ".codex"
+  ],
+  "failures": []
+}

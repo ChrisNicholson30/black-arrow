@@ -1,0 +1,910 @@
+{
+  "label": "baseline-fresh-zed",
+  "binary": "<repo>/codex-rs/target/blackarrow-baseline/codex",
+  "binary_bytes": 328022472,
+  "state": "fresh",
+  "profile": "zed",
+  "size": "120x40",
+  "network": "refused by logging proxy",
+  "home_env": "CODEX_HOME",
+  "tui": {
+    "first_byte_ms": {
+      "n": 10,
+      "min_ms": 13.01,
+      "median_ms": 15.51,
+      "p95_ms": 19.48,
+      "max_ms": 19.48
+    },
+    "first_paint_ms": {
+      "n": 10,
+      "min_ms": 15.74,
+      "median_ms": 18.38,
+      "p95_ms": 22.28,
+      "max_ms": 22.28
+    },
+    "first_frame_ms": {
+      "n": 10,
+      "min_ms": 16.86,
+      "median_ms": 19.52,
+      "p95_ms": 23.41,
+      "max_ms": 23.41
+    },
+    "settled_ms": {
+      "n": 10,
+      "min_ms": 70.57,
+      "median_ms": 73.04,
+      "p95_ms": 79.02,
+      "max_ms": 79.02
+    },
+    "ready_ms": {
+      "n": 0
+    },
+    "shutdown_ms": {
+      "n": 10,
+      "min_ms": 3.81,
+      "median_ms": 4.22,
+      "p95_ms": 4.58,
+      "max_ms": 4.58
+    }
+  },
+  "tui_first_launch": {
+    "first_byte_ms": 13.01,
+    "first_frame_ms": 16.86,
+    "settled_ms": 73.97,
+    "shutdown_ms": 4.02
+  },
+  "idle": {
+    "window_s": 10.0,
+    "cpu_percent": 0.023,
+    "cpu_ms": 2.26,
+    "rss_mb": 70.4,
+    "footprint_mb": 22.0,
+    "idle_wakeups_per_s": 0.0,
+    "interrupt_wakeups_per_s": 1.8,
+    "frames_drawn": 0,
+    "bytes_written": 0,
+    "child_processes": [],
+    "open_sockets": []
+  },
+  "queries": [
+    {
+      "at_ms": 16.53,
+      "kind": "cursor-position",
+      "answered": true
+    },
+    {
+      "at_ms": 16.55,
+      "kind": "OSC 10 colour",
+      "answered": true
+    },
+    {
+      "at_ms": 16.55,
+      "kind": "OSC 11 colour",
+      "answered": true
+    },
+    {
+      "at_ms": 16.56,
+      "kind": "kitty-keyboard",
+      "answered": true
+    },
+    {
+      "at_ms": 16.56,
+      "kind": "DA1",
+      "answered": true
+    }
+  ],
+  "screen": "  Welcome to Codex, OpenAI's command-line coding agent\n\n  Sign in with ChatGPT to use Codex as part of your paid plan\n  or connect an API key for usage-based billing\n\n> 1. Sign in with ChatGPT\n     Usage included with Plus, Pro, Business, and Enterprise plans\n\n  2. Sign in with Device Code\n     Sign in from another device with a one-time code\n\n  3. Provide your own API key\n     Pay for what you use\n\n  Press enter to continue\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+  "network_requests": [
+    {
+      "run": 0,
+      "at_ms": 52.3,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 67.6,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 81.1,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 169.5,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 170.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 14454.0,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 60.8,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 73.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 86.2,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 177.9,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 178.5,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 396.2,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 56.8,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 69.0,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 81.8,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 172.9,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 173.6,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 397.1,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 55.1,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 66.7,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 79.3,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 171.0,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 171.7,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 392.0,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 56.1,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 67.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 79.3,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 173.3,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 173.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 410.8,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 56.2,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 68.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 79.8,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 174.1,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 174.6,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 399.1,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 55.8,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 66.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 79.6,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 173.0,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 173.5,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 386.8,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 54.7,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 66.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 79.1,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 172.3,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 172.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 394.3,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 54.5,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 65.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 77.7,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 171.3,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 172.0,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 394.1,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 56.7,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 69.8,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 82.6,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 175.6,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 176.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 399.9,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    }
+  ],
+  "runs": [
+    {
+      "run": 0,
+      "first_byte_ms": 13.01,
+      "first_paint_ms": 15.74,
+      "first_frame_ms": 16.86,
+      "settled_ms": 73.97,
+      "frames_until_settled": 13,
+      "alt_screen": true,
+      "exited_early": false,
+      "idle": {
+        "window_s": 10.0,
+        "cpu_percent": 0.023,
+        "cpu_ms": 2.26,
+        "rss_mb": 70.4,
+        "footprint_mb": 22.0,
+        "idle_wakeups_per_s": 0.0,
+        "interrupt_wakeups_per_s": 1.8,
+        "frames_drawn": 0,
+        "bytes_written": 0,
+        "child_processes": [],
+        "open_sockets": []
+      },
+      "queries": [
+        {
+          "at_ms": 13.13,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 13.15,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 13.15,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 13.16,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 13.17,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 4.02,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946592104909000
+    },
+    {
+      "run": 1,
+      "first_byte_ms": 19.48,
+      "first_paint_ms": 22.28,
+      "first_frame_ms": 23.41,
+      "settled_ms": 79.02,
+      "frames_until_settled": 13,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 19.6,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 19.62,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 19.63,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 19.64,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 19.65,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 4.58,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946606566567000
+    },
+    {
+      "run": 2,
+      "first_byte_ms": 15.96,
+      "first_paint_ms": 19.03,
+      "first_frame_ms": 20.24,
+      "settled_ms": 74.6,
+      "frames_until_settled": 13,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 16.08,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 16.1,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 16.11,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 16.11,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 16.12,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 3.81,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946606971123000
+    },
+    {
+      "run": 3,
+      "first_byte_ms": 14.7,
+      "first_paint_ms": 17.44,
+      "first_frame_ms": 18.59,
+      "settled_ms": 72.47,
+      "frames_until_settled": 13,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 14.83,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 14.85,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 14.86,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 14.86,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 14.87,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 4.46,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946607375778000
+    },
+    {
+      "run": 4,
+      "first_byte_ms": 15.73,
+      "first_paint_ms": 18.66,
+      "first_frame_ms": 19.82,
+      "settled_ms": 72.74,
+      "frames_until_settled": 13,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 15.85,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 15.87,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 15.88,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 15.88,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 15.89,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 4.01,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946607776331000
+    },
+    {
+      "run": 5,
+      "first_byte_ms": 15.7,
+      "first_paint_ms": 18.54,
+      "first_frame_ms": 19.68,
+      "settled_ms": 73.35,
+      "frames_until_settled": 13,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 15.81,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 15.83,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 15.84,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 15.84,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 15.85,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 4.11,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946608195244000
+    },
+    {
+      "run": 6,
+      "first_byte_ms": 14.49,
+      "first_paint_ms": 17.25,
+      "first_frame_ms": 18.38,
+      "settled_ms": 72.45,
+      "frames_until_settled": 14,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 14.59,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 14.61,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 14.62,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 14.62,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 14.63,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 4.2,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946608602280000
+    },
+    {
+      "run": 7,
+      "first_byte_ms": 15.17,
+      "first_paint_ms": 17.9,
+      "first_frame_ms": 18.98,
+      "settled_ms": 71.91,
+      "frames_until_settled": 13,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 15.28,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 15.3,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 15.31,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 15.31,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 15.32,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 4.41,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946608997107000
+    },
+    {
+      "run": 8,
+      "first_byte_ms": 15.32,
+      "first_paint_ms": 18.22,
+      "first_frame_ms": 19.37,
+      "settled_ms": 70.57,
+      "frames_until_settled": 13,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 15.45,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 15.47,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 15.47,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 15.47,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 15.48,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 4.5,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946609400335000
+    },
+    {
+      "run": 9,
+      "first_byte_ms": 16.4,
+      "first_paint_ms": 19.32,
+      "first_frame_ms": 20.49,
+      "settled_ms": 75.77,
+      "frames_until_settled": 13,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 16.53,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 16.55,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 16.55,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 16.56,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 16.56,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 4.24,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946609803001000
+    }
+  ],
+  "stray_processes": [],
+  "state_dir_entries": [],
+  "home_entries": [
+    ".codex"
+  ],
+  "failures": []
+}

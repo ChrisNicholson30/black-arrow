@@ -1,0 +1,1589 @@
+{
+  "label": "baseline-ready-apple",
+  "binary": "<repo>/codex-rs/target/blackarrow-baseline/codex",
+  "binary_bytes": 328022472,
+  "state": "ready",
+  "profile": "apple",
+  "size": "120x40",
+  "network": "refused by logging proxy",
+  "home_env": "CODEX_HOME",
+  "tui": {
+    "first_byte_ms": {
+      "n": 10,
+      "min_ms": 12.95,
+      "median_ms": 18.38,
+      "p95_ms": 24.77,
+      "max_ms": 24.77
+    },
+    "first_paint_ms": {
+      "n": 10,
+      "min_ms": 15.85,
+      "median_ms": 21.57,
+      "p95_ms": 28.42,
+      "max_ms": 28.42
+    },
+    "first_frame_ms": {
+      "n": 10,
+      "min_ms": 16.26,
+      "median_ms": 22.0,
+      "p95_ms": 28.94,
+      "max_ms": 28.94
+    },
+    "settled_ms": {
+      "n": 10,
+      "min_ms": 59.82,
+      "median_ms": 70.23,
+      "p95_ms": 84.32,
+      "max_ms": 84.32
+    },
+    "ready_ms": {
+      "n": 0
+    },
+    "shutdown_ms": {
+      "n": 10,
+      "min_ms": 10.02,
+      "median_ms": 2671.88,
+      "p95_ms": 2872.71,
+      "max_ms": 2872.71
+    }
+  },
+  "tui_first_launch": {
+    "first_byte_ms": 12.95,
+    "first_frame_ms": 16.26,
+    "settled_ms": 84.32,
+    "shutdown_ms": 10.02
+  },
+  "idle": {
+    "window_s": 10.01,
+    "cpu_percent": 0.868,
+    "cpu_ms": 86.86,
+    "rss_mb": 119.8,
+    "footprint_mb": 33.5,
+    "idle_wakeups_per_s": 0.0,
+    "interrupt_wakeups_per_s": 2.5,
+    "frames_drawn": 2,
+    "bytes_written": 118,
+    "child_processes": [],
+    "open_sockets": [
+      "127.0.0.1:52104 (LISTEN)",
+      "127.0.0.1:52118->127.0.0.1:52104 (ESTABLISHED)",
+      "127.0.0.1:52119->127.0.0.1:52104 (ESTABLISHED)",
+      "127.0.0.1:52104->127.0.0.1:52118 (ESTABLISHED)",
+      "127.0.0.1:52104->127.0.0.1:52119 (ESTABLISHED)"
+    ]
+  },
+  "queries": [
+    {
+      "at_ms": 16.76,
+      "kind": "cursor-position",
+      "answered": true
+    },
+    {
+      "at_ms": 16.78,
+      "kind": "OSC 10 colour",
+      "answered": true
+    },
+    {
+      "at_ms": 16.79,
+      "kind": "OSC 11 colour",
+      "answered": true
+    },
+    {
+      "at_ms": 16.79,
+      "kind": "kitty-keyboard",
+      "answered": false
+    },
+    {
+      "at_ms": 16.8,
+      "kind": "DA1",
+      "answered": true
+    }
+  ],
+  "screen": "\n  >_ OpenAI Codex (v0.0.0)\n     <repo>/codex-rs/target/\u2026/baseline-ready-apple/workspace\n\n\n\n\n\n\n\n\n                                                       \u28c0\u28e4\u28e4\u28e4\u28c0\u28c0\n                                                    \u28e0\u28f6\u28ff\u28ff\u28ff\u28ff\u28ff\u28ff\u28ff\u28ff\u28e6\u28e4\u28e4\u28e4\u28e4\u28e4\u28e4\u2840\n                                                  \u2880\u28fe\u28ff\u28ff\u283f\u280b\u2809\u2809\u2889\u28ed\u28ff\u28ff\u28ff\u28ff\u28ff\u283f\u28ff\u28ff\u28ff\u28ff\u28f7\u28c4\n                                                 \u28c0\u28fe\u28ff\u28ff\u2803 \u28c0\u28f4\u28fe\u28ff\u28ff\u287f\u281f\u280b \u28c0\u2840 \u2808\u2819\u28bf\u28ff\u28ff\u28e7\n                                              \u28c0\u28f6\u28ff\u28ff\u28ff\u28ff\u2847 \u28b8\u28ff\u28ff\u287f\u281b\u2809\u2880\u28e0\u28f4\u28ff\u28ff\u28ff\u28f7\u28e6\u28c0\u2808\u28bb\u28ff\u28ff\u2847\n                                             \u28f0\u28ff\u28ff\u287f\u28bf\u28ff\u28ff\u2847 \u28b8\u28ff\u28ff\u2880\u28e4\u28f6\u28ff\u28ff\u28ff\u281f\u281b\u283b\u28ff\u28ff\u28ff\u28ff\u28ee\u28ff\u28ff\u2877\n                                            \u28b0\u28ff\u28ff\u285f\u2801\u28b8\u28ff\u28ff\u2847 \u28b8\u28ff\u28ff\u28ff\u28ff\u283f\u283f\u28ff\u28ff\u28ff\u28e6\u28c4\u2840\u2808\u281b\u283f\u28ff\u28ff\u28ff\u28e7\u2840\n                                            \u28fe\u28ff\u28ff\u2803 \u28b8\u28ff\u28ff\u2847 \u28b8\u28ff\u28ff\u280b\u2801  \u2808\u2819\u28bb\u28ff\u28ff\u28ff\u28f6\u28e4\u2840 \u2839\u28bf\u28ff\u28f7\u2844\n                                            \u28b8\u28ff\u28ff\u28c7 \u2838\u28ff\u28ff\u28f7\u28e6\u28fc\u28ff\u28ff      \u28b8\u28ff\u28ff\u283b\u28bf\u28ff\u28ff\u2847 \u2818\u28ff\u28ff\u28ff\n                                            \u2808\u28bf\u28ff\u28ff\u28e6\u2840\u2808\u281b\u283f\u28ff\u28ff\u28ff\u28ff\u28c4\u2840  \u2880\u28e0\u28fc\u28ff\u28ff  \u28ff\u28ff\u2847  \u28ff\u28ff\u28ff\u2807\n                                              \u28bb\u28ff\u28ff\u28ff\u28f7\u28e6\u28c0\u2808\u2819\u283b\u28ff\u28ff\u28ff\u28f6\u28f6\u28ff\u28ff\u28ff\u28ff\u28ff  \u28ff\u28ff\u2847 \u28e0\u28ff\u28ff\u28ff\n                                              \u28b8\u28ff\u28ff\u287f\u28bf\u28ff\u28ff\u28ff\u28e6\u28e0\u28f4\u28ff\u28ff\u28ff\u287f\u281f\u280b\u28b8\u28ff\u28ff  \u28ff\u28ff\u28f7\u28f4\u28ff\u28ff\u28ff\u2803\n                                              \u2818\u28ff\u28ff\u28f7 \u2808\u281b\u28bf\u28ff\u28ff\u28ff\u283f\u280b\u2809 \u28e0\u28f4\u28ff\u28ff\u28ff  \u28ff\u28ff\u28ff\u28ff\u28ff\u281f\u2801\n                                               \u283b\u28ff\u28ff\u28ff\u28e4\u28c0 \u2808\u2809 \u2880\u28e4\u28f6\u28ff\u28ff\u28ff\u283f\u281f\u2801 \u28f0\u28ff\u28ff\u285f\u280b\u2801\n                                                \u2808\u283f\u28ff\u28ff\u28ff\u28ff\u28f6\u28fe\u28ff\u28ff\u28ff\u28ff\u281f\u280b\u2801  \u28e0\u28fc\u28ff\u28ff\u285f\n                                                   \u2819\u281b\u281b\u281b\u283b\u281b\u28bf\u28ff\u28ff\u28ff\u28ff\u28f7\u28fe\u28ff\u28ff\u28ff\u287f\u280f\n                                                          \u2808\u2819\u281b\u283f\u283f\u283f\u283f\u281b\u2809\n\n\n\n\n\n\n\n\n\u203a Ask Codex to do anything\n\n\n  ? for shortcuts",
+  "network_requests": [
+    {
+      "run": 0,
+      "at_ms": 52.0,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 66.6,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 66.8,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 79.3,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 83.5,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 169.6,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 170.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 253.0,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 290.5,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 684.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 730.0,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 1515.8,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 1571.5,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 3134.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 3141.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 3151.6,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 3338.8,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 3739.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 4570.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 6235.4,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 6236.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 6446.6,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 6816.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 7619.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 9217.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 9366.7,
+      "method": "CONNECT",
+      "target": "api.openai.com:443"
+    },
+    {
+      "run": 0,
+      "at_ms": 14488.7,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 39.6,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 43.0,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 43.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 56.9,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 60.6,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 149.2,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 149.8,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 233.5,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 271.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 631.0,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 685.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 1449.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 1459.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 2925.5,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 2993.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 2995.4,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 45.5,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 49.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 49.4,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 64.3,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 68.8,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 155.8,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 157.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 243.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 284.5,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 630.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 674.7,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 1424.5,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 1540.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 3034.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 3261.0,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 3262.7,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 45.8,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 50.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 50.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 66.6,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 72.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 155.9,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 157.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 272.6,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 280.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 684.0,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 705.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 1499.0,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 1559.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 3223.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 3269.8,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 3,
+      "at_ms": 3271.4,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 44.2,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 48.4,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 48.5,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 65.9,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 70.6,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 154.3,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 154.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 251.6,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 271.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 617.7,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 658.7,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 1443.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 1496.6,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 2945.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 3105.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 4,
+      "at_ms": 3107.6,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 44.0,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 48.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 48.4,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 70.0,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 73.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 154.5,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 155.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 254.4,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 287.4,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 617.0,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 689.5,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 1372.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 1462.8,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 3037.8,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 5,
+      "at_ms": 3040.0,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 47.3,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 51.7,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 51.8,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 66.9,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 69.4,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 153.7,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 154.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 253.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 266.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 634.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 708.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 1431.6,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 1578.4,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 3069.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 6,
+      "at_ms": 3071.9,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 51.2,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 55.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 55.4,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 70.4,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 72.4,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 157.8,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 158.4,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 251.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 262.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 683.5,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 694.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 1421.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 1426.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 2935.7,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 7,
+      "at_ms": 2937.3,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 42.4,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 47.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 47.4,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 65.0,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 70.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 148.7,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 149.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 243.0,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 292.7,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 655.1,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 682.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 1380.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 1489.0,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 3052.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 3209.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 8,
+      "at_ms": 3211.7,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 41.2,
+      "method": "CONNECT",
+      "target": "raw.githubusercontent.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 45.4,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 45.5,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 59.3,
+      "method": "CONNECT",
+      "target": "github.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 62.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 149.3,
+      "method": "CONNECT",
+      "target": "api.github.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 149.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 231.7,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 279.3,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 649.7,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 670.0,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 1456.7,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 1515.9,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 3015.8,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 3037.2,
+      "method": "CONNECT",
+      "target": "chatgpt.com:443"
+    },
+    {
+      "run": 9,
+      "at_ms": 3038.7,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    }
+  ],
+  "runs": [
+    {
+      "run": 0,
+      "first_byte_ms": 12.95,
+      "first_paint_ms": 15.85,
+      "first_frame_ms": 16.26,
+      "settled_ms": 84.32,
+      "frames_until_settled": 18,
+      "alt_screen": true,
+      "exited_early": false,
+      "idle": {
+        "window_s": 10.01,
+        "cpu_percent": 0.868,
+        "cpu_ms": 86.86,
+        "rss_mb": 119.8,
+        "footprint_mb": 33.5,
+        "idle_wakeups_per_s": 0.0,
+        "interrupt_wakeups_per_s": 2.5,
+        "frames_drawn": 2,
+        "bytes_written": 118,
+        "child_processes": [],
+        "open_sockets": [
+          "127.0.0.1:52104 (LISTEN)",
+          "127.0.0.1:52118->127.0.0.1:52104 (ESTABLISHED)",
+          "127.0.0.1:52119->127.0.0.1:52104 (ESTABLISHED)",
+          "127.0.0.1:52104->127.0.0.1:52118 (ESTABLISHED)",
+          "127.0.0.1:52104->127.0.0.1:52119 (ESTABLISHED)"
+        ]
+      },
+      "queries": [
+        {
+          "at_ms": 13.07,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 13.09,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 13.1,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 13.1,
+          "kind": "kitty-keyboard",
+          "answered": false
+        },
+        {
+          "at_ms": 13.11,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 10.02,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946549465980000
+    },
+    {
+      "run": 1,
+      "first_byte_ms": 14.96,
+      "first_paint_ms": 17.89,
+      "first_frame_ms": 18.28,
+      "settled_ms": 59.82,
+      "frames_until_settled": 18,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 15.14,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 15.17,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 15.18,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 15.19,
+          "kind": "kitty-keyboard",
+          "answered": false
+        },
+        {
+          "at_ms": 15.19,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 2620.77,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946563958777000
+    },
+    {
+      "run": 2,
+      "first_byte_ms": 19.34,
+      "first_paint_ms": 22.47,
+      "first_frame_ms": 22.88,
+      "settled_ms": 67.72,
+      "frames_until_settled": 18,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 19.47,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 19.49,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 19.5,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 19.5,
+          "kind": "kitty-keyboard",
+          "answered": false
+        },
+        {
+          "at_ms": 19.5,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 2851.44,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946566957667000
+    },
+    {
+      "run": 3,
+      "first_byte_ms": 19.68,
+      "first_paint_ms": 22.89,
+      "first_frame_ms": 23.32,
+      "settled_ms": 77.23,
+      "frames_until_settled": 19,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 19.81,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 19.83,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 19.83,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 19.84,
+          "kind": "kitty-keyboard",
+          "answered": false
+        },
+        {
+          "at_ms": 19.84,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 2872.71,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946570224317000
+    },
+    {
+      "run": 4,
+      "first_byte_ms": 18.33,
+      "first_paint_ms": 21.58,
+      "first_frame_ms": 22.01,
+      "settled_ms": 68.01,
+      "frames_until_settled": 18,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 18.46,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 18.48,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 18.48,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 18.49,
+          "kind": "kitty-keyboard",
+          "answered": false
+        },
+        {
+          "at_ms": 18.49,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 2703.12,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946573500120000
+    },
+    {
+      "run": 5,
+      "first_byte_ms": 18.44,
+      "first_paint_ms": 21.57,
+      "first_frame_ms": 21.99,
+      "settled_ms": 74.09,
+      "frames_until_settled": 18,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 18.61,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 18.63,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 18.64,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 18.64,
+          "kind": "kitty-keyboard",
+          "answered": false
+        },
+        {
+          "at_ms": 18.64,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 2645.31,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946576612871000
+    },
+    {
+      "run": 6,
+      "first_byte_ms": 20.31,
+      "first_paint_ms": 23.66,
+      "first_frame_ms": 24.08,
+      "settled_ms": 70.4,
+      "frames_until_settled": 19,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 20.62,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 20.64,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 20.65,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 20.65,
+          "kind": "kitty-keyboard",
+          "answered": false
+        },
+        {
+          "at_ms": 20.65,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 2681.2,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946579656935000
+    },
+    {
+      "run": 7,
+      "first_byte_ms": 24.77,
+      "first_paint_ms": 28.42,
+      "first_frame_ms": 28.94,
+      "settled_ms": 73.22,
+      "frames_until_settled": 18,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 24.96,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 25.0,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 25.0,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 25.01,
+          "kind": "kitty-keyboard",
+          "answered": false
+        },
+        {
+          "at_ms": 25.01,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 2526.21,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946582732942000
+    },
+    {
+      "run": 8,
+      "first_byte_ms": 17.7,
+      "first_paint_ms": 21.1,
+      "first_frame_ms": 21.52,
+      "settled_ms": 70.06,
+      "frames_until_settled": 18,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 18.03,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 18.06,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 18.07,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 18.08,
+          "kind": "kitty-keyboard",
+          "answered": false
+        },
+        {
+          "at_ms": 18.08,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 2822.16,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946585673787000
+    },
+    {
+      "run": 9,
+      "first_byte_ms": 16.62,
+      "first_paint_ms": 19.74,
+      "first_frame_ms": 20.16,
+      "settled_ms": 62.89,
+      "frames_until_settled": 18,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 16.76,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 16.78,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 16.79,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 16.79,
+          "kind": "kitty-keyboard",
+          "answered": false
+        },
+        {
+          "at_ms": 16.8,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 2662.56,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946588888910000
+    }
+  ],
+  "stray_processes": [],
+  "state_dir_entries": [
+    ".sandbox_migration",
+    ".tmp",
+    "auth.json",
+    "config.toml",
+    "goals_1.sqlite",
+    "installation_id",
+    "log",
+    "logs_2.sqlite",
+    "logs_2.sqlite-wal",
+    "memories_1.sqlite",
+    "queue_1.sqlite",
+    "shell_snapshots",
+    "skills",
+    "state_5.sqlite",
+    "state_5.sqlite-shm",
+    "state_5.sqlite-wal",
+    "thread-writer-locks",
+    "tmp"
+  ],
+  "home_entries": [
+    ".codex"
+  ],
+  "failures": []
+}

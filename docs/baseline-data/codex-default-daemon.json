@@ -1,0 +1,240 @@
+{
+  "label": "baseline-default-daemon",
+  "binary": "<repo>/codex-rs/target/blackarrow-baseline/codex",
+  "binary_bytes": 328022472,
+  "state": "ready",
+  "profile": "zed",
+  "size": "120x40",
+  "network": "refused by logging proxy",
+  "home_env": "CODEX_HOME",
+  "tui": {
+    "first_byte_ms": {
+      "n": 3,
+      "min_ms": 13.26,
+      "median_ms": 13.4,
+      "p95_ms": 13.72,
+      "max_ms": 13.72
+    },
+    "first_paint_ms": {
+      "n": 3,
+      "min_ms": 15.85,
+      "median_ms": 16.13,
+      "p95_ms": 16.33,
+      "max_ms": 16.33
+    },
+    "first_frame_ms": {
+      "n": 3,
+      "min_ms": 16.97,
+      "median_ms": 17.21,
+      "p95_ms": 17.4,
+      "max_ms": 17.4
+    },
+    "settled_ms": {
+      "n": 3,
+      "min_ms": 32.34,
+      "median_ms": 32.99,
+      "p95_ms": 33.42,
+      "max_ms": 33.42
+    },
+    "ready_ms": {
+      "n": 0
+    },
+    "shutdown_ms": {
+      "n": 0
+    }
+  },
+  "tui_first_launch": {
+    "first_byte_ms": 13.72,
+    "first_frame_ms": 17.4,
+    "settled_ms": 33.42,
+    "shutdown_ms": null
+  },
+  "idle": null,
+  "queries": [
+    {
+      "at_ms": 13.36,
+      "kind": "cursor-position",
+      "answered": true
+    },
+    {
+      "at_ms": 13.37,
+      "kind": "OSC 10 colour",
+      "answered": true
+    },
+    {
+      "at_ms": 13.38,
+      "kind": "OSC 11 colour",
+      "answered": true
+    },
+    {
+      "at_ms": 13.38,
+      "kind": "kitty-keyboard",
+      "answered": true
+    },
+    {
+      "at_ms": 13.38,
+      "kind": "DA1",
+      "answered": true
+    }
+  ],
+  "screen": "Error: this CLI has no complete local package; install a packaged Codex CLI or use the standalone installer\nTo work without the background server, rerun the same command with --no-daemon (including resume or fork and its argumen\nts).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+  "network_requests": [
+    {
+      "run": 0,
+      "at_ms": 32.7,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 1,
+      "at_ms": 32.2,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    },
+    {
+      "run": 2,
+      "at_ms": 31.7,
+      "method": "CONNECT",
+      "target": "ab.chatgpt.com:443"
+    }
+  ],
+  "runs": [
+    {
+      "run": 0,
+      "first_byte_ms": 13.72,
+      "first_paint_ms": 16.33,
+      "first_frame_ms": 17.4,
+      "settled_ms": 33.42,
+      "frames_until_settled": 9,
+      "alt_screen": false,
+      "exited_early": true,
+      "queries": [
+        {
+          "at_ms": 13.84,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 13.86,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 13.87,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 13.88,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 13.88,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946632817074000
+    },
+    {
+      "run": 1,
+      "first_byte_ms": 13.4,
+      "first_paint_ms": 16.13,
+      "first_frame_ms": 17.21,
+      "settled_ms": 32.99,
+      "frames_until_settled": 9,
+      "alt_screen": false,
+      "exited_early": true,
+      "queries": [
+        {
+          "at_ms": 13.53,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 13.55,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 13.55,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 13.56,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 13.57,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946632851663000
+    },
+    {
+      "run": 2,
+      "first_byte_ms": 13.26,
+      "first_paint_ms": 15.85,
+      "first_frame_ms": 16.97,
+      "settled_ms": 32.34,
+      "frames_until_settled": 9,
+      "alt_screen": false,
+      "exited_early": true,
+      "queries": [
+        {
+          "at_ms": 13.36,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 13.37,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 13.38,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 13.38,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 13.38,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790946632885940000
+    }
+  ],
+  "stray_processes": [],
+  "state_dir_entries": [
+    "app-server-daemon",
+    "auth.json",
+    "config.toml",
+    "log",
+    "packages",
+    "tmp"
+  ],
+  "home_entries": [
+    ".codex"
+  ],
+  "failures": [
+    "run 0: exited before it settled",
+    "run 1: exited before it settled",
+    "run 2: exited before it settled"
+  ]
+}
