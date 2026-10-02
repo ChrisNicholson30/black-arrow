@@ -1,0 +1,152 @@
+{
+  "terminal": "Apple_Terminal",
+  "mode": "here",
+  "env": {
+    "TERM": "xterm-256color",
+    "TERM_PROGRAM": "Apple_Terminal",
+    "TERM_PROGRAM_VERSION": "488",
+    "COLORTERM": "truecolor",
+    "ZED_TERM": null
+  },
+  "results": [
+    {
+      "check": "first frame drawn",
+      "passed": true,
+      "detail": "32.89 ms"
+    },
+    {
+      "check": "identifies as Black Arrow",
+      "passed": true,
+      "detail": "session header"
+    },
+    {
+      "check": "prompt box ready",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "no upstream logo drawn",
+      "passed": true,
+      "detail": "0 braille cells on screen"
+    },
+    {
+      "check": "uses the alternate screen",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "bracketed paste enabled",
+      "passed": true,
+      "detail": "mode 2004"
+    },
+    {
+      "check": "startup probe not stalled",
+      "passed": true,
+      "detail": "device-attributes reply ends the probe; without it startup waits 250 ms"
+    },
+    {
+      "check": "typed text appears",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "accented, wide, and symbol characters render",
+      "passed": true,
+      "detail": "h\u00e9llo \u65e5\u672c\u8a9e \u2713"
+    },
+    {
+      "check": "multi-line paste stays in the prompt box",
+      "passed": true,
+      "detail": "not submitted"
+    },
+    {
+      "check": "paste triggers a redraw",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "redraws after shrinking",
+      "passed": true,
+      "detail": "50x14"
+    },
+    {
+      "check": "redraws after growing back",
+      "passed": true,
+      "detail": "80x24"
+    },
+    {
+      "check": "still running after resize",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Ctrl+C clears a draft without quitting",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "shell subprocess runs and its output is shown",
+      "passed": true,
+      "detail": "!printf \u2026 && seq 1 400 | tail"
+    },
+    {
+      "check": "normal exit: exits on Ctrl+C",
+      "passed": true,
+      "detail": "20 ms"
+    },
+    {
+      "check": "normal exit: exit status 0",
+      "passed": true,
+      "detail": "ExitInfo(status=0, signal=None, exit_ns=581445306602500)"
+    },
+    {
+      "check": "normal exit: terminal modes restored",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "normal exit: left the alternate screen",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "normal exit: line discipline restored",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "state written only to the Black Arrow directory",
+      "passed": true,
+      "detail": ".blackarrow"
+    },
+    {
+      "check": "SIGTERM: process ends",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "SIGTERM: terminal modes restored",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "SIGTERM: left the alternate screen",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "SIGTERM: line discipline restored",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "queries": [
+    "cursor-position: 0.0 ms",
+    "OSC 10 colour: 0.0 ms",
+    "OSC 11 colour: 0.0 ms",
+    "kitty-keyboard: no reply",
+    "DA1: 0.1 ms"
+  ],
+  "passed": 26,
+  "failed": 0
+}

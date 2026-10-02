@@ -1,0 +1,21 @@
+# Paths that exist upstream but whose content Black Arrow owns outright.
+#
+# Same syntax as pruned-paths.txt. During an upstream merge, whatever upstream
+# did to these paths is discarded and Black Arrow's version is kept. Files that
+# upstream adds inside an owned directory are dropped.
+#
+# Keep this list short. Every entry is a file that will never receive an
+# upstream improvement, so it should be something Black Arrow has to write
+# itself anyway.
+
+# Project front matter
+README.md
+CHANGELOG.md
+SECURITY.md
+
+# Black Arrow's documentation set. Upstream keeps short pointers to its hosted
+# docs here; Black Arrow keeps its engineering docs.
+docs/
+
+# Startup tips shown in the TUI: product copy, written for Black Arrow.
+codex-rs/tui/assets/tooltips.txt

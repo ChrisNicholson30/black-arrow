@@ -1,0 +1,15 @@
+# Black Arrow's additions to upstream's nextest configuration
+# (codex-rs/.config/nextest.toml). scripts/blackarrow/test.sh passes this file
+# to nextest as a tool config, so upstream's file stays as upstream wrote it
+# and never conflicts in a merge.
+
+[test-groups."@tool:blackarrow:tui-app-server"]
+max-threads = 4
+
+[[profile.local.overrides]]
+# Each of these tests starts an embedded app server, which registers file
+# watchers. macOS serves every watcher from one daemon, so at full concurrency
+# the tests starve each other and a handful run past the timeout. Upstream caps
+# the app-server crate's own integration tests the same way.
+filter = 'package(codex-tui) & test(/^app(_server_session)?::/)'
+test-group = '@tool:blackarrow:tui-app-server'

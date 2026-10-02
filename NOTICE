@@ -1,5 +1,16 @@
+Black Arrow
+Copyright 2026 The Black Arrow Authors
+
+Black Arrow is a modified version of OpenAI Codex. Files under codex-rs/ have
+been changed from the upstream originals; the changes are recorded in this
+repository's history and summarised in docs/architecture.md.
+
+The notices below are reproduced from the upstream NOTICE file.
+
+--------------------------------------------------------------------------------
+
 OpenAI Codex
-Copyright 2025 OpenAI
+Copyright 2025 OpenAI
 
 This project includes code derived from [Ratatui](https://github.com/ratatui/ratatui), licensed under the MIT license.
 Copyright (c) 2016-2022 Florian Dehau

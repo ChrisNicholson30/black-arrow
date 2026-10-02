@@ -1,0 +1,585 @@
+{
+  "label": "blackarrow-ready-zed-online",
+  "binary": "<repo>/codex-rs/target/release/blackarrow",
+  "binary_bytes": 327895320,
+  "state": "ready",
+  "profile": "zed",
+  "size": "120x40",
+  "network": "online",
+  "home_env": "BLACKARROW_HOME",
+  "tui": {
+    "first_byte_ms": {
+      "n": 10,
+      "min_ms": 11.1,
+      "median_ms": 19.41,
+      "p95_ms": 27.29,
+      "max_ms": 27.29
+    },
+    "first_paint_ms": {
+      "n": 10,
+      "min_ms": 11.79,
+      "median_ms": 20.09,
+      "p95_ms": 29.05,
+      "max_ms": 29.05
+    },
+    "first_frame_ms": {
+      "n": 10,
+      "min_ms": 11.89,
+      "median_ms": 20.16,
+      "p95_ms": 29.21,
+      "max_ms": 29.21
+    },
+    "settled_ms": {
+      "n": 10,
+      "min_ms": 43.19,
+      "median_ms": 52.68,
+      "p95_ms": 375.76,
+      "max_ms": 375.76
+    },
+    "ready_ms": {
+      "n": 0
+    },
+    "shutdown_ms": {
+      "n": 10,
+      "min_ms": 4.22,
+      "median_ms": 172.66,
+      "p95_ms": 680.9,
+      "max_ms": 680.9
+    }
+  },
+  "tui_first_launch": {
+    "first_byte_ms": 11.1,
+    "first_frame_ms": 11.89,
+    "settled_ms": 296.27,
+    "shutdown_ms": 4.22
+  },
+  "idle": {
+    "window_s": 10.01,
+    "cpu_percent": 0.037,
+    "cpu_ms": 3.75,
+    "rss_mb": 120.8,
+    "footprint_mb": 31.8,
+    "idle_wakeups_per_s": 0.0,
+    "interrupt_wakeups_per_s": 2.3,
+    "frames_drawn": 0,
+    "bytes_written": 0,
+    "child_processes": [],
+    "open_sockets": [
+      "127.0.0.1:52373->127.0.0.1:52369 (ESTABLISHED)",
+      "127.0.0.1:52369 (LISTEN)",
+      "127.0.0.1:52369->127.0.0.1:52373 (ESTABLISHED)",
+      "127.0.0.1:52374->127.0.0.1:52369 (ESTABLISHED)",
+      "127.0.0.1:52369->127.0.0.1:52374 (ESTABLISHED)"
+    ]
+  },
+  "queries": [
+    {
+      "at_ms": 20.53,
+      "kind": "cursor-position",
+      "answered": true
+    },
+    {
+      "at_ms": 20.55,
+      "kind": "OSC 10 colour",
+      "answered": true
+    },
+    {
+      "at_ms": 20.56,
+      "kind": "OSC 11 colour",
+      "answered": true
+    },
+    {
+      "at_ms": 20.56,
+      "kind": "kitty-keyboard",
+      "answered": true
+    },
+    {
+      "at_ms": 20.57,
+      "kind": "DA1",
+      "answered": true
+    }
+  ],
+  "screen": "\n  >_ Black Arrow (v0.0.0)\n     <repo>/codex-rs/target/\u2026/blackarrow-ready-zed-online/workspace\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\u203a Describe a task\n\n  GPT-6.1-Sol default \u00b7 <repo>/codex-rs/target/blackarrow-bench/black\u2026\n  ? for shortcuts",
+  "network_requests": [],
+  "runs": [
+    {
+      "run": 0,
+      "first_byte_ms": 11.1,
+      "first_paint_ms": 11.79,
+      "first_frame_ms": 11.89,
+      "settled_ms": 296.27,
+      "frames_until_settled": 24,
+      "alt_screen": true,
+      "exited_early": false,
+      "idle": {
+        "window_s": 10.01,
+        "cpu_percent": 0.037,
+        "cpu_ms": 3.75,
+        "rss_mb": 120.8,
+        "footprint_mb": 31.8,
+        "idle_wakeups_per_s": 0.0,
+        "interrupt_wakeups_per_s": 2.3,
+        "frames_drawn": 0,
+        "bytes_written": 0,
+        "child_processes": [],
+        "open_sockets": [
+          "127.0.0.1:52373->127.0.0.1:52369 (ESTABLISHED)",
+          "127.0.0.1:52369 (LISTEN)",
+          "127.0.0.1:52369->127.0.0.1:52373 (ESTABLISHED)",
+          "127.0.0.1:52374->127.0.0.1:52369 (ESTABLISHED)",
+          "127.0.0.1:52369->127.0.0.1:52374 (ESTABLISHED)"
+        ]
+      },
+      "queries": [
+        {
+          "at_ms": 11.19,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 11.21,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 11.22,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 11.22,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 11.23,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 4.22,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790965878454454000
+    },
+    {
+      "run": 1,
+      "first_byte_ms": 12.22,
+      "first_paint_ms": 12.92,
+      "first_frame_ms": 13.01,
+      "settled_ms": 43.71,
+      "frames_until_settled": 19,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 12.32,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 12.33,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 12.34,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 12.35,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 12.35,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 376.67,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790965893175715000
+    },
+    {
+      "run": 2,
+      "first_byte_ms": 19.82,
+      "first_paint_ms": 20.51,
+      "first_frame_ms": 20.58,
+      "settled_ms": 52.43,
+      "frames_until_settled": 19,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 19.92,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 19.94,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 19.95,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 19.95,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 19.96,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 129.74,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790965893934088000
+    },
+    {
+      "run": 3,
+      "first_byte_ms": 22.45,
+      "first_paint_ms": 23.19,
+      "first_frame_ms": 23.29,
+      "settled_ms": 44.25,
+      "frames_until_settled": 18,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 22.56,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 22.58,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 22.59,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 22.59,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 22.6,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 323.05,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790965894450786000
+    },
+    {
+      "run": 4,
+      "first_byte_ms": 12.66,
+      "first_paint_ms": 13.74,
+      "first_frame_ms": 13.86,
+      "settled_ms": 48.16,
+      "frames_until_settled": 19,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 12.76,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 12.79,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 12.8,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 12.81,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 12.82,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 525.06,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790965895128828000
+    },
+    {
+      "run": 5,
+      "first_byte_ms": 19.01,
+      "first_paint_ms": 19.67,
+      "first_frame_ms": 19.75,
+      "settled_ms": 52.93,
+      "frames_until_settled": 19,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 19.12,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 19.14,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 19.14,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 19.14,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 19.15,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 117.24,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790965896028842000
+    },
+    {
+      "run": 6,
+      "first_byte_ms": 11.91,
+      "first_paint_ms": 12.66,
+      "first_frame_ms": 12.73,
+      "settled_ms": 43.19,
+      "frames_until_settled": 19,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 11.98,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 12.0,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 12.0,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 12.01,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 12.01,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 680.9,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790965896542046000
+    },
+    {
+      "run": 7,
+      "first_byte_ms": 27.29,
+      "first_paint_ms": 29.05,
+      "first_frame_ms": 29.21,
+      "settled_ms": 65.05,
+      "frames_until_settled": 19,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 27.54,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 27.59,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 27.6,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 27.61,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 27.62,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 215.57,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790965897595887000
+    },
+    {
+      "run": 8,
+      "first_byte_ms": 26.34,
+      "first_paint_ms": 27.55,
+      "first_frame_ms": 27.69,
+      "settled_ms": 62.91,
+      "frames_until_settled": 19,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 26.53,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 26.56,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 26.57,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 26.58,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 26.59,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 25.5,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790965898200623000
+    },
+    {
+      "run": 9,
+      "first_byte_ms": 20.4,
+      "first_paint_ms": 21.32,
+      "first_frame_ms": 21.43,
+      "settled_ms": 375.76,
+      "frames_until_settled": 24,
+      "alt_screen": true,
+      "exited_early": false,
+      "queries": [
+        {
+          "at_ms": 20.53,
+          "kind": "cursor-position",
+          "answered": true
+        },
+        {
+          "at_ms": 20.55,
+          "kind": "OSC 10 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 20.56,
+          "kind": "OSC 11 colour",
+          "answered": true
+        },
+        {
+          "at_ms": 20.56,
+          "kind": "kitty-keyboard",
+          "answered": true
+        },
+        {
+          "at_ms": 20.57,
+          "kind": "DA1",
+          "answered": true
+        }
+      ],
+      "shutdown_ms": 107.17,
+      "exit_status": 0,
+      "exit_signal": null,
+      "leaked_terminal_state": [],
+      "termios_restored": true,
+      "start_wall_ns": 1790965898618539000
+    }
+  ],
+  "stray_processes": [],
+  "state_dir_entries": [
+    ".sandbox_migration",
+    ".tmp",
+    "auth.json",
+    "config.toml",
+    "goals_1.sqlite",
+    "goals_1.sqlite-shm",
+    "goals_1.sqlite-wal",
+    "installation_id",
+    "log",
+    "logs_2.sqlite",
+    "memories_1.sqlite",
+    "memories_1.sqlite-shm",
+    "memories_1.sqlite-wal",
+    "queue_1.sqlite",
+    "queue_1.sqlite-shm",
+    "queue_1.sqlite-wal",
+    "shell_snapshots",
+    "skills",
+    "state_5.sqlite",
+    "state_5.sqlite-shm",
+    "state_5.sqlite-wal",
+    "thread-writer-locks",
+    "tmp"
+  ],
+  "home_entries": [
+    ".blackarrow"
+  ],
+  "failures": []
+}
