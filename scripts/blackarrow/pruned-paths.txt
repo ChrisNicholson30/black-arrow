@@ -1,0 +1,68 @@
+# Paths from upstream Codex that Black Arrow does not carry.
+#
+# Syntax is a small subset of .gitignore:
+#   dir/          everything under a directory at the repository root
+#   file          one file at the repository root
+#   **/name       a file with that name at any depth
+#   **/*.ext      files with that extension at any depth
+#   !pattern      keep these after all; later lines win
+#
+# Nothing here is needed to build, test, or ship Black Arrow with Cargo. When
+# upstream changes or adds a file that matches, `upstream_sync.py` removes it
+# again, so pruning costs nothing at merge time. To bring something back,
+# delete its line and restore the files with `git checkout upstream/main -- <path>`.
+#
+# After editing this file run:  scripts/blackarrow/upstream_sync.py prune
+
+# --- SDKs and npm distribution for the Codex CLI
+sdk/
+codex-cli/
+package.json
+pnpm-lock.yaml
+pnpm-workspace.yaml
+.npmrc
+.prettierrc.toml
+.prettierignore
+
+# --- Bazel. Black Arrow builds with Cargo only.
+.bazelrc
+.bazelversion
+.bazelignore
+.worktreeinclude
+MODULE.bazel
+MODULE.bazel.lock
+**/BUILD.bazel
+**/*.bzl
+bazel/
+patches/
+workspace_root_test_launcher.sh.tpl
+workspace_root_test_launcher.bat.tpl
+third_party/
+# Licence texts for code the Rust workspace is derived from stay in the tree.
+!third_party/wezterm/LICENSE
+!third_party/voice/NOTICE.md
+!third_party/voice/licenses/
+# Checksums for upstream's prebuilt V8, which the code-mode host is built
+# against. scripts/blackarrow/fetch_v8.py verifies its download with these.
+!**/rusty_v8_*_release_manifests.sha256
+
+# --- Nix packaging
+flake.nix
+flake.lock
+codex-rs/default.nix
+
+# --- Upstream CI, release tooling, and repository automation
+.github/
+tools/
+justfile
+scripts/
+!scripts/blackarrow/
+codex-rs/scripts/
+.codespellrc
+.codespellignore
+.markdownlint-cli2.yaml
+ruff.toml
+.vscode/
+
+# --- Upstream product content
+announcement_tip.toml
