@@ -1,81 +1,99 @@
-<p align="center"><strong>Codex CLI</strong> is a coding agent from OpenAI that runs locally on your computer.
-<p align="center">
-  <img src="https://github.com/openai/codex/blob/main/.github/codex-cli-splash.png" alt="Codex CLI splash" width="80%" />
-</p>
-</br>
-If you want Codex in your code editor (VS Code, Cursor, Windsurf), <a href="https://developers.openai.com/codex/ide">install in your IDE.</a>
-</br>If you want the desktop app experience, run <code>codex app</code> or visit <a href="https://chatgpt.com/codex?app-landing-page=true">the Codex App page</a>.
-</br>If you are looking for the <em>cloud-based agent</em> from OpenAI, <strong>Codex Web</strong>, go to <a href="https://chatgpt.com/codex">chatgpt.com/codex</a>.</p>
+# Black Arrow
 
----
+A fast, provider-neutral terminal coding harness, built on the agent runtime of the open-source [OpenAI Codex CLI](https://github.com/openai/codex).
 
-## Quickstart
-
-### Installing and running Codex CLI
-
-Run the following on Mac or Linux to install Codex CLI:
-
-```shell
-curl -fsSL https://chatgpt.com/codex/install.sh | sh
+```bash
+blackarrow        # or: ba
 ```
 
-Run the following on Windows to install Codex CLI:
+Black Arrow is a deliberately shallow fork. It keeps Codex's sandboxing, approvals, tools, and session machinery, and changes the product around them: its own identity and state, no telemetry by default, startup that is measured instead of assumed, and, in later phases, the ability to move between ChatGPT, API-backed models, and local models without changing how you work.
 
-```shell
-powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"
+## Status
+
+**Foundation sprint complete. Not ready for general use.**
+
+| | |
+|---|---|
+| Works today | Builds and runs as `blackarrow` on Apple Silicon macOS. State isolated in `~/.blackarrow`. Project config in `.blackarrow/`. Sandbox, approvals, and sessions as in Codex. `blackarrow doctor`. Startup tracing and a benchmark. |
+| Inherited, not yet Black Arrow's own | Sign-in, provider selection, the model picker, plugins, and slash commands are upstream's. ChatGPT sign-in still presents the program as Codex and must not be relied on in a distributed build. See [docs/authentication.md](docs/authentication.md). |
+| Not built yet | Provider switching, `/thinking`, `/provider`, `/flight`, the command registry, packaging, releases. |
+
+The measured starting point is [docs/baseline.md](docs/baseline.md).
+
+## Build
+
+Requires macOS on Apple Silicon and [rustup](https://rustup.rs). The toolchain version is pinned by the repository.
+
+```bash
+cd codex-rs
+cargo build --release --bin blackarrow     # about 18 minutes from clean
+./target/release/blackarrow --version
 ```
 
-The standalone installers download from `https://releases.openai.com/codex` by default and fall back to GitHub Releases if a metadata or asset download is unavailable. To force GitHub Releases, set `CODEX_INSTALLER_USE_RELEASES_OPENAI_COM` to `false` (`0` and `no` are also accepted):
+To put `blackarrow` and `ba` on your `PATH`:
 
-```shell
-curl -fsSL https://chatgpt.com/codex/install.sh | CODEX_INSTALLER_USE_RELEASES_OPENAI_COM=false sh
+```bash
+mkdir -p ~/.local/bin
+ln -sf "$PWD/target/release/blackarrow" ~/.local/bin/blackarrow
+ln -sf "$PWD/target/release/blackarrow" ~/.local/bin/ba
 ```
 
-```powershell
-$env:CODEX_INSTALLER_USE_RELEASES_OPENAI_COM='false'; irm https://chatgpt.com/codex/install.ps1 | iex
+`ba` is the same executable under a second name.
+
+Use a release build. A debug build can be made to behave like Codex, in its state directory names and in its defaults, so that upstream's tests can run. It is for development only; [docs/architecture.md](docs/architecture.md) has the details.
+
+## Where things are kept
+
+| | |
+|---|---|
+| State, credentials, sessions, logs | `~/.blackarrow/`, or wherever `BLACKARROW_HOME` points |
+| Per-project configuration | `.blackarrow/config.toml` in the project |
+| Machine-wide configuration | `/etc/blackarrow/` |
+
+Black Arrow and Codex can be installed side by side. Black Arrow does not read, write, or migrate anything in `~/.codex`, and ignores `CODEX_HOME`. `blackarrow doctor` reports where state lives and confirms the two are separate.
+
+## What leaves your machine
+
+Off, unless you turn them on: usage analytics, metrics, feedback upload, update checks, and remote announcements. Upstream sends or fetches all five by default.
+
+Still on, inherited from Codex. Each launch contacts:
+
+| Host | What for | To turn it off |
+|---|---|---|
+| Your model provider, `api.openai.com` by default | The model | |
+| `chatgpt.com` | The list of available models | `features.api_key_model_discovery = false` |
+| `github.com`, `api.github.com`, `chatgpt.com` | OpenAI's plugin catalogue, re-synced on every launch | `features.plugins = false` |
+
+With both settings off, a launch reaches the model provider and nothing else. Neither request delays the first frame, but the chat screen waits for the model list when it is not cached. Moving model discovery to the provider you chose, and deciding what the plugin catalogue should be, belong to the provider phase; until then this table is the honest state. [docs/performance.md](docs/performance.md) has the measurements.
+
+Whatever a tool does once you approve it is up to that tool.
+
+## Working on it
+
+```bash
+cargo install --locked cargo-nextest               # once
+scripts/blackarrow/test.sh -p codex-tui            # tests: throwaway HOME, no network
+scripts/blackarrow/bench_startup.py --bin codex-rs/target/release/blackarrow
+scripts/blackarrow/terminal_check.py --bin codex-rs/target/release/blackarrow
+scripts/blackarrow/upstream_sync.py check          # the fork's rules still hold
+BLACKARROW_STARTUP_TRACE=/tmp/trace.json blackarrow   # startup timeline
 ```
 
-Codex CLI can also be installed via the following package managers:
+Run tests through `test.sh`, not bare `cargo test`; [docs/upstream-sync.md](docs/upstream-sync.md) says why.
 
-```shell
-# Install using npm
-npm install -g @openai/codex
-```
+| Document | What it covers |
+|---|---|
+| [architecture.md](docs/architecture.md) | How Black Arrow differs from Codex, and where every difference lives |
+| [baseline.md](docs/baseline.md) | Measurements of unmodified Codex, taken before any change |
+| [performance.md](docs/performance.md) | Targets, current numbers, how to measure |
+| [authentication.md](docs/authentication.md) | Sign-in today and the plan for Black Arrow's own |
+| [providers.md](docs/providers.md) | Providers today and the plan for the provider router |
+| [commands.md](docs/commands.md) | Slash commands: what exists, what is planned |
+| [upstream-sync.md](docs/upstream-sync.md) | Taking changes from upstream Codex, and running the tests |
+| [release.md](docs/release.md) | Versioning, packaging, and distribution |
 
-```shell
-# Install using Homebrew
-brew install --cask codex
-```
+## Licence and attribution
 
-Then simply run `codex` to get started.
+Black Arrow is a modified version of OpenAI Codex and is distributed under the same [Apache-2.0 licence](LICENSE). Upstream's attribution notices are preserved in [NOTICE](NOTICE). Changes made for Black Arrow are recorded in this repository's history and summarised in [docs/architecture.md](docs/architecture.md).
 
-<details>
-<summary>You can also go to the <a href="https://github.com/openai/codex/releases/latest">latest GitHub Release</a> and download the appropriate binary for your platform.</summary>
-
-Each GitHub Release contains many executables, but in practice, you likely want one of these:
-
-- macOS
-  - Apple Silicon/arm64: `codex-aarch64-apple-darwin.tar.gz`
-  - x86_64 (older Mac hardware): `codex-x86_64-apple-darwin.tar.gz`
-- Linux
-  - x86_64: `codex-x86_64-unknown-linux-musl.tar.gz`
-  - arm64: `codex-aarch64-unknown-linux-musl.tar.gz`
-
-Each archive contains a single entry with the platform baked into the name (e.g., `codex-x86_64-unknown-linux-musl`), so you likely want to rename it to `codex` after extracting it.
-
-</details>
-
-### Using Codex with your ChatGPT plan
-
-Run `codex` and select **Sign in with ChatGPT**. We recommend signing into your ChatGPT account to use Codex as part of your Plus, Pro, Business, Edu, or Enterprise plan. [Learn more about what's included in your ChatGPT plan](https://help.openai.com/en/articles/11369540-codex-in-chatgpt).
-
-You can also use Codex with an API key, but this requires [additional setup](https://developers.openai.com/codex/auth#sign-in-with-an-api-key).
-
-## Docs
-
-- [**Codex Documentation**](https://developers.openai.com/codex)
-- [**Contributing**](./docs/contributing.md)
-- [**Installing & building**](./docs/install.md)
-- [**Open source fund**](./docs/open-source-fund.md)
-
-This repository is licensed under the [Apache-2.0 License](LICENSE).
+Black Arrow is an independent project. It is not affiliated with, sponsored by, or endorsed by OpenAI. "Codex" and "OpenAI" are used here only to identify the software Black Arrow is derived from.

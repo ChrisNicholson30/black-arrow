@@ -1,0 +1,18 @@
+{
+  "first_exec_of_new_copy_ms": [
+    1751.4,
+    1609.3,
+    1666.5,
+    1679.3,
+    1614.4
+  ],
+  "second_exec_ms": [
+    11.1,
+    16.7,
+    10.5,
+    16.0,
+    15.6
+  ],
+  "first_median_ms": 1666.5,
+  "second_median_ms": 15.6
+}

@@ -1,0 +1,83 @@
+{
+  "pid": 49023,
+  "exec_to_main_ms": 7.465,
+  "marks": [
+    {
+      "name": "main",
+      "since_main_ms": 0.0,
+      "since_exec_ms": 7.465
+    },
+    {
+      "name": "arg0_ready",
+      "since_main_ms": 13.977,
+      "since_exec_ms": 21.442
+    },
+    {
+      "name": "runtime_ready",
+      "since_main_ms": 14.158,
+      "since_exec_ms": 21.623
+    },
+    {
+      "name": "cli_parsed",
+      "since_main_ms": 14.544,
+      "since_exec_ms": 22.009
+    },
+    {
+      "name": "bootstrap_config_loaded",
+      "since_main_ms": 17.279,
+      "since_exec_ms": 24.744
+    },
+    {
+      "name": "terminal_ready",
+      "since_main_ms": 17.607,
+      "since_exec_ms": 25.072
+    },
+    {
+      "name": "first_frame",
+      "since_main_ms": 18.074,
+      "since_exec_ms": 25.539
+    },
+    {
+      "name": "config_loaded",
+      "since_main_ms": 21.084,
+      "since_exec_ms": 28.549
+    },
+    {
+      "name": "state_ready",
+      "since_main_ms": 39.906,
+      "since_exec_ms": 47.371
+    },
+    {
+      "name": "app_server_ready",
+      "since_main_ms": 58.468,
+      "since_exec_ms": 65.933
+    },
+    {
+      "name": "auth_loaded",
+      "since_main_ms": 59.578,
+      "since_exec_ms": 67.043
+    },
+    {
+      "name": "models_loaded",
+      "since_main_ms": 2967.691,
+      "since_exec_ms": 2975.156
+    },
+    {
+      "name": "chat_frame",
+      "since_main_ms": 2977.789,
+      "since_exec_ms": 2985.254
+    },
+    {
+      "name": "session_ready",
+      "since_main_ms": 9058.103,
+      "since_exec_ms": 9065.568
+    },
+    {
+      "name": "mcp_ready",
+      "since_main_ms": 9058.427,
+      "since_exec_ms": 9065.892
+    }
+  ],
+  "harness_first_frame_ms": 25.7,
+  "network": "refused"
+}
