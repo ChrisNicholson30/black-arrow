@@ -112,6 +112,10 @@ fn linux_app_tooltip(session: LinuxDesktopSession) -> Option<&'static str> {
 }
 
 fn app_tooltip() -> Option<&'static str> {
+    // Black Arrow: there is no desktop app to promote.
+    if !blackarrow_base::defaults::current().has_desktop_app {
+        return None;
+    }
     if IS_MACOS {
         Some(MACOS_APP_TOOLTIP)
     } else if IS_WINDOWS {
@@ -191,6 +195,11 @@ pub(crate) mod announcement {
 
     /// Prewarm the cache of the announcement tip.
     pub(crate) fn prewarm(http_client_factory: HttpClientFactory) {
+        // Black Arrow: upstream's announcements describe Codex, and fetching
+        // them is a network request on every launch.
+        if !blackarrow_base::defaults::current().fetch_remote_announcements {
+            return;
+        }
         if ANNOUNCEMENT_TIP.get().is_some() {
             return;
         }

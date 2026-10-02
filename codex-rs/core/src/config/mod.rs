@@ -4085,7 +4085,9 @@ impl Config {
 
         let review_model = override_review_model.or(cfg.review_model);
 
-        let check_for_update_on_startup = cfg.check_for_update_on_startup.unwrap_or(true);
+        let check_for_update_on_startup = cfg
+            .check_for_update_on_startup
+            .unwrap_or(blackarrow_base::defaults::current().check_for_update_on_startup);
         let model_catalog = load_model_catalog(cfg.model_catalog_json.clone())?;
 
         let log_dir = cfg
@@ -4496,12 +4498,16 @@ impl Config {
                 .and_then(|tui| tui.disable_paste_burst)
                 .or(cfg.disable_paste_burst)
                 .unwrap_or(false),
-            analytics_enabled: cfg.analytics.as_ref().and_then(|a| a.enabled),
+            analytics_enabled: cfg
+                .analytics
+                .as_ref()
+                .and_then(|a| a.enabled)
+                .or(blackarrow_base::defaults::current().analytics_enabled),
             feedback_enabled: cfg
                 .feedback
                 .as_ref()
                 .and_then(|feedback| feedback.enabled)
-                .unwrap_or(true),
+                .unwrap_or(blackarrow_base::defaults::current().feedback_enabled),
             tool_suggest,
             tui_notifications: cfg
                 .tui

@@ -589,8 +589,15 @@ async fn build_report(
         }
     }
 
-    progress.begin("desktop");
-    if let Some(desktop) = desktop::collect().await {
+    // Black Arrow: there is no desktop app, and inspecting the Codex one that
+    // may be installed alongside is none of this program's business.
+    let desktop = if blackarrow_base::defaults::current().has_desktop_app {
+        progress.begin("desktop");
+        desktop::collect().await
+    } else {
+        None
+    };
+    if let Some(desktop) = desktop {
         #[cfg(any(target_os = "macos", target_os = "windows"))]
         if let Some(application) = desktop.application.as_ref() {
             updates::append_desktop_update(&mut checks, config_result.as_ref().ok(), application)

@@ -969,7 +969,8 @@ pub const FEATURES: &[FeatureSpec] = &[
         id: Feature::DaemonAutoStart,
         key: "daemon_auto_start",
         stage: Stage::Stable,
-        default_enabled: true,
+        // Black Arrow: off by default. See blackarrow_base::defaults::FEATURE_DEFAULTS.
+        default_enabled: false,
     },
     FeatureSpec {
         id: Feature::TranscriptV2,
@@ -1997,5 +1998,7 @@ pub fn unstable_features_warning_event(
     })
 }
 
+#[cfg(test)]
+mod blackarrow_tests;
 #[cfg(test)]
 mod tests;

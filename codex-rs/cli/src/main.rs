@@ -177,13 +177,17 @@ enum Subcommand {
     RemoteControl(RemoteControlCommand),
 
     /// Launch the Desktop app (opens the app installer if missing).
+    // Black Arrow: hidden and refused at dispatch; there is no desktop app.
     #[cfg(any(target_os = "macos", target_os = "windows"))]
+    #[clap(hide = true)]
     App(app_cmd::AppCommand),
 
     /// Generate shell completion scripts.
     Completion(CompletionCommand),
 
     /// Update Codex to the latest version.
+    // Black Arrow: hidden and refused at dispatch until a release channel exists.
+    #[clap(hide = true)]
     Update,
 
     /// Diagnose local Black Arrow installation, config, auth, and runtime health.
@@ -200,7 +204,8 @@ enum Subcommand {
     Execpolicy(ExecpolicyCommand),
 
     /// Apply the latest diff produced by Codex agent as a `git apply` to your local working tree.
-    #[clap(visible_alias = "a")]
+    // Black Arrow: Codex Cloud is an OpenAI service, not a Black Arrow feature.
+    #[clap(visible_alias = "a", hide = true)]
     Apply(ApplyCommand),
 
     /// Resume a previous interactive session (picker by default; use --last to continue the most recent).
@@ -225,7 +230,8 @@ enum Subcommand {
     Fork(ForkCommand),
 
     /// [EXPERIMENTAL] Browse tasks from Codex Cloud and apply changes locally.
-    #[clap(name = "cloud", alias = "cloud-tasks")]
+    // Black Arrow: Codex Cloud is an OpenAI service, not a Black Arrow feature.
+    #[clap(name = "cloud", alias = "cloud-tasks", hide = true)]
     Cloud(CloudTasksCli),
 
     /// Internal: run the responses API proxy.
@@ -589,19 +595,15 @@ struct AppServerCommand {
 
     /// Controls whether analytics are enabled by default.
     ///
-    /// Analytics are disabled by default for app-server. Users have to explicitly opt in
-    /// via the `analytics` section in the config.toml file.
+    /// Accepted for compatibility; it has no effect in Black Arrow.
     ///
-    /// However, for first-party use cases like the VSCode IDE extension, we default analytics
-    /// to be enabled by default by setting this flag. Users can still opt out by setting this
-    /// in their config.toml:
+    /// Upstream uses this flag to let first-party clients default analytics on.
+    /// Black Arrow sends analytics only when the user opts in from config.toml:
     ///
     /// ```toml
     /// [analytics]
-    /// enabled = false
+    /// enabled = true
     /// ```
-    ///
-    /// See https://developers.openai.com/codex/config-advanced/#metrics for more details.
     #[arg(long = "analytics-default-enabled")]
     analytics_default_enabled: bool,
 
@@ -772,6 +774,18 @@ fn handle_app_exit(
     Ok(())
 }
 
+/// Black Arrow: upstream's updater reinstalls the Codex package through npm,
+/// Homebrew, or its own installer. Refuse until Black Arrow publishes releases,
+/// so this binary can never modify a Codex install on the same machine.
+fn ensure_release_channel() -> anyhow::Result<()> {
+    anyhow::ensure!(
+        blackarrow_base::defaults::current().has_release_channel,
+        "Black Arrow does not publish releases yet, so it cannot update itself. \
+         Rebuild from source to pick up changes."
+    );
+    Ok(())
+}
+
 /// Run the update action and print the result.
 fn run_update_action(
     action: UpdateAction,
@@ -792,6 +806,9 @@ fn run_update_action(
         println!("Relaunch Codex to reconnect.");
         return Ok(());
     }
+    // Restarting this program's own background server is fine. Everything
+    // below reinstalls the Codex package, so it stops here.
+    ensure_release_channel()?;
     println!();
     let cmd_str = action.command_str();
     println!("Updating Codex via `{cmd_str}`...");
@@ -858,6 +875,7 @@ fn resolve_windows_update_command_from_path(
 }
 
 fn run_update_command() -> anyhow::Result<()> {
+    ensure_release_channel()?;
     #[cfg(debug_assertions)]
     {
         anyhow::bail!(
