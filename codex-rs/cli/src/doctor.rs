@@ -73,6 +73,7 @@ use serde::Serialize;
 use supports_color::Stream;
 
 mod background;
+mod blackarrow;
 mod desktop;
 mod disk;
 mod filesystem_paths;
@@ -365,6 +366,11 @@ async fn build_report(
     }));
     checks.push(run_sync_check("runtime", progress.clone(), runtime_check));
     checks.push(run_sync_check("search", progress.clone(), search_check));
+    checks.push(run_sync_check(
+        "isolation",
+        progress.clone(),
+        blackarrow::isolation_check,
+    ));
 
     progress.begin("config");
     let config_started = Instant::now();
@@ -382,6 +388,9 @@ async fn build_report(
         });
     checks.push(run_sync_check("disk", progress.clone(), || {
         disk::check(config_result.as_ref().ok(), &cwd)
+    }));
+    checks.push(run_sync_check("privacy", progress.clone(), || {
+        blackarrow::privacy_check(config_result.as_ref().ok())
     }));
     #[cfg(target_os = "windows")]
     checks.push(run_sync_check("dev drive", progress.clone(), || {
@@ -1305,7 +1314,7 @@ fn auth_check(config: &Config) -> DoctorCheck {
             "auth.credentials",
             "auth",
             CheckStatus::Fail,
-            "no Codex credentials were found",
+            "no credentials were found",
         )
         .details(details)
         .remediation(
@@ -1897,6 +1906,16 @@ fn terminal_name(info: &TerminalInfo) -> &'static str {
         TerminalName::Vte => "VTE",
         TerminalName::WindowsTerminal => "Windows Terminal",
         TerminalName::Dumb => "dumb",
+        // Black Arrow: Zed's integrated terminal is a primary target. Upstream's
+        // terminal table has no entry for it, so name it from what it reports.
+        TerminalName::Unknown
+            if info
+                .term_program
+                .as_deref()
+                .is_some_and(|program| program.eq_ignore_ascii_case("zed")) =>
+        {
+            "Zed"
+        }
         TerminalName::Unknown => "unknown",
     }
 }

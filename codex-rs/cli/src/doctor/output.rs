@@ -26,13 +26,24 @@ const GROUPS: &[OutputGroup] = &[
     OutputGroup {
         title: "Environment",
         keys: &[
-            "system", "disk", "security", "runtime", "install", "search", "git", "terminal",
-            "title", "state", "threads",
+            "system",
+            "disk",
+            "security",
+            "runtime",
+            "install",
+            "search",
+            "git",
+            "terminal",
+            "title",
+            "state",
+            "isolation",
+            "threads",
         ],
     },
     OutputGroup {
         title: "Configuration",
-        keys: &["config", "auth", "mcp", "sandbox"],
+        // Black Arrow: `privacy` is its own check; see doctor/blackarrow.rs.
+        keys: &["config", "auth", "privacy", "mcp", "sandbox"],
     },
     OutputGroup {
         title: "Desktop App",
