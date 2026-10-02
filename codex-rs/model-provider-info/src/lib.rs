@@ -531,9 +531,16 @@ other non-default provider fields are not supported"
             wire_api: WireApi::Responses,
             query_params: None,
             http_headers: Some(
-                [("version".to_string(), env!("CARGO_PKG_VERSION").into())]
-                    .into_iter()
-                    .collect(),
+                // Black Arrow: upstream sends the package version, which is
+                // 0.0.0 in a source build, and the backend refuses any model
+                // that needs a newer client than this header names. See
+                // blackarrow_base::upstream.
+                [(
+                    "version".to_string(),
+                    blackarrow_base::upstream::CODEX_CLIENT_VERSION.into(),
+                )]
+                .into_iter()
+                .collect(),
             ),
             env_http_headers: Some(
                 [
@@ -773,3 +780,7 @@ pub fn create_oss_provider_with_base_url(base_url: &str, wire_api: WireApi) -> M
 #[cfg(test)]
 #[path = "model_provider_info_tests.rs"]
 mod tests;
+
+#[cfg(test)]
+#[path = "blackarrow_tests.rs"]
+mod blackarrow_tests;

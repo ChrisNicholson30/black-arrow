@@ -13,6 +13,7 @@ path = "src/lib.rs"
 workspace = true
 
 [dependencies]
+blackarrow-base = { workspace = true }
 chrono = { workspace = true, features = ["serde"] }
 codex-http-client = { workspace = true }
 codex-login = { workspace = true }

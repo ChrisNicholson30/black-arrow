@@ -4096,6 +4096,7 @@ dependencies = [
 name = "codex-model-provider-info"
 version = "0.0.0"
 dependencies = [
+ "blackarrow-base",
  "codex-client",
  "codex-protocol",
  "codex-utils-absolute-path",
@@ -4114,6 +4115,7 @@ dependencies = [
 name = "codex-models-manager"
 version = "0.0.0"
 dependencies = [
+ "blackarrow-base",
  "chrono",
  "codex-http-client",
  "codex-login",

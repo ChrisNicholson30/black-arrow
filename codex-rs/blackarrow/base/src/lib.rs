@@ -2,8 +2,8 @@
 //!
 //! Black Arrow is a shallow fork of the Codex CLI. Everything that makes it a
 //! distinct product at the lowest level lives here: what it is called, where it
-//! keeps its state, which upstream defaults it overrides, and how its startup
-//! is timed. Upstream crates reach into this crate through small, deliberate
+//! keeps its state, which upstream defaults it overrides, how its startup is
+//! timed, and which Codex client it tells the backend it is. Upstream crates reach into this crate through small, deliberate
 //! call sites, so the fork's divergence stays in one directory that upstream
 //! never touches.
 //!
@@ -14,3 +14,4 @@ pub mod brand;
 pub mod defaults;
 pub mod paths;
 pub mod startup;
+pub mod upstream;
