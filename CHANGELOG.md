@@ -14,7 +14,7 @@ Foundation sprint, forked from openai/codex at `ca466061d6`.
 - Startup timeline, written to the file named by `BLACKARROW_STARTUP_TRACE`.
 - Two checks in `blackarrow doctor`: that state is separate from Codex, and which of analytics, feedback upload, update checks, and announcements are on.
 - The terminal is restored when the process is ended by SIGTERM, SIGHUP, or SIGINT.
-- `scripts/blackarrow/`: startup benchmark, terminal behaviour check, hermetic test runner, and upstream sync tooling.
+- `scripts/blackarrow/`: startup benchmark, terminal behaviour check, hermetic test runner, upstream sync tooling, and `install.sh`, which links `blackarrow` and `ba` into `~/.local/bin`.
 - Engineering documentation under `docs/`, including a measured baseline of unmodified Codex.
 
 ### Changed
@@ -25,6 +25,8 @@ Foundation sprint, forked from openai/codex at `ca466061d6`.
 - Feedback upload is off: it sends logs to OpenAI, not to Black Arrow.
 - The animated OpenAI logo on empty conversations is not shown.
 - Keychain entries, device-key labels, and the macOS preferences domain use Black Arrow's names.
+- The status line at the bottom shows how much of the weekly usage limit is left, after the model, directory, and thread name. It is omitted when the provider reports no weekly limit.
+- Requests to the Codex backend state the Codex client version that the bundled catalogue needs, `0.155.0` at this fork point, not the source tree's `0.0.0`. With `0.0.0` the backend left the newest models, GPT-6-Luna, GPT-6-Sol and GPT-6.1-Sol among them, out of the model list, and refused them when asked for by name.
 
 ### Removed
 

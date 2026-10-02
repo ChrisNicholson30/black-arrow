@@ -465,6 +465,9 @@ impl ChatWidget {
             .unwrap_or_else(|| {
                 DEFAULT_STATUS_LINE_ITEMS
                     .iter()
+                    // Black Arrow: the default line also shows weekly usage.
+                    // The list is in blackarrow_base::defaults.
+                    .chain(blackarrow_base::defaults::current().extra_status_line_items)
                     .map(ToString::to_string)
                     .collect()
             })
@@ -1276,3 +1279,8 @@ where
     }
     (items, invalid)
 }
+
+// Black Arrow: checks on the items added to the default status line.
+#[cfg(test)]
+#[path = "status_surfaces_blackarrow_tests.rs"]
+mod blackarrow_tests;

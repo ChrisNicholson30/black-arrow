@@ -21,16 +21,16 @@ Black Arrow changes the product boundary: what the program is called, where it k
 
 ## How much differs
 
-`scripts/blackarrow/upstream_sync.py footprint` counts it. At the foundation commit, against upstream at `ca466061d6`:
+`scripts/blackarrow/upstream_sync.py footprint` counts it. Against upstream at `ca466061d6`:
 
 | | Files |
 |---|---|
 | Upstream files not carried | 645 |
 | Upstream files replaced wholesale (README, docs, startup tips) | 19 |
-| Changed only by the codemod | 105, of which 54 are tests and snapshots |
-| Snapshots refreshed by running the tests | 146 |
-| Changed by hand | 73: 48 source, 6 tests, 19 manifests |
-| Fork-only files | 49 |
+| Changed only by the codemod | 106, of which 55 are tests and snapshots |
+| Snapshots refreshed by running the tests | 147 |
+| Changed by hand | 77: 50 source, 6 tests, 21 manifests |
+| Fork-only files | 53 |
 
 Only the "changed by hand" row costs anything at merge time. The rest is re-applied by script; see [upstream-sync.md](upstream-sync.md).
 
@@ -38,10 +38,10 @@ Only the "changed by hand" row costs anything at merge time. The rest is re-appl
 
 | Path | Contents |
 |---|---|
-| `codex-rs/blackarrow/base/` | `brand` (names and identifiers), `paths` (state locations and the rules for choosing them), `defaults` (policy that differs from upstream), `startup` (the startup timeline). No workspace dependencies. |
+| `codex-rs/blackarrow/base/` | `brand` (names and identifiers), `paths` (state locations and the rules for choosing them), `defaults` (policy that differs from upstream), `startup` (the startup timeline), `upstream` (the Codex client version stated to the backend). No workspace dependencies. |
 | `codex-rs/cli/src/doctor/blackarrow.rs` | The doctor's isolation check. |
 | `codex-rs/tui/src/blackarrow_signals.rs` | Terminal restoration on termination signals. |
-| `blackarrow_tests.rs` and `seatbelt_blackarrow_tests.rs` beside the code they test; `cli/tests/blackarrow_identity.rs`; `tui/tests/suite/blackarrow_*.rs` | Black Arrow's own tests. |
+| `blackarrow_tests.rs` and `*_blackarrow_tests.rs` beside the code they test; `cli/tests/blackarrow_identity.rs`; `tui/tests/suite/blackarrow_*.rs` | Black Arrow's own tests. |
 | `scripts/blackarrow/`, `docs/` | Tooling and documentation. |
 
 **Mechanical differences.** Pruned paths are listed in `scripts/blackarrow/pruned-paths.txt`: SDKs, npm packaging, Bazel, Nix, CI workflows, release scripts. A few files under pruned directories are kept: licence texts, and the checksum manifest for upstream's prebuilt V8. The codemod is `scripts/blackarrow/rebrand_command_hints.py`; its header describes each rule. Eleven snapshot files are renamed from `codex__*` to `blackarrow__*`, because unit-test snapshots take the name of the binary crate.
@@ -129,7 +129,7 @@ Several hundred lower-traffic strings: error messages on rare paths, settings de
 
 ## Defaults that differ
 
-All in `blackarrow/base/src/defaults.rs`, as `Defaults::BLACK_ARROW`. Each is read at one upstream call site through `defaults::current()`.
+All in `blackarrow/base/src/defaults.rs`, as `Defaults::BLACK_ARROW`. Each is read at one upstream call site through `defaults::current()`, and `upstream_sync.py check` fails if a merge leaves one unread.
 
 | Behaviour | Upstream | Black Arrow | Why |
 |---|---|---|---|
@@ -142,6 +142,7 @@ All in `blackarrow/base/src/defaults.rs`, as `Defaults::BLACK_ARROW`. Each is re
 | Remote announcements | Fetched from the Codex repository at each launch | Not fetched | Different product; needless startup request. |
 | Doctor's desktop and update probes | Inspect the Codex desktop app and update CDN | Skipped | Not this program's business. |
 | `cloud`, `apply` commands | Listed in help | Hidden | Codex Cloud is an OpenAI service. They still work. |
+| Status line | Model, directory, thread name | The same, then `weekly NN% left` | Usage at a glance, without running `/status`. It displays the usage report the program already fetches, so it adds no request, and it is left out when the provider reports no weekly limit. `/statusline` still replaces the whole line. |
 
 The daemon default is a feature flag, and feature defaults live in upstream's feature table, because every consumer reads them there. That table is a constant, so it does not follow `BLACKARROW_UPSTREAM_DEFAULTS`; the few upstream tests about daemon auto-start turn it on in their own configuration. `features/src/blackarrow_tests.rs` fails if the table stops agreeing with Black Arrow's policy, which is how a merge that restores a default gets caught.
 
@@ -164,7 +165,7 @@ Upstream restores the terminal on normal exit and on panic. A SIGTERM, SIGHUP, o
 Upstream's tests are kept as upstream wrote them wherever possible, because every edited test is a future conflict. Four mechanisms make that work:
 
 - **Debug builds honour upstream's names**, so fixtures that set `CODEX_HOME` or create `.codex/` still work.
-- **Debug builds use upstream's defaults when the test runner asks**, so tests that expect analytics, feedback upload, or the desktop-app command still pass.
+- **Debug builds use upstream's defaults when the test runner asks**, so tests that expect analytics, feedback upload, the desktop-app command, or upstream's status line still pass.
 - **The codemod rewrites expectations** together with the messages they assert on: command hints everywhere, and in listed test files the session title, the prompt text, the directory the product writes to, and the preferences domain.
 - **The logo stays on in unit tests**, as described above.
 
@@ -216,3 +217,4 @@ Short records of choices that shape maintenance.
 9. **Tests run offline, with a scratch home.** Upstream's suite reaches GitHub and the model provider from any test that starts the app server, and writes into the home directory from a few. Neither belongs on a developer's machine, so the wrapper prevents both instead of trusting each test.
 10. **Add to upstream's test configuration from outside it.** Concurrency limits for this platform live in a nextest tool config, so upstream's file is never edited.
 11. **Upstream's defaults on request, in debug builds only.** The alternative was to opt each affected upstream test back in to the default it assumes: thirty-odd analytics tests across twenty files, whose configuration is written in more than one order. One switch that release builds cannot see is smaller and does not grow with upstream. The cost is that upstream's suite no longer exercises Black Arrow's defaults, so those have their own tests.
+12. **Tell the backend which Codex client this is, not `0.0.0`.** The backend hides models from the catalogue and refuses requests for them when the client version it is told is too old, and a source build has none. The version stated is the highest one the bundled catalogue asks for, held in one constant that both requests read, with a test that fails when the catalogue moves past it. Deriving it at run time was the first version, and kept itself up to date, but the header is built in a crate that cannot see the catalogue. A constant a person raises is also a decision a person sees: a newer version opts in to whatever else the backend gates on it. Black Arrow's own version number would say nothing true about Codex compatibility. See [providers.md](providers.md).

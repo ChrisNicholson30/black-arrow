@@ -92,6 +92,7 @@ Then:
    ```bash
    scripts/blackarrow/upstream_sync.py check
    ```
+   Besides the mechanical rules, this catches two ways a merge undoes the fork without a conflict: a hand-changed file that has lost its `Black Arrow:` note, and a default in `blackarrow/base/src/defaults.rs` that no upstream file reads any more because the call was merged away.
 6. **Measure.** A sync must not make startup slower or add network requests.
    ```bash
    (cd codex-rs && cargo build --release --bin blackarrow)
@@ -113,6 +114,7 @@ The scripts cannot catch these. They are how a merge quietly undoes the fork.
 - **New user-visible strings** naming Codex in primary surfaces: `--help`, the session header, onboarding, the doctor.
 - **New drawings of upstream's logo.** `tui/tests/suite/blackarrow_screen.rs` checks the first screen; a new place would need its own check.
 - **A new V8 version.** Upstream adds a checksum manifest under `third_party/v8/` when it changes the `v8` crate. The prune rules keep that one file; check that it arrived, or `fetch_v8.py` will refuse to download.
+- **The bundled model catalogue.** If the merge brings a catalogue whose newest model needs a newer Codex client, `blackarrow_client_version_tests` in `codex-models-manager` fails and names the version. Raise `CODEX_CLIENT_VERSION` in `blackarrow/base/src/upstream.rs` to it, and no further. Until then the picker would not show that model, and the backend would refuse it.
 
 ## Running the tests
 

@@ -16,7 +16,10 @@ docs/architecture.md, and has to be merged by a person.
 Commands:
 
   check      Verify the working tree follows the rules. Exit 1 if it does not.
-             Safe to run at any time; changes nothing.
+             Safe to run at any time; changes nothing. It also checks two
+             things a merge can undo without a conflict: that hand-made changes
+             still carry their note, and that every default in defaults.rs is
+             still read by the code it is meant to change.
 
   footprint  Count how the tree differs from upstream: what is pruned, what a
              script rewrote, what was changed by hand, what is fork-only.
@@ -60,6 +63,7 @@ REPO_ROOT = HERE.parents[1]
 PRUNED = HERE / "pruned-paths.txt"
 OWNED = HERE / "owned-paths.txt"
 REBRAND = HERE / "rebrand_command_hints.py"
+DEFAULTS_SOURCE = "codex-rs/blackarrow/base/src/defaults.rs"
 
 sys.path.insert(0, str(HERE))
 import rebrand_command_hints as rebrand  # noqa: E402
@@ -283,6 +287,36 @@ def is_test_path(path: str) -> bool:
     return "/tests/" in path or name.endswith("_tests.rs") or name == "tests.rs" or "/service_tests/" in path
 
 
+def unread_defaults() -> list:
+    """Fields of `Defaults` that no upstream file reads any more.
+
+    Each default Black Arrow changes takes effect at one call site inside an
+    upstream file, written `defaults::current().<field>`. A merge that rewrites
+    the code around it can drop the call without breaking the build or a test,
+    and the default goes back to upstream's with nothing to show for it.
+
+    Fork-only files do not count: they report the defaults, they do not apply
+    them.
+    """
+    text = (REPO_ROOT / DEFAULTS_SOURCE).read_text(encoding="utf-8")
+    body = re.search(r"pub struct Defaults \{(.*?)\n\}", text, re.DOTALL)
+    fields = re.findall(r"^\s*pub (\w+):", body.group(1), re.MULTILINE) if body else []
+    unread = set(fields)
+    for path in tracked_files() + untracked_files():
+        if not path.endswith(".rs") or "blackarrow" in path or not unread:
+            continue
+        try:
+            source = (REPO_ROOT / path).read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        if "defaults::current()" not in source:
+            continue
+        for field in sorted(unread):
+            if re.search(rf"defaults::current\(\)\s*\.\s*{field}\b", source):
+                unread.discard(field)
+    return [field for field in fields if field in unread]
+
+
 # ---------------------------------------------------------------------------
 # check
 # ---------------------------------------------------------------------------
@@ -327,12 +361,23 @@ def command_check(_args) -> int:
                 print(f"  {path}")
             print("  fix: add a `Black Arrow:` comment beside the change\n")
 
+    unread = unread_defaults()
+    if unread:
+        problems += 1
+        print(f"{len(unread)} default(s) in {DEFAULTS_SOURCE} are no longer read by any upstream file:")
+        for field in unread:
+            print(f"  {field}")
+        print(
+            "  fix: put back the `defaults::current().<name>` call that a merge removed; "
+            "docs/architecture.md says where each belongs\n"
+        )
+
     if problems:
         print(f"{problems} rule(s) violated.")
         return 1
     print(
         "Fork rules hold: nothing pruned is tracked, snapshots are named correctly, "
-        "text is rewritten, and hand-made changes are marked."
+        "text is rewritten, hand-made changes are marked, and every default is read."
     )
     return 0
 

@@ -43,6 +43,7 @@ rewritten.
 from __future__ import annotations
 
 import argparse
+import os
 import re
 import sys
 from dataclasses import dataclass
@@ -153,6 +154,10 @@ PROJECT_DIR_TEST_PATHS = (
     # expects the editor to be refused; it has to name the same directories
     # the product tries.
     "tui/src/app/tests.rs",
+    # Replaces the project directory with a symlink after detection and expects
+    # the import to refuse it; that only means something for the directory the
+    # import writes to.
+    "app-server/tests/suite/v2/external_agent_config.rs",
 )
 PROJECT_DIR_RULE = (re.compile(r"""(?<=["'])\.codex(?=["'/])"""), ".blackarrow")
 
@@ -249,9 +254,19 @@ def is_candidate(path: Path) -> bool:
 
 
 def candidate_files():
-    for path in sorted(SOURCE_ROOT.rglob("*")):
-        if path.is_file() and is_candidate(path):
-            yield path
+    """Every file this script rewrites, in a stable order.
+
+    Skipped directories are pruned during the walk and never entered: the
+    build directory alone can hold millions of files.
+    """
+    found = []
+    for directory, subdirectories, names in os.walk(SOURCE_ROOT):
+        subdirectories[:] = [name for name in subdirectories if name not in SKIP_DIRS]
+        for name in names:
+            path = Path(directory) / name
+            if is_candidate(path):
+                found.append(path)
+    return sorted(found)
 
 
 def rewrite_line(line: str, traits: Traits) -> str:
