@@ -149,7 +149,7 @@ async fn external_agent_config_import_skips_repository_redirect_after_detection(
     let codex_home = TempDir::new()?;
     let repository = TempDir::new()?;
     let repo_root = repository.path();
-    let repo_config_dir = repo_root.join(".codex");
+    let repo_config_dir = repo_root.join(".blackarrow");
     let global_config = codex_home.path().join("config.toml");
     std::fs::create_dir(repo_root.join(".git"))?;
     std::fs::create_dir(&repo_config_dir)?;
