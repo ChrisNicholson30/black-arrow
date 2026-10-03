@@ -19,6 +19,8 @@ The script links both names in `~/.local/bin` to the build. It finds the binary 
 
 A Homebrew formula would do the same with `bin.install` and `bin.install_symlink`.
 
+`scripts/blackarrow/get.sh` is the same thing for someone without a checkout, as a `curl … | sh` command: it fetches the source, builds it, keeps the program outside the build directory, and links the two names. It builds from source because there is nothing else to install yet. Publishing a binary is a decision for later: a build that signs in to ChatGPT as the Codex CLI should not be handed out as a product, and a download needs signing and notarising to run without warnings. See [authentication.md](authentication.md).
+
 ## Versioning
 
 The workspace version is `0.0.0`, as upstream keeps it on `main`, and `blackarrow --version` prints `blackarrow 0.0.0` for any source build.

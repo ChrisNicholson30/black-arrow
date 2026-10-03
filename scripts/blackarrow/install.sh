@@ -12,15 +12,22 @@
 #
 # A link that already points at a `blackarrow` binary, or at nothing, is
 # repointed. Anything else with one of the two names is left alone.
+#
+# BLACKARROW_BINARY names a different binary to link to. get.sh uses it for the
+# copy it keeps outside the build directory.
 set -eu
 
 repo_root=$(cd "$(dirname "$0")/../.." && pwd)
-binary="$repo_root/codex-rs/target/release/blackarrow"
+binary="${BLACKARROW_BINARY:-$repo_root/codex-rs/target/release/blackarrow}"
 bin_dir="${1:-$HOME/.local/bin}"
 
 if [ ! -x "$binary" ]; then
-    echo "install.sh: there is no release build at $binary" >&2
-    echo "  build it first: (cd \"$repo_root/codex-rs\" && cargo build --release --bin blackarrow)" >&2
+    if [ -n "${BLACKARROW_BINARY:-}" ]; then
+        echo "install.sh: there is no program at $binary" >&2
+    else
+        echo "install.sh: there is no release build at $binary" >&2
+        echo "  build it first: (cd \"$repo_root/codex-rs\" && cargo build --release --bin blackarrow)" >&2
+    fi
     exit 1
 fi
 

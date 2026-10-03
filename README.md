@@ -20,9 +20,19 @@ Black Arrow is a deliberately shallow fork. It keeps Codex's sandboxing, approva
 
 The measured starting point is [docs/baseline.md](docs/baseline.md).
 
+## Install
+
+There are no prebuilt binaries yet, so installing means building. In one step:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ChrisNicholson30/black-arrow/develop/scripts/blackarrow/get.sh | sh
+```
+
+It needs macOS on Apple Silicon, git, the Xcode command line tools, and [rustup](https://rustup.rs); it installs none of them and says what is missing. It fetches the source into `~/.local/share/blackarrow`, builds it (about 20 minutes with memory to spare, much longer without; about 15 GB of disk while it runs), and links `blackarrow` and `ba` into `~/.local/bin`. Run it again to update. The script's header says how to remove everything and which settings it reads.
+
 ## Build
 
-Requires macOS on Apple Silicon and [rustup](https://rustup.rs). The toolchain version is pinned by the repository.
+To work on Black Arrow, build it in a checkout. Requires macOS on Apple Silicon and [rustup](https://rustup.rs). The toolchain version is pinned by the repository.
 
 ```bash
 cd codex-rs
