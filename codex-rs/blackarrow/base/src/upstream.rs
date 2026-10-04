@@ -3,8 +3,8 @@
 //! The backend decides which models a client may see and use from the Codex
 //! client version it is told, and it is told in two places:
 //!
-//! - The model catalogue request carries `client_version`. A model whose
-//!   `minimal_client_version` is higher is left out of the reply.
+//! - The model catalogue request carries `client_version`. A model the
+//!   version is too old for is left out of the reply.
 //! - Every model request carries a `version` header. A model that needs a
 //!   newer client is refused: "The '...' model is not supported when using
 //!   Codex with a ChatGPT account."
@@ -16,25 +16,30 @@
 //! is.
 //!
 //! What the backend wants to know is which Codex client the code is. That is
-//! the upstream code this tree is built from, and the tree records what that
-//! code can run in the bundled model catalogue: upstream adds a model to
-//! `models-manager/models.json`, with the client version it needs, when the
-//! client can use it. So the version stated is the highest one the bundled
-//! catalogue asks for, and no higher.
+//! the newest upstream release whose code this tree contains: a release is
+//! cut from upstream `main`, and once the commit it was cut from has been
+//! merged, this tree is at least that client. The fork point, `ca466061d6`,
+//! contains the commit `rust-v0.160.0` was cut from.
+//!
+//! The bundled catalogue cannot be the guide. Its `minimal_client_version`
+//! values understate what the backend wants: it says GPT-6.1-Sol needs
+//! 0.153.0, but told 0.155.0, the newest version the catalogue asks for, the
+//! backend left GPT-6.1-Sol out of the list and refused it, while Codex 0.160.0
+//! on the same account could use it. The catalogue is still a floor, and a
+//! test in `codex-models-manager` checks it.
 //!
 //! It is not Black Arrow's version number, which is its own and says nothing
 //! about Codex compatibility. It is also not the User-Agent, which upstream
 //! builds from the package version and which Black Arrow leaves alone.
 
 /// The Codex client version this tree implements, as the backend's model
-/// gates understand it.
+/// gates understand it: the newest upstream release the merged code contains.
 ///
-/// Raise it when an upstream merge brings a catalogue that needs a newer
-/// client: a test in `codex-models-manager` fails until the two agree, and
-/// names the value to use. Do not set it ahead of the catalogue. A newer
-/// version opts in to whatever else the backend gates on it, for code that
-/// has not been merged.
-pub const CODEX_CLIENT_VERSION: &str = "0.155.0";
+/// Raise it after each upstream merge, to the newest release that merge
+/// contains; `docs/upstream-sync.md` has the commands. Do not set it ahead of
+/// the merged code. A newer version opts in to whatever else the backend gates
+/// on it, for code that has not been merged.
+pub const CODEX_CLIENT_VERSION: &str = "0.160.0";
 
 #[cfg(test)]
 mod tests {

@@ -1,11 +1,11 @@
 //! The Codex client version Black Arrow states, against the catalogue it ships.
 //!
 //! The backend leaves a model out of the catalogue, and refuses requests for
-//! it, when the client version it is told is below the model's
-//! `minimal_client_version`. The version stated is a constant in
-//! `blackarrow_base::upstream`, because the crates that send it sit below
-//! this one. These tests are what keep the constant true: it has to be exactly
-//! what the bundled catalogue needs.
+//! it, when the client version it is told is too old for the model. The
+//! version stated is a constant in `blackarrow_base::upstream`, because the
+//! crates that send it sit below this one. It is the newest upstream release
+//! the tree contains, which a test cannot see. What a test can check is the
+//! floor: every bundled model's `minimal_client_version`.
 
 use blackarrow_base::upstream::CODEX_CLIENT_VERSION;
 use pretty_assertions::assert_eq;
@@ -58,21 +58,25 @@ fn minimal_client_versions(catalog_json: &str) -> Vec<(String, Version)> {
         .collect()
 }
 
-/// With a lower version the newest bundled models are hidden and refused.
-/// With a higher one Black Arrow claims to be a client it has not merged.
+/// Below the bundled catalogue's newest requirement, that model is hidden and
+/// refused. Meeting it is not enough, because the backend can want more than
+/// the catalogue says; that is why the constant follows upstream releases.
 #[test]
-fn the_stated_client_is_exactly_what_the_bundled_catalogue_needs() {
+fn the_stated_client_can_use_every_bundled_model() {
+    let stated = parse_version(&Value::String(CODEX_CLIENT_VERSION.to_string()))
+        .expect("CODEX_CLIENT_VERSION is major.minor.patch");
     let gated = minimal_client_versions(BUNDLED);
-    let (slug, (major, minor, patch)) = gated
+    let (slug, newest) = gated
         .iter()
         .max_by_key(|(_, version)| *version)
         .expect("no bundled model names a minimal_client_version; has upstream renamed the field?");
+    let (major, minor, patch) = *newest;
 
-    assert_eq!(
-        CODEX_CLIENT_VERSION,
-        format!("{major}.{minor}.{patch}"),
-        "the bundled catalogue's newest requirement is {slug}'s; set CODEX_CLIENT_VERSION in \
-         blackarrow/base/src/upstream.rs to it"
+    assert!(
+        stated >= *newest,
+        "{slug} needs Codex {major}.{minor}.{patch}, newer than CODEX_CLIENT_VERSION \
+         ({CODEX_CLIENT_VERSION}); raise it in blackarrow/base/src/upstream.rs to the newest \
+         upstream release the merge contains (docs/upstream-sync.md)"
     );
 }
 

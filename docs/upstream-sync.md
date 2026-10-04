@@ -114,7 +114,15 @@ The scripts cannot catch these. They are how a merge quietly undoes the fork.
 - **New user-visible strings** naming Codex in primary surfaces: `--help`, the session header, onboarding, the doctor.
 - **New drawings of upstream's logo.** `tui/tests/suite/blackarrow_screen.rs` checks the first screen; a new place would need its own check.
 - **A new V8 version.** Upstream adds a checksum manifest under `third_party/v8/` when it changes the `v8` crate. The prune rules keep that one file; check that it arrived, or `fetch_v8.py` will refuse to download.
-- **The bundled model catalogue.** If the merge brings a catalogue whose newest model needs a newer Codex client, `blackarrow_client_version_tests` in `codex-models-manager` fails and names the version. Raise `CODEX_CLIENT_VERSION` in `blackarrow/base/src/upstream.rs` to it, and no further. Until then the picker would not show that model, and the backend would refuse it.
+- **The Codex client version.** Set `CODEX_CLIENT_VERSION` in `blackarrow/base/src/upstream.rs` to the newest upstream release the merge contains. A release is contained when the `main` commit it was cut from is in the merge. This finds it, newest first:
+  ```bash
+  merged=$(git merge-base HEAD upstream/main)
+  for tag in $(git ls-remote --tags upstream 'rust-v*' | grep -oE 'rust-v[0-9]+\.[0-9]+\.[0-9]+$' | sort -rV | head -10); do
+    git fetch -q upstream "refs/tags/$tag:refs/tags/$tag"
+    git merge-base --is-ancestor "$(git merge-base upstream/main "$tag")" "$merged" && { echo "$tag"; break; }
+  done
+  ```
+  Too low, and the backend hides and refuses its newest models without saying why. Too high, and Black Arrow claims to be a client it has not merged. The bundled catalogue is not the guide: its `minimal_client_version` values understate what the backend wants. `blackarrow_client_version_tests` in `codex-models-manager` still fails if the constant is below what the catalogue asks for.
 
 ## Running the tests
 

@@ -26,7 +26,7 @@ Foundation sprint, forked from openai/codex at `ca466061d6`.
 - The animated OpenAI logo on empty conversations is not shown.
 - Keychain entries, device-key labels, and the macOS preferences domain use Black Arrow's names.
 - The status line at the bottom shows how much of the weekly usage limit is left, after the model, directory, and thread name. It is omitted when the provider reports no weekly limit.
-- Requests to the Codex backend state the Codex client version that the bundled catalogue needs, `0.155.0` at this fork point, not the source tree's `0.0.0`. With `0.0.0` the backend left the newest models, GPT-6-Luna, GPT-6-Sol and GPT-6.1-Sol among them, out of the model list, and refused them when asked for by name.
+- Requests to the Codex backend state the version of the newest upstream Codex release the code contains, `0.160.0` at this fork point, not the source tree's `0.0.0`. With `0.0.0` the backend left the newest models, GPT-6-Luna, GPT-6-Sol and GPT-6.1-Sol among them, out of the model list, and refused them when asked for by name. With `0.155.0`, the newest version the bundled catalogue asks for, it still did so for GPT-6.1-Sol.
 
 ### Removed
 
