@@ -28,7 +28,13 @@ There are no prebuilt binaries yet, so installing means building. In one step:
 curl -fsSL https://raw.githubusercontent.com/ChrisNicholson30/black-arrow/develop/scripts/blackarrow/get.sh | sh
 ```
 
-It needs macOS on Apple Silicon, git, the Xcode command line tools, and [rustup](https://rustup.rs); it installs none of them and says what is missing. It fetches the source into `~/.local/share/blackarrow`, builds it (about 20 minutes with memory to spare, much longer without; about 15 GB of disk while it runs), and links `blackarrow` and `ba` into `~/.local/bin`. Run it again to update. The script's header says how to remove everything and which settings it reads.
+It needs macOS on Apple Silicon, git, the Xcode command line tools, and [rustup](https://rustup.rs); it installs none of them and says what is missing. It fetches the source into `~/.local/share/blackarrow`, builds it (about 20 minutes with memory to spare, much longer without; about 15 GB of disk while it runs), and links `blackarrow` and `ba` into `~/.local/bin`. Run it again to update. The script's header says which settings it reads.
+
+`uninstall.sh` removes Black Arrow completely: the program, its source, your settings, sign-in and sessions, and its Keychain items. It lists what it found and asks first, and it leaves Codex alone:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/ChrisNicholson30/black-arrow/develop/scripts/blackarrow/uninstall.sh | sh
+```
 
 ## Build
 

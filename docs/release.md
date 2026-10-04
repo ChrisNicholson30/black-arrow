@@ -65,7 +65,7 @@ Black Arrow builds the code-mode host only to run upstream's tests of it. Shippi
 - Code signing and notarisation. An unsigned binary downloaded through a browser is quarantined by Gatekeeper.
 - Homebrew: a tap first. The name `blackarrow` in homebrew-core is not guaranteed to be free.
 - Checksums and release notes.
-- An uninstall procedure: remove the binary and the `ba` symlink, then `~/.blackarrow` if the user wants their state gone.
+- An uninstall procedure for each way of installing. `scripts/blackarrow/uninstall.sh` covers a build from `get.sh`: the links, the program and source, `~/.blackarrow`, `~/Library/Application Support/dev.blackarrow`, and the Keychain items. A Homebrew install would remove the program itself and leave the rest.
 - CI. Upstream's workflows were removed because they target OpenAI's infrastructure. Black Arrow needs its own: format, lint, test, the fork-rule check (`scripts/blackarrow/upstream_sync.py check`), the terminal check, and the startup benchmark with budgets.
 
 ## Licence obligations

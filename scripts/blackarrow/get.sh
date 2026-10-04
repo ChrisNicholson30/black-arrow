@@ -15,13 +15,13 @@
 # rustup. It installs none of them: it says what is missing and stops. It never
 # asks for a password and writes nothing outside your home directory.
 #
-# Run it again to update. To remove Black Arrow:
+# Run it again to update. To remove Black Arrow completely, including your
+# settings, sign-in, and sessions, use uninstall.sh beside this script:
 #
-#   rm ~/.local/bin/blackarrow ~/.local/bin/ba
-#   rm -rf ~/.local/share/blackarrow
+#   curl -fsSL https://raw.githubusercontent.com/ChrisNicholson30/black-arrow/develop/scripts/blackarrow/uninstall.sh | sh
 #
-# Your settings, sign-in, and sessions are in ~/.blackarrow. Installing,
-# updating, and removing leave that directory alone.
+# Your settings, sign-in, and sessions are in ~/.blackarrow. Installing and
+# updating leave that directory alone.
 #
 # Settings, all optional:
 #
